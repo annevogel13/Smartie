@@ -1,12 +1,42 @@
 <script>
 
+import VueApexCharts from 'vue3-apexcharts'
+export default {
+    data() {
+        return {
+            name: 'Test_naam',
+            options: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                xaxis: {
+                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+                }
+            },
+            series: [{
+                name: 'series-1',
+                data: [30, 40, 45, 50, 49, 60, 70, 91]
+            }]
+        }
+    }, 
+    components: { VueApexCharts }
+}
+
+
 </script>
 <template>
-    <div class = "swipeCartBusiness">
-        <h3> TEST </h3>
+    <div class="swipeCartBusiness">
+        <h3> {{ name }} </h3>
+        <div>
+            <apexchart width="500" type="bar" :options="options" :series="series"></apexchart>
+        </div>
     </div>
 </template>
+
+
 <style>
+.swipeCartBusiness {
+    background-color: aliceblue;
 
-
+}
 </style>

@@ -8,6 +8,7 @@
     <li><router-link to ="/">Home</router-link></li>
     <li><router-link to ="/About">About</router-link></li>
     <li><router-link to ="/Profile"> Profile page</router-link></li>
+    <li><router-link to ="/Swipe"> Swipe page</router-link></li>
     </ul>
   </div>
   
@@ -41,6 +42,7 @@
     overflow : hidden ;
     background-color: #F29292; 
     position : fixed ; 
+    margin-left: 10px;
     top : 0 ; 
     width : 15%; 
     height : 100%;
