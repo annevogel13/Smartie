@@ -16,4 +16,10 @@
 
 <script>
 
+
 </script>
+<style>
+  body {
+    background-image : linear-gradient(#dbede3, #d8d2e6); /* ipv van de background image uit het handleidingsboek */ 
+  }
+</style>

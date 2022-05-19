@@ -8,6 +8,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
     "standard": "^17.0.0",
     "vue": "^3.2.33",
     "vue-router": "^4.0.15"
