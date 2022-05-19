@@ -4,7 +4,8 @@
   </header>
   <div id = 'nav'>
     <router-link to ="/">Home</router-link>
-    <router-link to ="/MakeProfile"> Profile page</router-link>
+    <router-link to ="/Profile"> Profile page</router-link>
+    <router-link to ="/About">About</router-link>
   </div>
   
   <div class="container">
