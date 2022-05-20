@@ -2,7 +2,6 @@
 
     import SwipeCarteBusiness from "../components/SwipeCarteBusiness.vue"
     
-
     export default {
         name : 'Swipe',
         components : { SwipeCarteBusiness,  }

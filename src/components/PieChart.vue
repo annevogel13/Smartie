@@ -17,8 +17,8 @@ export default {
                     opacity: 0.8
                 },
                 title: {
-              text: 'Voorbeeld grafiek 1'
-            },
+                    text: 'Voorbeeld grafiek 1'
+                },
                 responsive: [{
                     breakpoint: 300,
                     options: {
@@ -38,10 +38,8 @@ export default {
 </script>
 <template>
     <div class="pieChart">
-            <apexchart type="polarArea" :options="chartOptions" :series="series"></apexchart>
-        </div>
+        <apexchart type="polarArea" :options="chartOptions" :series="series"></apexchart>
+    </div>
 </template>
 <style>
-
-
 </style>

@@ -34,83 +34,71 @@ export default {
 
 <template>
     <div class="swipeCartBusiness">
-       <!--  <h3 class="nameCompagnie"  @click="more_information"> {{ name }} </h3>
-         <p>
-                korte beschrijving van het bedrijf met bijvoorbeeld een opsomming met elementen : 
-                <ul>
-                    <li>ding 1 </li>
-                    <li>ding 1 </li>
-                    <li>ding 1 </li>
-                    <li>ding 1 </li>
-                </ul>
-            </p>
-             --> 
         <div class="div1 griditem">
-           <h3 class="nameCompagnie"  @click="more_information"> {{ name }} </h3>
+            <h3 class="nameCompagnie" @click="more_information"> {{ name }} </h3>
         </div>
         <div class="div2 griditem">
             <p>
-                korte beschrijving van het bedrijf met bijvoorbeeld een opsomming met elementen : 
-                <ol>
-                    <li>ding 1 </li>
-                    <li>ding 1 </li>
-                    <li>ding 1 </li>
-                    <li>ding 1 </li>
-                </ol>
+                korte beschrijving van het bedrijf met bijvoorbeeld een opsomming met elementen :
+            <ol>
+                <li>ding 1 </li>
+                <li>ding 1 </li>
+                <li>ding 1 </li>
+                <li>ding 1 </li>
+            </ol>
             </p>
         </div>
         <div class="div3 griditem">
-            <PieChart></PieChart>        
+            <PieChart></PieChart>
             <LineChart></LineChart>
         </div>
 
         <div class="div4 griditem btn_tinder">
-            <h3 class = "match ">Match?</h3>
-            <button class="swipe-left"  @click="swipe_left" ></button>
+            <h3 class="match ">Match?</h3>
+            <button class="swipe-left" @click="swipe_left"></button>
             <button class="swipe-right" @click="swipe_right"></button>
-        </div>            
+        </div>
 
-            <PopupFeedback ref = "feedback_visible"></PopupFeedback>
-            <PopupQuestions ref ="questions_visible"></PopupQuestions>
+        <PopupFeedback ref="feedback_visible"></PopupFeedback>
+        <PopupQuestions ref="questions_visible"></PopupQuestions>
 
     </div>
 </template>
 
 <style>
-
-.match{
+.match {
     text-align: center;
 }
 
-.div1{
-    
-    grid-column: 1/3 ; 
-    grid-row: 1 ;
+.div1 {
+
+    grid-column: 1/3;
+    grid-row: 1;
 }
 
-.div2{
+.div2 {
 
-    grid-column: 1; 
+    grid-column: 1;
     grid-row: 2;
-    
+
 }
 
-.div3{
-    
-    grid-column: 2 / 4; 
+.div3 {
+
+    grid-column: 2 / 4;
     grid-row: 2;
-    padding : 10px; 
+    padding: 10px;
 }
 
-.div4{
-    
-    grid-column: 1/3; 
+.div4 {
+
+    grid-column: 1/3;
     grid-row: 4;
-    padding: 10px; 
+    padding: 10px;
 }
 
 .swipeCartBusiness {
-    display :grid; 
+    display: grid;
     background-color: aliceblue;
     padding: 10px;
     width: 80%;
@@ -157,6 +145,4 @@ export default {
     background-color: #e34848c2;
     border-color: #e34848c2;
 }
-
-
 </style>

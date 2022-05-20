@@ -8,6 +8,7 @@
     <li><router-link to ="/">Home</router-link></li>
     <li><router-link to ="/About">About</router-link></li>
     <li><router-link to ="/Profile"> Profile page</router-link></li>
+        <li><router-link to ="/Dashboard"> Dashboard</router-link></li>
     <li><router-link to ="/Swipe"> Swipe page</router-link></li>
     </ul>
   </div>
