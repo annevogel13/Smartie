@@ -33,7 +33,7 @@ export default {
 
 <template>
     <div class="swipeCartBusiness" >
-        <h3 @click="more_information"> {{ name }} </h3>
+        <h3 class="nameCompagnie"  @click="more_information"> {{ name }} </h3>
         <div>
             <PieChart></PieChart>
             <div class = "two_buttons">
@@ -48,6 +48,16 @@ export default {
 
 <style>
 
+.nameCompagnie{
+    border-radius: 10px;
+    text-align: center;
+    background-color: #F29292 ;
+    padding : 10px; 
+}
+
+.nameCompagnie:hover{
+    background-color: #f29292c7;
+}
 
 .swipe-left {
     
