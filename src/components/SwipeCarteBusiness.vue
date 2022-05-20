@@ -64,9 +64,10 @@ export default {
             <LineChart></LineChart>
         </div>
 
-        <div class="div4 griditem">
-            <button class="swipe-left"  @click="swipe_left" >LEFT</button>
-            <button class="swipe-right" @click="swipe_right">RIGHT</button>
+        <div class="div4 griditem btn_tinder">
+            <h3 class = "match ">Match?</h3>
+            <button class="swipe-left"  @click="swipe_left" ></button>
+            <button class="swipe-right" @click="swipe_right"></button>
         </div>            
 
             <PopupFeedback ref = "feedback_visible"></PopupFeedback>
@@ -76,6 +77,10 @@ export default {
 </template>
 
 <style>
+
+.match{
+    text-align: center;
+}
 
 .div1{
     
@@ -126,31 +131,31 @@ export default {
 }
 
 .swipe-left {
-
-    background-color: green;
-    border-color: green;
-    width: 50%;
+    border-radius: 10px;
+    background-color: #548051;
+    border-color: #548051;
+    width: 40%;
     height: 50px;
 }
 
 .swipe-left:hover {
-    background-color: whitesmoke;
-    border-color: green;
+    background-color: #548051b6;
+    border-color: #5480517e;
 }
 
 .swipe-right {
     float: right;
-
-    background-color: red;
-    border-color: red;
-    width: 50%;
+    border-radius: 10px;
+    background-color: #E34948;
+    border-color: #E34948;
+    width: 40%;
     height: 50px;
 
 }
 
 .swipe-right:hover {
-    background-color: whitesmoke;
-    border-color: red;
+    background-color: #e34848c2;
+    border-color: #e34848c2;
 }
 
 

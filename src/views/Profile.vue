@@ -15,3 +15,8 @@
     }
     
 </script>
+<style>
+.profile{
+    width :100%; 
+}
+</style>

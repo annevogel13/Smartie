@@ -43,7 +43,7 @@
 
   .navbar {
     overflow : hidden ;
-    background-color: #F29292; 
+    background-color:  #F29292;  
     position : fixed ; 
     margin-left: 10px;
     top : 0 ; 
