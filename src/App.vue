@@ -24,11 +24,14 @@
 <style>
 
   .format {
-      max-width: 600px;
-      margin: 30px auto;
+      max-width: 70%;
+      float: right;
+      margin-top: 30px ;
+      margin-bottom: 30px ;
       background: white;
       text-align: left;
       padding: 40px;
+      margin-right : 5%;
       border-radius: 10px;
   }
 

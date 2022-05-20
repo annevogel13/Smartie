@@ -5,7 +5,7 @@ import VueApexCharts from 'vue3-apexcharts'
 export default {
     data() {
         return {
-            series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
+            series: [14, 23, 21, 17],
             chartOptions: {
                 chart: {
                     type: 'polarArea',
@@ -16,11 +16,14 @@ export default {
                 fill: {
                     opacity: 0.8
                 },
+                title: {
+              text: 'Voorbeeld grafiek 1'
+            },
                 responsive: [{
                     breakpoint: 300,
                     options: {
                         chart: {
-                            width: 100
+                            width: 150,
                         },
                         legend: {
                             position: 'bottom'
@@ -38,3 +41,7 @@ export default {
             <apexchart type="polarArea" :options="chartOptions" :series="series"></apexchart>
         </div>
 </template>
+<style>
+
+
+</style>

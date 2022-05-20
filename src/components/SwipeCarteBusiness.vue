@@ -1,11 +1,12 @@
 <script>
 
 import PieChart from "./PieChart.vue"
+import LineChart from "./LineChart.vue"
 import PopupFeedback from "../components/PopupFeedback.vue"
 import PopupQuestions from "../components/PopupQuestions.vue"
 
 export default {
-    components: { PieChart, PopupFeedback, PopupQuestions },
+    components: { PieChart, LineChart, PopupFeedback, PopupQuestions },
     data() {
         return {
             name: 'Test_naam',
@@ -21,49 +22,114 @@ export default {
         },
         swipe_right() {
             this.s_right = !this.s_right
-            this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible; 
-            
+            this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible;
+
         },
-        more_information(){
-            this.$refs.questions_visible.visible = ! this.$refs.questions_visible.visible
+        more_information() {
+            this.$refs.questions_visible.visible = !this.$refs.questions_visible.visible
         }
     }
 }
 </script>
 
 <template>
-    <div class="swipeCartBusiness" >
-        <h3 class="nameCompagnie"  @click="more_information"> {{ name }} </h3>
-        <div>
-            <PieChart></PieChart>
-            <div class = "two_buttons">
-                <button class="swipe-left"  @click="swipe_left" >LEFT</button>
-                <button class="swipe-right" @click="swipe_right">RIGHT</button>
-            </div>
+    <div class="swipeCartBusiness">
+       <!--  <h3 class="nameCompagnie"  @click="more_information"> {{ name }} </h3>
+         <p>
+                korte beschrijving van het bedrijf met bijvoorbeeld een opsomming met elementen : 
+                <ul>
+                    <li>ding 1 </li>
+                    <li>ding 1 </li>
+                    <li>ding 1 </li>
+                    <li>ding 1 </li>
+                </ul>
+            </p>
+             --> 
+        <div class="div1 griditem">
+           <h3 class="nameCompagnie"  @click="more_information"> {{ name }} </h3>
+        </div>
+        <div class="div2 griditem">
+            <p>
+                korte beschrijving van het bedrijf met bijvoorbeeld een opsomming met elementen : 
+                <ol>
+                    <li>ding 1 </li>
+                    <li>ding 1 </li>
+                    <li>ding 1 </li>
+                    <li>ding 1 </li>
+                </ol>
+            </p>
+        </div>
+        <div class="div3 griditem">
+            <PieChart></PieChart>        
+            <LineChart></LineChart>
+        </div>
+
+        <div class="div4 griditem">
+            <button class="swipe-left"  @click="swipe_left" >LEFT</button>
+            <button class="swipe-right" @click="swipe_right">RIGHT</button>
+        </div>            
+
             <PopupFeedback ref = "feedback_visible"></PopupFeedback>
             <PopupQuestions ref ="questions_visible"></PopupQuestions>
-        </div>
+
     </div>
 </template>
 
 <style>
 
-.nameCompagnie{
-    border-radius: 10px;
-    text-align: center;
-    background-color: #F29292 ;
+.div1{
+    
+    grid-column: 1/3 ; 
+    grid-row: 1 ;
+}
+
+.div2{
+
+    grid-column: 1; 
+    grid-row: 2;
+    
+}
+
+.div3{
+    
+    grid-column: 2 / 4; 
+    grid-row: 2;
     padding : 10px; 
 }
 
-.nameCompagnie:hover{
+.div4{
+    
+    grid-column: 1/3; 
+    grid-row: 4;
+    padding: 10px; 
+}
+
+.swipeCartBusiness {
+    display :grid; 
+    background-color: aliceblue;
+    padding: 10px;
+    width: 80%;
+    height: 50%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.nameCompagnie {
+    border-radius: 10px;
+    text-align: center;
+    background-color: #F29292;
+    padding: 10px;
+}
+
+.nameCompagnie:hover {
     background-color: #f29292c7;
 }
 
 .swipe-left {
-    
+
     background-color: green;
     border-color: green;
-    width : 50%;
+    width: 50%;
     height: 50px;
 }
 
@@ -73,13 +139,13 @@ export default {
 }
 
 .swipe-right {
-    float : right; 
-    
+    float: right;
+
     background-color: red;
     border-color: red;
-    width : 50%; 
-    height : 50px; 
-    
+    width: 50%;
+    height: 50px;
+
 }
 
 .swipe-right:hover {
@@ -87,8 +153,5 @@ export default {
     border-color: red;
 }
 
-.swipeCartBusiness {
-    background-color: aliceblue;
-    padding : 10px; 
-}
+
 </style>
