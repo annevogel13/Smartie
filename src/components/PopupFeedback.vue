@@ -15,7 +15,7 @@
     <div class="popupfeedback">
         <div id="myModal" class="modal" v-if = "visible">
 
-            <div class="modal-content" :style = "{display: visibile} " >
+            <div class="modal-content" >
                 <span class="close" @click = "visible = !visible" >&times;</span>
                 <p>Wil je feedback geven waarom je niet voor dit bedrijf/cursist kiest ? </p>
             </div>

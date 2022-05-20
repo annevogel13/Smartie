@@ -2,9 +2,10 @@
 
 import PieChart from "./PieChart.vue"
 import PopupFeedback from "../components/PopupFeedback.vue"
+import PopupQuestions from "../components/PopupQuestions.vue"
 
 export default {
-    components: { PieChart, PopupFeedback },
+    components: { PieChart, PopupFeedback, PopupQuestions },
     data() {
         return {
             name: 'Test_naam',
@@ -20,37 +21,40 @@ export default {
         },
         swipe_right() {
             this.s_right = !this.s_right
-            this.$refs.accesing_visible.visible = !this.$refs.accesing_visible.visible; 
+            this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible; 
             
+        },
+        more_information(){
+            this.$refs.questions_visible.visible = ! this.$refs.questions_visible.visible
         }
     }
 }
-
-
 </script>
+
 <template>
-    <div class="swipeCartBusiness" @click = "visible = !visible">
-        <h3> {{ name }} </h3>
+    <div class="swipeCartBusiness" >
+        <h3 @click="more_information"> {{ name }} </h3>
         <div>
             <PieChart></PieChart>
-            <button class="swipe-left" @click="swipe_left">LEFT</button>
-            <button class="swipe-right" @click="swipe_right">RIGHT</button>
-            <p> {{ s_left }} en {{s_right}} </p>
-            <PopupFeedback ref = "accesing_visible"></PopupFeedback>
-            <div v-if = "s_right">
-                <h3>FEEDBACK????</h3>
+            <div class = "two_buttons">
+                <button class="swipe-left"  @click="swipe_left" >LEFT</button>
+                <button class="swipe-right" @click="swipe_right">RIGHT</button>
             </div>
-
+            <PopupFeedback ref = "feedback_visible"></PopupFeedback>
+            <PopupQuestions ref ="questions_visible"></PopupQuestions>
         </div>
     </div>
 </template>
 
-
 <style>
+
+
 .swipe-left {
+    
     background-color: green;
     border-color: green;
-    align-self: left;
+    width : 50%;
+    height: 50px;
 }
 
 .swipe-left:hover {
@@ -59,9 +63,13 @@ export default {
 }
 
 .swipe-right {
+    float : right; 
+    
     background-color: red;
     border-color: red;
-    align-self: right;
+    width : 50%; 
+    height : 50px; 
+    
 }
 
 .swipe-right:hover {
@@ -71,6 +79,6 @@ export default {
 
 .swipeCartBusiness {
     background-color: aliceblue;
-
+    padding : 10px; 
 }
 </style>
