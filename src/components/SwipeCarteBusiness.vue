@@ -1,8 +1,10 @@
 <script>
 
 import PieChart from "./PieChart.vue"
+import PopupFeedback from "../components/PopupFeedback.vue"
+
 export default {
-    components: { PieChart },
+    components: { PieChart, PopupFeedback },
     data() {
         return {
             name: 'Test_naam',
@@ -18,6 +20,8 @@ export default {
         },
         swipe_right() {
             this.s_right = !this.s_right
+            this.$refs.accesing_visible.visible = !this.$refs.accesing_visible.visible; 
+            
         }
     }
 }
@@ -25,14 +29,14 @@ export default {
 
 </script>
 <template>
-    <div class="swipeCartBusiness">
+    <div class="swipeCartBusiness" @click = "visible = !visible">
         <h3> {{ name }} </h3>
         <div>
             <PieChart></PieChart>
             <button class="swipe-left" @click="swipe_left">LEFT</button>
             <button class="swipe-right" @click="swipe_right">RIGHT</button>
             <p> {{ s_left }} en {{s_right}} </p>
-
+            <PopupFeedback ref = "accesing_visible"></PopupFeedback>
             <div v-if = "s_right">
                 <h3>FEEDBACK????</h3>
             </div>
