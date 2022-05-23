@@ -5,11 +5,12 @@
   <div class  = 'navbar'>
     <ul>
       <li><img alt="Logo Code Gorilla" class="logo" src="./assets/logo.png" width="125" height="125" /></li>
-    <li><router-link to ="/">Home</router-link></li>
-    <li><router-link to ="/About">About</router-link></li>
-    <li><router-link to ="/Profile"> Profile page</router-link></li>
-        <li><router-link to ="/Dashboard"> Dashboard</router-link></li>
-    <li><router-link to ="/Swipe"> Swipe page</router-link></li>
+      <li><router-link to ="/">Home</router-link></li>
+      <li><router-link to ="/About">About</router-link></li>
+      <li><router-link to ="/Profile"> Profile page</router-link></li>
+      <li><router-link to ="/Dashboard"> Dashboard</router-link></li>
+      <li><router-link to ="/Swipe"> Swipe page</router-link></li>
+      <li><router-link to ="/Register">Register</router-link></li>
     </ul>
   </div>
   
