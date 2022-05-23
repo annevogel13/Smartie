@@ -20,7 +20,3 @@
 
     <!-- nog beter : https://swiperjs.com/demos   infinite loop --> 
 </template>
-<style>
-
-
-</style>

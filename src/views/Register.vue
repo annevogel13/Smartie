@@ -11,13 +11,11 @@ export default {
     },
     methods: {
         register(){
-            console.log("BONJOUR MES AMIES ")
+            console.log("Register new user")
             const auth = getAuth();
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then((userCredential) => {
-                    // Signed in 
                     const user = userCredential.user;
-                    // ...
                 })
                 .catch((error) => {
                     const errorCode = error.code;

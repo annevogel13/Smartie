@@ -15,7 +15,7 @@
     }
     
 </script>
-<style>
+<style scoped >
 .profile{
     width :100%; 
 }

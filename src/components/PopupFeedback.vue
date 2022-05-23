@@ -26,7 +26,7 @@
 
 </template>
 
-<style>
+<style scoped>
 
 /* The Popup (background) */
 .modal {

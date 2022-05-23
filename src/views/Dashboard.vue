@@ -49,7 +49,7 @@ export default {
 
 </template>
 
-<style>
+<style scoped>
 .toprecommendations{
     grid-column: 1;
     grid-row : 1; 

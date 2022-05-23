@@ -41,5 +41,3 @@ export default {
         <apexchart type="polarArea" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
-<style>
-</style>

@@ -23,7 +23,7 @@
 
 
 </script>
-<style>
+<style  >
 
   .format {
       max-width: 70%;

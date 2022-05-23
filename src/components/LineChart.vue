@@ -32,5 +32,3 @@ export default {
         <apexchart type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
-<style>
-</style>
