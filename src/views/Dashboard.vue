@@ -28,8 +28,20 @@ export default {
 
         <div v-if = "role == 'bedrijf'">
             <h3> Pagina voor bedrijven </h3>
-            <div class = "swipeData">
+            <div class = "toprecommendations">
+                <ol>
+                    <li>ABC</li>
+                    <li>ABC</li>
+                    <li>ABC</li>
+                    <li>ABC</li>
+                    <li>ABC</li>
+                </ol>
+                <button>Contact</button>
+            </div>
 
+
+            <div class = "swipeData">
+                
                 <SwipeDataChart></SwipeDataChart>
             </div>
         </div>
@@ -38,15 +50,25 @@ export default {
 </template>
 
 <style>
-
+.toprecommendations{
+    grid-column: 1;
+    grid-row : 1; 
+    float : left; 
+    
+}
 .swipeData {
+
+    grid-column: 2;
+    grid-row : 1; 
     padding : 30px; 
     float : right; 
-    width : 50%; 
+    width : 60%; 
 }
 
 .dashboard {
+    display : grid; 
     width: 1000px;
+
 }
 
 .quick {

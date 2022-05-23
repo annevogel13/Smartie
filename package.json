@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "apexcharts": "^3.35.2",
+    "firebase": "^9.8.1",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "standard": "^17.0.0",
