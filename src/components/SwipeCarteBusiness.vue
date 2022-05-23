@@ -65,7 +65,7 @@ export default {
     </div>
 </template>
 
-<style>
+<style scoped>
 .match {
     text-align: center;
 }

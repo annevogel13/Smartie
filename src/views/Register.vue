@@ -1,7 +1,8 @@
 <script>
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 export default {
-    name: "Register",
     data() {
         return {
             email: "",
@@ -9,21 +10,24 @@ export default {
         };
     },
     methods: {
-        Register: function () {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.email, this.password)
-                .then(
-                    user => {
-                        this.$router.replace("home");
-                    },
-                    err => {
-                        alert(err.message);
-                    }
-                )
-        }
+        register(){
+            console.log("BONJOUR MES AMIES ")
+            const auth = getAuth();
+            createUserWithEmailAndPassword(auth, this.email, this.password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                })
+            }
     }
 }
+
+
 </script>
 <template>
     <div class="register">
@@ -32,18 +36,34 @@ export default {
         <br>
         <input type="password" v-model="password" placeholder="Password">
         <br>
-        <button @click="signUp">Register</button>
+        <button @click="register()">Register</button>
         <span>
-            <router-link to="/login">login</router-link>.
+            <router-link to="/Dashboard">login</router-link>.
         </span>
+        <p> {{ email }} +++ {{ password }}</p>
     </div>
 </template>
-<style>
-
-.register{
-    float : center; 
-    width : 100%; 
-    height: 600px;
+<style scoped>
+.register {
+    margin-top: 40px;
 }
 
+input {
+    width: 80%;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+button {
+    width: 10%;
+    margin-top: 30px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+span {
+    display: block;
+    margin-top: 20px;
+    font-size: 11px;
+}
 </style>
