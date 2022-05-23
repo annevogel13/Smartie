@@ -45,6 +45,11 @@ export default {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                 })
+        },
+    },
+    computed: {
+        test (){
+            return this.$store.state.count 
         }
     }
 }
@@ -53,6 +58,7 @@ export default {
 </script>
 <template>
     <div class="register">
+        {{test}}
         <div v-if='!login'>
             <h3>Creer een account</h3>
             <input type="text" v-model="email" placeholder="Email">
@@ -75,7 +81,7 @@ export default {
             </button>
             <button @click="this.login = !login">Wisselen naar registeren</button>
         </div>
-        test : {{this.user_uid}}
+        
     </div>
 </template>
 <style scoped>

@@ -25,6 +25,8 @@
       </li>
       <li><button class="logout" @click="log_out()">Uitloggen</button></li>
     </ul>
+
+    hier : {{ this.$store.role }}
   </div>
 
   <div class="format">
@@ -43,8 +45,6 @@ export default {
   },
   methods: {
     log_out() {
-
-
       const auth = getAuth();
       signOut(auth).then(() => {
         console.log("Sign-out successful")
@@ -93,11 +93,11 @@ ul {
   justify-content: space-around;
 }
 
-.logout{
+.logout {
   background-color: #dbede3;
-  border-color : #dbede3;
-  margin : 10px; 
-  border-radius : 10px; 
-  padding : 10px 15px ; 
+  border-color: #dbede3;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px 15px;
 }
 </style>
