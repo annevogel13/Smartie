@@ -1,6 +1,7 @@
 <script>
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 export default {
     data() {
@@ -8,6 +9,7 @@ export default {
             email: "",
             password: "",
             login: false,
+            user_uid : "leeg" , 
         };
     },
     methods: {
@@ -17,6 +19,7 @@ export default {
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then((userCredential) => {
                     const user = userCredential.user;
+
                 })
                 .then(this.$router.push('./Dashboard'))
                 .catch((error) => {
@@ -24,13 +27,17 @@ export default {
                     const errorMessage = error.message;
                 })
         },
-
+        create_user_db(){
+            console.log(auth)
+        },
         login_user() {
             const auth = getAuth();
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then((userCredential) => {
                     console.log("Ingelogged") 
                     const user = userCredential.user;
+                    this.user_uid = auth.currentUser.uid; 
+                    console.log(auth.currentUser.uid)
                 })
                 .then(this.$router.push('./Dashboard'))
                 .catch((error) => {
@@ -68,9 +75,7 @@ export default {
             </button>
             <button @click="this.login = !login">Wisselen naar registeren</button>
         </div>
-
-
-
+        test : {{this.user_uid}}
     </div>
 </template>
 <style scoped>
