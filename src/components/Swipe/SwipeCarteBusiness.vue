@@ -1,9 +1,9 @@
 <script>
 
-import PieChart from "./Charts/PieChart.vue"
-import LineChart from "./Charts/LineChart.vue"
-import PopupFeedback from "../components/Popups/PopupFeedback.vue"
-import PopupQuestions from "../components/Popups/PopupQuestions.vue"
+import PieChart from "../Charts/PieChart.vue"
+import LineChart from "../Charts/LineChart.vue"
+import PopupFeedback from "../Popups/PopupFeedback.vue"
+import PopupQuestions from "../Popups/PopupQuestions.vue"
 
 export default {
     components: { PieChart, LineChart, PopupFeedback, PopupQuestions },
@@ -12,8 +12,6 @@ export default {
             name: 'Test_naam',
             s_left: false,
             s_right: false,
-
-
         }
     },
     methods: {
