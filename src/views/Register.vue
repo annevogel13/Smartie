@@ -1,12 +1,13 @@
 <script>
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
     data() {
         return {
             email: "",
-            password: ""
+            password: "",
+            login: false,
         };
     },
     methods: {
@@ -22,6 +23,21 @@ export default {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                 })
+        },
+
+        login_user() {
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, this.email, this.password)
+                .then((userCredential) => {
+                    console.log("Ingelogged") 
+                    const user = userCredential.user;
+                })
+                .then(this.$router.push('./Dashboard'))
+                .catch((error) => {
+                    console.log("error")
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                })
         }
     }
 }
@@ -30,18 +46,30 @@ export default {
 </script>
 <template>
     <div class="register">
-        <h3>Creer een account</h3>
-        <input type="text" v-model="email" placeholder="Email">
-        <br>
-        <input type="password" v-model="password" placeholder="Password">
-        <br>
-        <button @click="register()">
-            Registeren
-        </button>
-        <br>
-        <button>
-            <router-link style="text-decoration: none; color: inherit;" to="/Dashboard"> Om in te loggen klik hier</router-link>
-        </button>
+        <div v-if='!login'>
+            <h3>Creer een account</h3>
+            <input type="text" v-model="email" placeholder="Email">
+            <br>
+            <input type="password" v-model="password" placeholder="Password">
+            <br>
+            <button @click="register()">
+                Registeren
+            </button>
+            <button @click="this.login = !login">Wisselen naar login</button>
+        </div>
+        <div v-if='login'>
+            <h3>Login</h3>
+            <input type="text" v-model="email" placeholder="Email">
+            <br>
+            <input type="password" v-model="password" placeholder="Password">
+            <br>
+            <button @click="login_user()">
+                Login
+            </button>
+            <button @click="this.login = !login">Wisselen naar registeren</button>
+        </div>
+
+
 
     </div>
 </template>
@@ -49,6 +77,7 @@ export default {
 .register {
     margin-top: 40px;
     width: 1000px;
+    vertical-align: center;
 }
 
 input {
@@ -62,11 +91,10 @@ input {
 }
 
 button {
-    margin : 10px; 
+    margin: 10px;
     background-color: aliceblue;
-    border : aliceblue; 
-    padding : 5px; 
+    border: aliceblue;
+    padding: 5px;
 
 }
-
 </style>
