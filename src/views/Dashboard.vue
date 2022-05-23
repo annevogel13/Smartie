@@ -1,6 +1,6 @@
 <script>
 
-import SwipeDataChart from "../components/SwipeDataChart.vue"
+import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
 export default {
     data() {
         return {

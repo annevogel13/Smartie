@@ -1,6 +1,6 @@
 <script>
 
-    import SwipeCarteBusiness from "../components/SwipeCarteBusiness.vue"
+    import SwipeCarteBusiness from "../components/Swipe/SwipeCarteBusiness.vue"
     
     export default {
         name : 'Swipe',
