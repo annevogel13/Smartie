@@ -10,12 +10,11 @@ import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Profile from '@/views/Profile.vue'
 import Swipe from '@/views/Swipe.vue'
-import Dashboard from '@/views/Dashboard.vue'
-import Register from '@/views/Register.vue'
+import Dashboard from '@/views/DashboardUser.vue'
+import Register from '@/views/RegisterUser.vue'
 import Test from '@/views/Test.vue'
 
 // database --> firebase 
-import { db }  from './db.js'
 import { firestorePlugin } from 'vuefire';
 
 // store information site-wide 
@@ -32,7 +31,6 @@ export const store = createStore({
     }
 })
 
-
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -46,7 +44,6 @@ const router = createRouter({
 
     ]
 })
-
 
 
 createApp(App)
