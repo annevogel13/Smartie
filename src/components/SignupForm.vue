@@ -1,77 +1,78 @@
 <template>
-    <div class = "format">
+    <div class="format">
         <form>
             <h2>Maak je profiel aan</h2>
-            <label> email </label>
-            <input type = "email" required v-model = "email">
-            <label> Wachtwoord </label>
-            <input type = "password" required v-model = "password">
             <label> Username </label>
-            <input type = "text" required v-model = "username"> 
+            <input type="text" required v-model="profile.username">
             <label> Telefoonnummer </label>
-            <input type = "tel" v-model = "telefoonnr">
+            <input type="tel" v-model="profile.telefoonnr">
 
-            <label> Profiel foto </label>
-            <!-- // TODO profiel foto kunnen uploaden -->
-            <input type = "image" v-model = "profielfoto">
+            <label>Profiel foto</label>
+            <input type="file" accept="image/">
             <label> Role </label>
-            <select v-model = "role">
-                <option value = "bedrijf">Bedrijf</option>
-                <option value = "cursist">Cursist</option>
+            <select v-model="profile.role">
+                <option value="bedrijf">Bedrijf</option>
+                <option value="cursist">Cursist</option>
             </select>
 
-            <div v-if = "role == 'bedrijf' ">
+            <div v-if="profile.role == 'bedrijf'">
                 <h3> Vragen specifiek voor bedrijven </h3>
             </div>
 
-            <div v-if = "role == 'cursist' ">
+            <div v-if="profile.role == 'cursist'">
                 <h3> Vragen specifiek voor cursisten </h3>
-                
+
             </div>
-            <button>Bevestigen</button>
+            <button @click="uploadInformation()">Bevestigen</button>
         </form>
     </div>
 </template>
 <script>
 
-    export default {
-        data() {
-            return {                
-                email: '',
-                password : '',
-                profielfoto : '', 
-                telefoonnr : '', 
-                username : '', 
-                role : '',
-                
+import { add_to_collection } from '../db'
+
+export default {
+    data() {
+        return {
+            profile: {
+                profielfoto: "",
+                role: "",
+                telefoonnr: "",
+                username: "",
             }
         }
+    },
+    methods: {
+        uploadInformation(){
+                console.log("trying to upload profile ")
+                add_to_collection('profiles', this.profile)
+            }
+
     }
+}
 </script>
 <style scoped >
+label {
+    color: #aaa;
+    display: inline-block;
+    margin: 25px 0 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
 
+input,
+select {
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    color: #555
+}
 
-    label {
-        color: #aaa;
-        display: inline-block;
-        margin: 25px 0 15px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: bold;
-    }
-
-    input,
-    select {
-        padding: 10px 6px;
-        width: 100%;
-        box-sizing: border-box;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        color: #555
-    }
-
-    button {
-        align-items: center ;
-        background-color :aliceblue
-    }
+button {
+    align-items: center;
+    background-color: aliceblue
+}
 </style>
