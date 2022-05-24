@@ -8,11 +8,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 // webpages 
 import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
-import Profile from '@/views/Profile.vue'
+import Profile from '@/views/ProfileUser.vue'
 import Swipe from '@/views/Swipe.vue'
 import Dashboard from '@/views/DashboardUser.vue'
 import Register from '@/views/RegisterUser.vue'
-import Test from '@/views/Test.vue'
+import Test from '@/views/testDB.vue'
 
 // database --> firebase 
 import { firestorePlugin } from 'vuefire';
@@ -36,11 +36,11 @@ const router = createRouter({
     routes: [
         { path: '/',            name: 'Home',           component: Home         },
         { path: '/About',       name: 'About',          component: About        },
-        { path: '/Profile',     name: 'MakeProfile',    component: Profile      },
-        { path: '/Dashboard',   name: 'Dashboard',      component: Dashboard    },
+        { path: '/ProfileUser',     name: 'MakeProfile',    component: Profile      },
+        { path: '/DashboardUser',   name: 'Dashboard',      component: Dashboard    },
         { path: '/Swipe',       name: 'Swipe',          component: Swipe        },
-        { path: '/Register',    name: 'Register',       component: Register     },
-        { path: '/Test',    name: 'Test',       component: Test     }
+        { path: '/RegisterUser',    name: 'Register',       component: Register     },
+        { path: '/TestDB',    name: 'Test',       component: Test     }
 
     ]
 })

@@ -12,16 +12,16 @@
         <router-link to="/About">About</router-link>
       </li>
       <li>
-        <router-link to="/Profile"> Profile page</router-link>
+        <router-link to="/ProfileUser"> Profile page</router-link>
       </li>
       <li>
-        <router-link to="/Dashboard"> Dashboard</router-link>
+        <router-link to="/DashboardUser"> Dashboard</router-link>
       </li>
       <li>
         <router-link to="/Swipe"> Swipe page</router-link>
       </li>
       <li>
-        <router-link to="/Register">Register</router-link>
+        <router-link to="/RegisterUser">Register</router-link>
       </li>
       <li><button class="logout" @click="log_out()">Uitloggen</button></li>
     </ul>
@@ -47,7 +47,7 @@ export default {
       signOut(auth).then(() => {
         console.log("Sign-out successful")
       }).catch((error) => {
-        console.log("An error happened")
+        console.log("An error happened", error.message)
       });
     }
   }
