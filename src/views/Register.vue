@@ -2,18 +2,7 @@
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-
-import { doc, getDoc } from "firebase/firestore";
-
-const docRef = doc(db, "users", "UID");
-const docSnap = await getDoc(docRef);
-
-if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-} else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-}
+import { db } from '../db'
 
 export default {
     data() {
@@ -21,7 +10,8 @@ export default {
             email: "",
             password: "",
             role: "",
-            login: false
+            login: false,
+            newUser : ""
         }
     },
     methods: {
@@ -34,7 +24,6 @@ export default {
                 })
                 .then(this.$router.push('./Dashboard'))
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     console.log(errorMessage)
                 })
@@ -53,17 +42,19 @@ export default {
                 .then(this.$router.push('./Dashboard'))
                 .catch((error) => {
 
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     console.log(errorMessage)
                 })
         },
+        async addUser(){
+            if(this.newUser) {
+                await db.collection("users").add({name : this.newUser})
+                
+            }
+        },
+
     },
-    computed: {
-        test() {
-            return this.$store.state.count
-        }
-    },
+
     components: { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
 }
 

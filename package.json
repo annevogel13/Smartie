@@ -9,13 +9,14 @@
   },
   "dependencies": {
     "apexcharts": "^3.35.2",
-    "firebase": "^9.8.1",
+    "firebase": "^9.8.1-20220509172230",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "standard": "^17.0.0",
     "vue": "^3.2.33",
     "vue-router": "^4.0.15",
     "vue3-apexcharts": "^1.4.1",
+    "vuefire": "^3.0.0-alpha.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
