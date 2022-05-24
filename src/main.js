@@ -15,17 +15,20 @@ import Register from '@/views/Register.vue'
 
 // database --> firebase 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore} from "firebase/firestore"
 
 // store information site-wide 
 import { createStore } from 'vuex'
 
 export const store = createStore({
-  state () {
-    return {
-      count: "bedrijf"
+    state() {
+        return {
+            user : {
+                UID : "", 
+                count: "bedrijf"
+            }
+        }
     }
-  }
 })
 
 
@@ -37,28 +40,27 @@ const firebaseConfig = {
     messagingSenderId: "719152514019",
     appId: "1:719152514019:web:c6a2e869309966d42a56d6",
     measurementId: "G-4YR0EWFPGV"
-    };
+};
 
 
 const router = createRouter({
-    history : createWebHistory(),
-    routes : [
-        {path : '/', name : 'Home', component : Home},
-        {path : '/About', name : 'About', component : About},
-        {path : '/Profile', name : 'MakeProfile', component : Profile},
-        {path : '/Dashboard', name : 'Dashboard', component : Dashboard},
-        {path : '/Swipe', name : 'Swipe', component : Swipe},
-        {path : '/Register', name : 'Register', component : Register }
+    history: createWebHistory(),
+    routes: [
+        { path: '/',            name: 'Home',           component: Home         },
+        { path: '/About',       name: 'About',          component: About        },
+        { path: '/Profile',     name: 'MakeProfile',    component: Profile      },
+        { path: '/Dashboard',   name: 'Dashboard',      component: Dashboard    },
+        { path: '/Swipe',       name: 'Swipe',          component: Swipe        },
+        { path: '/Register',    name: 'Register',       component: Register     }
     ]
 })
 
 const app_firebase = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app_firebase);
-
+export const db = getFirestore(app_firebase);
 
 createApp(App)
-.use(router)
-.use(VueApexCharts)
-.use(store)
-.mount('#app')
+    .use(router)
+    .use(VueApexCharts)
+    .use(store)
+    .mount('#app')
 

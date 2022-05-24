@@ -1,16 +1,28 @@
 <script>
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+
+
+import { doc, getDoc } from "firebase/firestore";
+
+const docRef = doc(db, "users", "UID");
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+} else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+}
 
 export default {
     data() {
         return {
             email: "",
             password: "",
-            login: false,
-            user_uid : "leeg" , 
-        };
+            role: "",
+            login: false
+        }
     },
     methods: {
         register() {
@@ -19,51 +31,56 @@ export default {
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-
                 })
                 .then(this.$router.push('./Dashboard'))
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    console.log(errorMessage)
                 })
+            this.create_user_db();
         },
-        create_user_db(){
-            console.log(auth)
-        },
+
         login_user() {
             const auth = getAuth();
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then((userCredential) => {
-                    console.log("Ingelogged") 
+                    console.log("Ingelogged")
                     const user = userCredential.user;
-                    this.user_uid = auth.currentUser.uid; 
-                    console.log(auth.currentUser.uid)
+                    this.$store.state.user.UID = auth.currentUser.uid;
+
                 })
                 .then(this.$router.push('./Dashboard'))
                 .catch((error) => {
-                    console.log("error")
+
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    console.log(errorMessage)
                 })
         },
     },
     computed: {
-        test (){
-            return this.$store.state.count 
+        test() {
+            return this.$store.state.count
         }
-    }
+    },
+    components: { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
 }
-
 
 </script>
 <template>
     <div class="register">
-        {{test}}
+
         <div v-if='!login'>
             <h3>Creer een account</h3>
             <input type="text" v-model="email" placeholder="Email">
             <br>
             <input type="password" v-model="password" placeholder="Password">
+            <br>
+            <select class="role" v-model="role" placeholder="Bedrijf">
+                <option value="bedrijf">Bedrijf</option>
+                <option value="cursist">Cursist</option>
+            </select>
             <br>
             <button @click="register()">
                 Registeren
@@ -81,7 +98,7 @@ export default {
             </button>
             <button @click="this.login = !login">Wisselen naar registeren</button>
         </div>
-        
+
     </div>
 </template>
 <style scoped>
@@ -91,7 +108,8 @@ export default {
     vertical-align: center;
 }
 
-input {
+input,
+.role {
     padding: 10px 6px;
     width: 100%;
     box-sizing: border-box;

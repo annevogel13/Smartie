@@ -25,8 +25,6 @@
       </li>
       <li><button class="logout" @click="log_out()">Uitloggen</button></li>
     </ul>
-
-    hier : {{ this.$store.role }}
   </div>
 
   <div class="format">
