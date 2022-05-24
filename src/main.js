@@ -12,6 +12,7 @@ import Profile from '@/views/Profile.vue'
 import Swipe from '@/views/Swipe.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Register from '@/views/Register.vue'
+import Test from '@/views/Test.vue'
 
 // database --> firebase 
 import { db }  from './db.js'
@@ -40,7 +41,9 @@ const router = createRouter({
         { path: '/Profile',     name: 'MakeProfile',    component: Profile      },
         { path: '/Dashboard',   name: 'Dashboard',      component: Dashboard    },
         { path: '/Swipe',       name: 'Swipe',          component: Swipe        },
-        { path: '/Register',    name: 'Register',       component: Register     }
+        { path: '/Register',    name: 'Register',       component: Register     },
+        { path: '/Test',    name: 'Test',       component: Test     }
+
     ]
 })
 
