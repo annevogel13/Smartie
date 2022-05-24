@@ -5,6 +5,10 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "eslint:recommended"
   ],
+  "eqeqeq": [
+    "error", 
+    "smart"
+  ], 
   "env": {
     "vue/setup-compiler-macros": true
   }
