@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore} from "firebase/firestore"
+import { addDoc, getFirestore, setDoc, collection } from "firebase/firestore"
 import "firebase/firestore"
 
 
@@ -15,3 +15,32 @@ const firebaseConfig = {
 
 const app_firebase = initializeApp(firebaseConfig);
 export const db = getFirestore(app_firebase);
+
+
+import { doc, getDoc } from "firebase/firestore";
+
+export async function read_collection(name_collection, id_document) {
+    const docRef = doc(db, name_collection, id_document);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        return docSnap.data(); 
+    } else {
+
+        console.log("No such document!");
+    }
+}
+
+export async function add_to_collection(name_collection, data_structure, identification){
+    if(identification){
+        const docRef = doc(db, name_collection, identification)
+        await setDoc(docRef, data_structure)
+    }else {
+        console.log("NO id ")
+        await addDoc(collection(db, name_collection), data_structure)
+    }
+
+    console.log("Document added:");
+}
+
