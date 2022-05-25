@@ -26,23 +26,28 @@ export const store = createStore({
                 hasProfile : false 
             }
         }
+    },
+    mutations: {
+        set_3(state, {id_user, role_user, boolean_has_profile}){
+            state.UID = id_user; 
+            state.role = role_user; 
+            state.hasProfile = boolean_has_profile; 
+        }
     }
 })
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/',            name: 'Home',           component: Home         },
-        { path: '/About',       name: 'About',          component: About        },
+        { path: '/',                name: 'Home',           component: Home         },
+        { path: '/About',           name: 'About',          component: About        },
         { path: '/ProfileUser',     name: 'MakeProfile',    component: Profile      },
         { path: '/DashboardUser',   name: 'Dashboard',      component: Dashboard    },
-        { path: '/Swipe',       name: 'Swipe',          component: Swipe        },
+        { path: '/Swipe',           name: 'Swipe',          component: Swipe        },
         { path: '/RegisterUser',    name: 'Register',       component: Register     },
-        { path: '/TestDB',    name: 'Test',       component: Test     }
-
+        { path: '/TestDB',          name: 'Test',           component: Test         }
     ]
 })
-
 
 createApp(App)
     .use(router)

@@ -2,7 +2,7 @@
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-import { add_to_collection, has_completed_profile } from '../db'
+import { add_to_collection, db } from '../db'
 
 
 export default {
@@ -12,7 +12,7 @@ export default {
             password: "",
             role: "",
             login: false,
-            newUser : ""
+            newUser: ""
         }
     },
     methods: {
@@ -21,9 +21,12 @@ export default {
             const auth = getAuth();
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
-                    this.$store.state.user.UID = auth.currentUser.uid;
-                    this.$store.state.user.role = this.role;
-                    add_to_collection("profiles", {UID : auth.currentUser.uid, hasProfile : false, role : this.role}, auth.currentUser.uid)
+                    this.store.commit(set_3, {
+                        "uid": auth.currentUser.id,
+                        "role": this.role,
+                        "hasProfile": false
+                    })
+                    add_to_collection("profiles", { UID: auth.currentUser.uid, hasProfile: false, role: this.role }, auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {
@@ -31,13 +34,27 @@ export default {
                     console.log(errorMessage)
                 })
         },
+        async load_user_data(uid) {
+            const q = query(profiles_collection, where("UID", "==", uid))
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, "=> ", doc.data())
+                store.commit(set_3, {
+                    "uid": doc.data().UID,
+                    "role": doc.data().role,
+                    "hasProfile": doc.data().hasProfile
+                })
+            })
 
+            console.log("user information loaded")
+        },
         login_user() {
             const auth = getAuth();
+            load_user_data(auth.currentUser.uid)
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     console.log("Ingelogged")
-                    has_completed_profile(auth.currentUser.uid)
+                    
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {
@@ -45,11 +62,16 @@ export default {
                     const errorMessage = error.message;
                     console.log(errorMessage)
                 })
+            
         },
     },
 
     components: {}
+
 }
+
+import { query, where, getDocs, collection } from "firebase/firestore"
+const profiles_collection = collection(db, "profiles")
 
 </script>
 <template>
@@ -82,7 +104,6 @@ export default {
             </button>
             <button @click="this.login = !login">Wisselen naar registeren</button>
         </div>
-
     </div>
 </template>
 <style scoped>

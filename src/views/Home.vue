@@ -6,6 +6,6 @@
             fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <router-link to ='./About'>About</router-link>
         <br>
-        <router-link to ='./Profile'> Go to make profile page</router-link>
+        <router-link to ='./ProfileUser'> Go to make profile page</router-link>
     </div>
 </template>

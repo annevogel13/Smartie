@@ -2,8 +2,6 @@
 
 import { compileScript } from "@vue/compiler-sfc"
 import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
-import { getAuth} from "firebase/auth";
-
 
 export default {
     data() {

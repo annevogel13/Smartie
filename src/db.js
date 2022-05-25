@@ -35,10 +35,11 @@ export async function read_collection(name_collection, id_document) {
 export async function add_to_collection(name_collection, data_structure, identification) {
 
     if (identification) {
+        console.log("document ", identification, " updated")
         const docRef = doc(db, name_collection, identification)
         await setDoc(docRef, data_structure)
     } else {
-        console.log("NO id ")
+        console.log(" new document ID ")
         tmp = await addDoc(collection(db, name_collection), data_structure)
         console.log(tmp)
 
@@ -65,3 +66,4 @@ export async function has_completed_profile(uid) {
     })
 
 }
+

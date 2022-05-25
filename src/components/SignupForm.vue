@@ -44,10 +44,9 @@ export default {
     },
     methods: {
         uploadInformation(){
-                console.log("trying to upload profile ")
+                console.log("trying to upload profile ") 
                 add_to_collection('profiles', this.profile)
             }
-
     }
 }
 </script>

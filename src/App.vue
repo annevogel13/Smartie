@@ -21,9 +21,11 @@
         <router-link to="/Swipe"> Swipe page</router-link>
       </li>
       <li>
-        <router-link to="/RegisterUser">Register</router-link>
+        <button class = "logout"><router-link to="/RegisterUser">Log in</router-link></button>
       </li>
-      <li><button class="logout" @click="log_out()">Uitloggen</button></li>
+      <li>
+        <button class="logout" @click="log_out()"><router-link to="/">Log uit</router-link></button>
+      </li>
     </ul>
   </div>
 
@@ -103,11 +105,15 @@ ul {
   justify-content: space-around;
 }
 
-.logout {
-  background-color: #dbede3;
+
+a, button {
+  text-decoration: none;
+  color : inherit; 
+  padding : 5px; 
   border-color: #dbede3;
   margin: 10px;
   border-radius: 10px;
   padding: 10px 15px;
 }
+
 </style>
