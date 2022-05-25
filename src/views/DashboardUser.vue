@@ -1,19 +1,20 @@
 <script>
 
+import { compileScript } from "@vue/compiler-sfc"
 import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
+
 export default {
     data() {
         return {
             role: "bedrijf",
         }
     },
-    components : { SwipeDataChart}
+    components : { SwipeDataChart }
 }
 </script>
 
 <template>
-    <div class="dashboard">
-
+    <div v-if =  "this.$store.state.user.UID != ''" class="dashboard">
         <h3> Dashboard </h3>
         <p>(gepersonaliseerd --> twee verschillende versies)</p>
 
@@ -38,14 +39,13 @@ export default {
                 </ol>
                 <button>Contact</button>
             </div>
-
-
             <div class = "swipeData">
                 
                 <SwipeDataChart></SwipeDataChart>
             </div>
         </div>
     </div>
+    <div v-else>{{ this.$router.push('./RegisterUser') }}</div>
 
 </template>
 

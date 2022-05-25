@@ -25,19 +25,19 @@ export async function read_collection(name_collection, id_document) {
 
     if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
-        return docSnap.data(); 
+        return docSnap.data();
     } else {
 
         console.log("No such document!");
     }
 }
 
-export async function add_to_collection(name_collection, data_structure, identification){
-    
-    if(identification){
+export async function add_to_collection(name_collection, data_structure, identification) {
+
+    if (identification) {
         const docRef = doc(db, name_collection, identification)
         await setDoc(docRef, data_structure)
-    }else {
+    } else {
         console.log("NO id ")
         tmp = await addDoc(collection(db, name_collection), data_structure)
         console.log(tmp)
@@ -47,3 +47,19 @@ export async function add_to_collection(name_collection, data_structure, identif
     console.log("Document added:", identification);
 }
 
+import { query, where, getDocs } from "firebase/firestore"
+
+const profiles_collection = collection(db, "profiles")
+
+export async function has_completed_profile(uid) {
+
+    const q = query(profiles_collection, where("hasProfile", "==", false))
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, "=> ", doc.data())
+        this.$store.hasProfile = doc.data().hasProfile 
+        //this.$store.role = doc.data().role
+    })
+
+}

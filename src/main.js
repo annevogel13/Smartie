@@ -1,8 +1,7 @@
 import { createApp } from 'vue'
-
+import App from './App.vue'
 // charts 
 import VueApexCharts from "vue3-apexcharts";
-import App from './App.vue'
 // routing 
 import { createRouter, createWebHistory } from 'vue-router'
 // webpages 
@@ -13,10 +12,8 @@ import Swipe from '@/views/Swipe.vue'
 import Dashboard from '@/views/DashboardUser.vue'
 import Register from '@/views/RegisterUser.vue'
 import Test from '@/views/testDB.vue'
-
 // database --> firebase 
 import { firestorePlugin } from 'vuefire';
-
 // store information site-wide 
 import { createStore } from 'vuex'
 
@@ -25,7 +22,8 @@ export const store = createStore({
         return {
             user : {
                 UID : "", 
-                role: "bedrijf"
+                role: "bedrijf",
+                hasProfile : false 
             }
         }
     }

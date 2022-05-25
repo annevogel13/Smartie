@@ -2,7 +2,7 @@
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-import { db, add_to_collection } from '../db'
+import { add_to_collection } from '../db'
 
 
 export default {

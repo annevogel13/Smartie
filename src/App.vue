@@ -45,6 +45,7 @@ export default {
     log_out() {
       const auth = getAuth();
       signOut(auth).then(() => {
+        this.$store.sate.UID = ''
         console.log("Sign-out successful")
       }).catch((error) => {
         console.log("An error happened", error.message)
