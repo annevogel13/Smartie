@@ -2,7 +2,8 @@
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-import { db } from '../db'
+import { db, add_to_collection } from '../db'
+
 
 export default {
     data() {
@@ -21,21 +22,20 @@ export default {
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     this.$store.state.user.UID = auth.currentUser.uid;
+                    add_to_collection("profiles", {UID : auth.currentUser.uid, hasProfile : false}, auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {
                     const errorMessage = error.message;
                     console.log(errorMessage)
                 })
-            this.create_user_db();
         },
 
         login_user() {
             const auth = getAuth();
             signInWithEmailAndPassword(auth, this.email, this.password)
-                .then(() => {//(userCredential) => {
+                .then(() => {
                     console.log("Ingelogged")
-                    //const user = userCredential.user;
                     this.$store.state.user.UID = auth.currentUser.uid;
 
                 })
@@ -46,13 +46,6 @@ export default {
                     console.log(errorMessage)
                 })
         },
-        async addUser(){
-            if(this.newUser) {
-                await db.collection("users").add({name : this.newUser})
-                
-            }
-        },
-
     },
 
     components: {}

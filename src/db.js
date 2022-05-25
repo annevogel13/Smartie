@@ -33,14 +33,17 @@ export async function read_collection(name_collection, id_document) {
 }
 
 export async function add_to_collection(name_collection, data_structure, identification){
+    
     if(identification){
         const docRef = doc(db, name_collection, identification)
         await setDoc(docRef, data_structure)
     }else {
         console.log("NO id ")
-        await addDoc(collection(db, name_collection), data_structure)
+        tmp = await addDoc(collection(db, name_collection), data_structure)
+        console.log(tmp)
+
     }
 
-    console.log("Document added:");
+    console.log("Document added:", identification);
 }
 

@@ -25,7 +25,7 @@ export const store = createStore({
         return {
             user : {
                 UID : "", 
-                count: "bedrijf"
+                role: "bedrijf"
             }
         }
     }
