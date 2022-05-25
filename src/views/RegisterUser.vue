@@ -2,7 +2,7 @@
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-import { add_to_collection } from '../db'
+import { add_to_collection, has_completed_profile } from '../db'
 
 
 export default {
@@ -22,7 +22,8 @@ export default {
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     this.$store.state.user.UID = auth.currentUser.uid;
-                    add_to_collection("profiles", {UID : auth.currentUser.uid, hasProfile : false}, auth.currentUser.uid)
+                    this.$store.state.user.role = this.role;
+                    add_to_collection("profiles", {UID : auth.currentUser.uid, hasProfile : false, role : this.role}, auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {
@@ -36,8 +37,7 @@ export default {
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     console.log("Ingelogged")
-                    this.$store.state.user.UID = auth.currentUser.uid;
-
+                    has_completed_profile(auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {

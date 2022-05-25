@@ -43,12 +43,23 @@ export default {
   },
   methods: {
     log_out() {
+
       const auth = getAuth();
       signOut(auth).then(() => {
-        this.$store.sate.UID = ''
+        this.$store.state.UID = ''
         console.log("Sign-out successful")
       }).catch((error) => {
         console.log("An error happened", error.message)
+      });
+
+    },
+    updateUserInfo() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+        } else {
+          // No user is signed in.
+        }
       });
     }
   }

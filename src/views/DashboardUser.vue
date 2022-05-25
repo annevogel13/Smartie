@@ -2,6 +2,8 @@
 
 import { compileScript } from "@vue/compiler-sfc"
 import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
+import { getAuth} from "firebase/auth";
+
 
 export default {
     data() {
@@ -9,12 +11,13 @@ export default {
             role: "bedrijf",
         }
     },
-    components : { SwipeDataChart }
+    components : { SwipeDataChart },
 }
 </script>
 
 <template>
-    <div v-if =  "this.$store.state.user.UID != ''" class="dashboard">
+<div class="dashboard">
+
         <h3> Dashboard </h3>
         <p>(gepersonaliseerd --> twee verschillende versies)</p>
 
@@ -45,7 +48,6 @@ export default {
             </div>
         </div>
     </div>
-    <div v-else>{{ this.$router.push('./RegisterUser') }}</div>
 
 </template>
 
