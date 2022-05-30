@@ -29,6 +29,12 @@ export default createStore({
         },
         setHasProfile(state, _hasProfile){
             state.user.hasProfile = _hasProfile
+        },
+        fill_state(state, data){
+            state.user.UID = data.UID; 
+            state.user.role = data.role; 
+            state.user.hasProfile = data.hasProfile; 
+            state.user.username = data.username; 
         }
     },
     // can't change data in the state 

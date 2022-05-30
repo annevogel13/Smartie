@@ -15,7 +15,7 @@
       <li>
         <router-link to="/About">About</router-link>
       </li>
-      <li>
+      <li v-if="!this.$store.state.user.hasProfile">
         <router-link to="/ProfileUser"> Profile page</router-link>
       </li>
       <li v-if="this.$store.state.user.loggedIn">

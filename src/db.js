@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { addDoc, getFirestore, collection } from "firebase/firestore"
 import "firebase/firestore"
-
+import store from './store'
 
 const firebaseConfig = {
     apiKey: "AIzaSyBz-GuAE6HSTl47j9VM0utLN_HWaYGP83Q",
@@ -48,10 +48,6 @@ export async function add_to_collection(name_collection, data_structure, identif
     console.log("Document added:", identification);
 }
 
-import { query, where, getDocs } from "firebase/firestore"
-
-
-const profiles_collection = collection(db, "profiles")
 
 export async function get_profile_in_store(_UID) {
     console.log("get profile in store")
@@ -59,13 +55,38 @@ export async function get_profile_in_store(_UID) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        
+        const test = {
+            UID : docSnap.data().UID, 
+            role : docSnap.data().role, 
+            hasProfile : docSnap.data().hasProfile, 
+            username : docSnap.data().username
+        } 
+        console.log("tt: ", test)
+        this.$store.emits('fill_state', test)
+    
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
     }
 }
+
+/*
+
+            async test() {
+            const docRef = doc(db, "profiles", _UID);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                test = {
+                    UID: docSnap.data().UID,
+                    role: docSnap.data().role,
+                    hasProfile: docSnap.data().hasProfile,
+                    username: docSnap.data().username,
+                }
+                this.$store.emit("fill_state", test)
+            }
+        }
+
+*/ 
 
 import { setDoc } from 'firebase/firestore'
 
