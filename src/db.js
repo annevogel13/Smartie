@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { addDoc, getFirestore, collection } from "firebase/firestore"
 import "firebase/firestore"
-import store from './store'
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBz-GuAE6HSTl47j9VM0utLN_HWaYGP83Q",
@@ -62,7 +62,7 @@ export async function get_profile_in_store(_UID) {
             username : docSnap.data().username
         } 
         console.log("tt: ", test)
-        this.$store.emits('fill_state', test)
+        return docSnap.data().hasProfile
     
     } else {
         // doc.data() will be undefined in this case
