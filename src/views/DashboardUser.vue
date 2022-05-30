@@ -23,7 +23,7 @@ export default {
             <option value="bedrijf">Bedrijf</option>
             <option value="cursist">Cursist</option>
         </select>
-
+        
         <div v-if = "role == 'cursist'">
             <h3> Pagina voor cursisten </h3>
         </div>

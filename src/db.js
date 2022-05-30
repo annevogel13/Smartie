@@ -49,7 +49,7 @@ export async function add_to_collection(name_collection, data_structure, identif
 }
 
 import { query, where, getDocs } from "firebase/firestore"
-import { store } from "./main.js"
+
 
 const profiles_collection = collection(db, "profiles")
 
@@ -60,9 +60,9 @@ export async function has_completed_profile(uid) {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         console.log(doc.id, "=> ", doc.data())
-        store.state.UID = doc.data().UID 
-        store.state.hasProfile = doc.data().hasProfile 
-        store.state.role = doc.data().role
+        //store.state.UID = doc.data().UID 
+        //store.state.hasProfile = doc.data().hasProfile 
+        //store.state.role = doc.data().role 
     })
 
 }

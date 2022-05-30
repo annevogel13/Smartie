@@ -15,24 +15,7 @@ import Test from '@/views/testDB.vue'
 // database --> firebase 
 import { firestorePlugin } from 'vuefire';
 // store information site-wide 
-import { createStore } from 'vuex'
-
-export const store = createStore({
-    state() {
-        return {
-            user : {
-                UID : "", 
-                role: "bedrijf",
-                hasProfile : false 
-            }
-        }
-    },
-    mutations: {
-        set_UID(state, uid){
-            state.user.UID = uid;  
-        }
-    }
-})
+import store from './store'
 
 const router = createRouter({
     history: createWebHistory(),

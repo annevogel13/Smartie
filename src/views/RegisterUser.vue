@@ -45,7 +45,7 @@ export default {
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     console.log("Ingelogged")
-                    store.commit(set_UID, auth.currentUser.uid)
+                    this.$store.commit('setUID', auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {
@@ -62,13 +62,13 @@ export default {
 }
 
 import { query, where, getDocs, collection } from "firebase/firestore"
-import { store } from "../main";
+
 const profiles_collection = collection(db, "profiles")
 
 </script>
 <template>
     <div class="registerUser">
-
+        
         <div v-if='!login'>
             <h3>Creer een account</h3>
             <input type="text" v-model="email" placeholder="Email">
