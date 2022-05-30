@@ -28,10 +28,8 @@ export const store = createStore({
         }
     },
     mutations: {
-        set_3(state, {id_user, role_user, boolean_has_profile}){
-            state.UID = id_user; 
-            state.role = role_user; 
-            state.hasProfile = boolean_has_profile; 
+        set_UID(state, uid){
+            state.user.UID = uid;  
         }
     }
 })

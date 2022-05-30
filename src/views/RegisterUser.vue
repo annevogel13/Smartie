@@ -12,7 +12,6 @@ export default {
             password: "",
             role: "",
             login: false,
-            newUser: ""
         }
     },
     methods: {
@@ -21,11 +20,8 @@ export default {
             const auth = getAuth();
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
-                    this.store.commit(set_3, {
-                        "uid": auth.currentUser.id,
-                        "role": this.role,
-                        "hasProfile": false
-                    })
+                    store.commit(set_UID, auth.currentUser.uid)
+                    
                     add_to_collection("profiles", { UID: auth.currentUser.uid, hasProfile: false, role: this.role }, auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))
@@ -39,22 +35,17 @@ export default {
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 console.log(doc.id, "=> ", doc.data())
-                store.commit(set_3, {
-                    "uid": doc.data().UID,
-                    "role": doc.data().role,
-                    "hasProfile": doc.data().hasProfile
-                })
+
             })
 
             console.log("user information loaded")
         },
         login_user() {
             const auth = getAuth();
-            load_user_data(auth.currentUser.uid)
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     console.log("Ingelogged")
-                    
+                    store.commit(set_UID, auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {
@@ -71,6 +62,7 @@ export default {
 }
 
 import { query, where, getDocs, collection } from "firebase/firestore"
+import { store } from "../main";
 const profiles_collection = collection(db, "profiles")
 
 </script>

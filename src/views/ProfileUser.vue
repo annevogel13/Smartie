@@ -1,10 +1,3 @@
-<template>
-    <div class="profileUser" >
-        <h4>Profile</h4>
-        <p>Hier kan je je profiel aanmaken</p>
-        <signup-form />
-    </div>
-</template>
 <script>
     
     import SignupForm from "../components/SignupForm.vue"
@@ -15,8 +8,10 @@
     }
     
 </script>
-<style scoped >
-.profile{
-    width :100%; 
-}
-</style>
+
+
+<template>
+    <div class="profileUser" >
+        <signup-form />
+    </div>
+</template>
