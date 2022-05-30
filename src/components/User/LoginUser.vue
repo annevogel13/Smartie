@@ -18,7 +18,6 @@ export default {
         }
     },
     methods: {
-
         login_user() {
             const auth = getAuth();
             signInWithEmailAndPassword(auth, this.email, this.password)

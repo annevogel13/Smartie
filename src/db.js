@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, getFirestore, setDoc, collection } from "firebase/firestore"
+import { addDoc, getFirestore, collection } from "firebase/firestore"
 import "firebase/firestore"
 
 
@@ -53,17 +53,27 @@ import { query, where, getDocs } from "firebase/firestore"
 
 const profiles_collection = collection(db, "profiles")
 
-export async function has_completed_profile(uid) {
+export async function get_profile_in_store(_UID) {
 
-    const q = query(profiles_collection, where("hasProfile", "==", false))
+    const q = query(profiles_collection, where("UID", "==", _UID))
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         console.log(doc.id, "=> ", doc.data())
-        //store.state.UID = doc.data().UID 
-        //store.state.hasProfile = doc.data().hasProfile 
-        //store.state.role = doc.data().role 
-    })
+        
 
+    })
+}
+
+import { setDoc } from 'firebase/firestore'
+
+export async function update_profile(_UID, _username, _tel){
+        await setDoc(doc(db, "profiles", _UID), {
+            UID : _UID, 
+            username : _username,
+            tel : _tel, 
+            hasProfile : true, 
+        })
+    console.log("Profile ", _UID, " updated ")
 }
 

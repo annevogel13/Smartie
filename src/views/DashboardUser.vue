@@ -13,6 +13,11 @@ export default {
 
         <h3> Dashboard </h3>
 
+        <div class="noProfile">
+            <p> Je profiel is niet compleet </p>
+            <button><router-link to = "/ProfileUser" >Klilk hier om naar de profiel pagina te gaan</router-link></button>
+        </div>
+
         <div v-if = "this.$store.state.user.role == 'cursist'">
             <h3> Pagina voor cursisten </h3>
         </div>

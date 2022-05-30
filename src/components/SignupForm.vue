@@ -1,48 +1,47 @@
 <template>
     <div class="format">
-        <form>
-            <h2>Maak je profiel aan</h2>
-            <label> Username </label>
-            <input type="text" required v-model="profile.username">
-            <label> Telefoonnummer </label>
-            <input type="tel" v-model="profile.telefoonnr">
 
-            <label>Profiel foto</label>
-            <input type="file" accept="image/">
+        <h2>Maak je profiel aan</h2>
+        <label> Username </label>
+        <input type="text" required v-model="username">
+        <label> Telefoonnummer </label>
+        <input type="tel" required v-model="telefoonnr">
 
+        <label>Profiel foto</label>
+        <input type="file" accept="image/">
 
-            <div v-if="this.$store.state.user.role == 'bedrijf'">
-                <h3> Vragen specifiek voor bedrijven </h3>
-            </div>
+        <div v-if="this.$store.state.user.role == 'bedrijf'">
+            <h3> Vragen specifiek voor bedrijven </h3>
+        </div>
 
-            <div v-if="this.$store.state.user.role == 'cursist'">
-                <h3> Vragen specifiek voor cursisten </h3>
+        <div v-if="this.$store.state.user.role == 'cursist'">
+            <h3> Vragen specifiek voor cursisten </h3>
 
-            </div>
-            <button @click="uploadInformation()">Bevestigen</button>
-        </form>
+        </div>
+        <button @click="uploadInformation">Bevestigen</button>
+
+        
     </div>
 </template>
 <script>
 
-import { add_to_collection } from '../db'
+import { update_profile } from '../db'
 
 export default {
     data() {
         return {
-            profile: {
-                profielfoto: "",
-                telefoonnr: "",
-                username: "",
-            }
+            profielfoto: "",
+            telefoonnr: "",
+            username: "",
+
         }
     },
     methods: {
-        uploadInformation(){
-                console.log("trying to upload profile ") 
-                add_to_collection('profiles', this.profile)
-                
-            }
+        uploadInformation() {
+            console.log("trying to upload profile ")
+            update_profile(this.$store.state.user.UID, this.username, this.telefoonnr)
+
+        }
     }
 }
 </script>

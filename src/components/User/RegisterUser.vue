@@ -4,7 +4,9 @@
     <br />
     <input type="password" v-model="password" placeholder="Password" />
     <br />
-    <select class="role" v-model="role" placeholder="Role">
+    
+    <select class="role" v-model="role" >
+        <option disabled selected>Kies de rol</option>
         <option value="bedrijf">Bedrijf</option>
         <option value="cursist">Cursist</option>
     </select>
@@ -14,7 +16,7 @@
 
 <script>
 
-import { add_to_collection, db } from '../../db'
+import { add_to_collection} from '../../db'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
