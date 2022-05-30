@@ -4,11 +4,6 @@ import { compileScript } from "@vue/compiler-sfc"
 import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
 
 export default {
-    data() {
-        return {
-            role: "bedrijf",
-        }
-    },
     components : { SwipeDataChart },
 }
 </script>
@@ -17,18 +12,12 @@ export default {
 <div class="dashboard">
 
         <h3> Dashboard </h3>
-        <p>(gepersonaliseerd --> twee verschillende versies)</p>
 
-        <select class="quick" v-model="role">
-            <option value="bedrijf">Bedrijf</option>
-            <option value="cursist">Cursist</option>
-        </select>
-        
-        <div v-if = "role == 'cursist'">
+        <div v-if = "this.$store.state.user.role == 'cursist'">
             <h3> Pagina voor cursisten </h3>
         </div>
 
-        <div v-if = "role == 'bedrijf'">
+        <div v-if = "this.$store.state.user.role == 'bedrijf'">
             <h3> Pagina voor bedrijven </h3>
             <div class = "toprecommendations">
                 <ol>

@@ -9,17 +9,13 @@
 
             <label>Profiel foto</label>
             <input type="file" accept="image/">
-            <label> Role </label>
-            <select v-model="profile.role">
-                <option value="bedrijf">Bedrijf</option>
-                <option value="cursist">Cursist</option>
-            </select>
 
-            <div v-if="profile.role == 'bedrijf'">
+
+            <div v-if="this.$store.state.user.role == 'bedrijf'">
                 <h3> Vragen specifiek voor bedrijven </h3>
             </div>
 
-            <div v-if="profile.role == 'cursist'">
+            <div v-if="this.$store.state.user.role == 'cursist'">
                 <h3> Vragen specifiek voor cursisten </h3>
 
             </div>
@@ -36,7 +32,6 @@ export default {
         return {
             profile: {
                 profielfoto: "",
-                role: "",
                 telefoonnr: "",
                 username: "",
             }
@@ -46,6 +41,7 @@ export default {
         uploadInformation(){
                 console.log("trying to upload profile ") 
                 add_to_collection('profiles', this.profile)
+                
             }
     }
 }

@@ -20,7 +20,8 @@ export default {
             const auth = getAuth();
             createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
-                    store.commit(set_UID, auth.currentUser.uid)
+                    this.$store.commit('setUID', auth.currentUser.uid)
+                    this.$store.commit('setRole', this.role)
                     
                     add_to_collection("profiles", { UID: auth.currentUser.uid, hasProfile: false, role: this.role }, auth.currentUser.uid)
                 })
