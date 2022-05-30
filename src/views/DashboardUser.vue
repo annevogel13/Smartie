@@ -12,8 +12,8 @@ export default {
 <div class="dashboard">
 
         <h3> Dashboard </h3>
-
-        <div class="noProfile">
+        
+        <div v-if="!this.$store.state.user.hasProfile" class="noProfile">
             <p> Je profiel is niet compleet </p>
             <button><router-link to = "/ProfileUser" >Klilk hier om naar de profiel pagina te gaan</router-link></button>
         </div>

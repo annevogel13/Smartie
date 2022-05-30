@@ -40,7 +40,7 @@ export default {
         uploadInformation() {
             console.log("trying to upload profile ")
             update_profile(this.$store.state.user.UID, this.username, this.telefoonnr)
-
+            this.$router.push("./DashboardUser")
         }
     }
 }

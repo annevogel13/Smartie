@@ -35,7 +35,7 @@ export async function read_collection(name_collection, id_document) {
 export async function add_to_collection(name_collection, data_structure, identification) {
 
     if (identification) {
-        console.log("document ", identification, " updated")
+        console.log("document added to collection ", identification)
         const docRef = doc(db, name_collection, identification)
         await setDoc(docRef, data_structure)
     } else {
@@ -54,26 +54,28 @@ import { query, where, getDocs } from "firebase/firestore"
 const profiles_collection = collection(db, "profiles")
 
 export async function get_profile_in_store(_UID) {
+    console.log("get profile in store")
+    const docRef = doc(db, "profiles", _UID);
+    const docSnap = await getDoc(docRef);
 
-    const q = query(profiles_collection, where("UID", "==", _UID))
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        console.log(doc.id, "=> ", doc.data())
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
         
-
-    })
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
 }
 
 import { setDoc } from 'firebase/firestore'
 
-export async function update_profile(_UID, _username, _tel){
-        await setDoc(doc(db, "profiles", _UID), {
-            UID : _UID, 
-            username : _username,
-            tel : _tel, 
-            hasProfile : true, 
-        })
+export async function update_profile(_UID, _username, _tel) {
+    await setDoc(doc(db, "profiles", _UID), {
+        UID: _UID,
+        username: _username,
+        tel: _tel,
+        hasProfile: true,
+    })
     console.log("Profile ", _UID, " updated ")
 }
 

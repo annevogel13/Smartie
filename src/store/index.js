@@ -6,7 +6,8 @@ export default createStore({
             UID : '',
             loggedIn : false, 
             username : '', 
-            role : '', 
+            role : '',
+            hasProfile: false,  
         }
     },
     // only synchronous code 
@@ -15,7 +16,7 @@ export default createStore({
         setUID(state, _UID){
             state.user.UID = _UID 
             state.user.loggedIn = true 
-            console.log( state.user.UID, state.user.loggedIn)
+            console.log("USER LOGGED IN ", state.user.UID, state.user.loggedIn)
         }, 
         setUser(state, _username){
             state.user.username = _username 
@@ -25,6 +26,9 @@ export default createStore({
         },
         loggingOut(state){
             state.user.loggedIn = false 
+        },
+        setHasProfile(state, _hasProfile){
+            state.user.hasProfile = _hasProfile
         }
     },
     // can't change data in the state 

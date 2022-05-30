@@ -11,7 +11,7 @@
         <option value="cursist">Cursist</option>
     </select>
     <br />
-    <button @click="register()">Registeren</button>
+    <button @click="register">Registeren</button>
 </template>
 
 <script>
@@ -35,6 +35,7 @@ export default {
                 .then(() => {
                     this.$store.commit('setUID', auth.currentUser.uid)
                     this.$store.commit('setRole', this.role)
+                    this.$store.commit('hasProfile', false)
 
                     add_to_collection("profiles", { UID: auth.currentUser.uid, hasProfile: false, role: this.role }, auth.currentUser.uid)
                 })
