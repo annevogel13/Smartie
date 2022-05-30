@@ -1,0 +1,38 @@
+<template>
+    <h3>Login</h3>
+    <input type="text" v-model="email" placeholder="Email" />
+    <br />
+    <input type="password" v-model="password" placeholder="Password" />
+    <br />
+    <button @click="login_user()">Login</button>
+</template>
+
+<script>
+export default {
+        data() {
+        return {
+            email: "",
+            password: "",
+        }
+    },
+    methods: {
+        
+        login_user() {
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, this.email, this.password)
+                .then(() => {
+                    console.log("Ingelogged");
+                    this.$store.commit("setUID", auth.currentUser.uid);
+                })
+                .then(this.$router.push("./DashboardUser"))
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    console.log(errorMessage);
+                });
+        },
+    },
+};
+</script>
+
+<style>
+</style>
