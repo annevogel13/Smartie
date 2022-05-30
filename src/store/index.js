@@ -22,6 +22,9 @@ export default createStore({
         },
         setRole(state, _role){
             state.user.role = _role 
+        },
+        loggingOut(state){
+            state.user.loggedIn = false 
         }
     },
     // can't change data in the state 

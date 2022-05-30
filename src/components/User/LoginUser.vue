@@ -8,15 +8,17 @@
 </template>
 
 <script>
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 export default {
-        data() {
+    data() {
         return {
             email: "",
             password: "",
         }
     },
     methods: {
-        
+
         login_user() {
             const auth = getAuth();
             signInWithEmailAndPassword(auth, this.email, this.password)

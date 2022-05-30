@@ -15,6 +15,7 @@
 <script>
 
 import { add_to_collection, db } from '../../db'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
         data() {

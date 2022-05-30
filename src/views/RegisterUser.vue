@@ -1,6 +1,5 @@
 <script>
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 
 import login from '../components/User/LoginUser.vue'
@@ -9,13 +8,11 @@ import register from '../components/User/RegisterUser.vue'
 export default {
     data() {
         return {
-            wissel : false, 
+            wissel : true, 
         }
     }, 
     components: { login, register }
-
 }
-
 
 </script>
 <template>

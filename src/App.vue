@@ -18,18 +18,18 @@
       <li>
         <router-link to="/ProfileUser"> Profile page</router-link>
       </li>
-      <li>
+      <li v-if="this.$store.state.user.loggedIn">
         <router-link to="/DashboardUser"> Dashboard</router-link>
       </li>
       <li>
         <router-link to="/Swipe"> Swipe page</router-link>
       </li>
-      <li>
+      <li v-if="!this.$store.state.user.loggedIn">
         <button class="logout">
           <router-link to="/RegisterUser">Log in</router-link>
         </button>
       </li>
-      <li>
+      <li v-if="this.$store.state.user.loggedIn">
         <button class="logout" @click="log_out()">
           <router-link to="/">Log uit</router-link>
         </button>
@@ -46,17 +46,13 @@
 import { getAuth, signOut } from "firebase/auth";
 
 export default {
-  data() {
-    return {
 
-    }
-  },
   methods: {
     log_out() {
 
       const auth = getAuth();
       signOut(auth).then(() => {
-        this.$store.state.UID = ''
+        this.$store.commit('loggingOut')
         console.log("Sign-out successful")
       }).catch((error) => {
         console.log("An error happened", error.message)
@@ -73,7 +69,7 @@ export default {
   margin-top: 30px;
   margin-bottom: 30px;
   background: white;
-  padding : 20px; 
+  padding: 20px;
   margin-right: 5%;
   border-radius: 10px;
 }
