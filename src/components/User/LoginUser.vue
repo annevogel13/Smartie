@@ -25,7 +25,10 @@ export default {
                 .then(() => {
                     console.log("Ingelogged")
                     this.$store.commit("setUID", auth.currentUser.uid)
-                    get_profile_in_store(auth.currentUser.uid)
+                    get_profile_in_store(auth.currentUser.uid).then(data =>{
+                        console.log(data)
+                        this.$store.commit('fill_state', data)
+                    })
                     // TODO : get this working !!!! state doesn't fill up 
                 })
                 .then(this.$router.push("./DashboardUser"))

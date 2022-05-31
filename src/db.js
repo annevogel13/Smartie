@@ -55,14 +55,8 @@ export async function get_profile_in_store(_UID) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        const test = {
-            UID : docSnap.data().UID, 
-            role : docSnap.data().role, 
-            hasProfile : docSnap.data().hasProfile, 
-            username : docSnap.data().username
-        } 
-        console.log("tt: ", test)
-        return docSnap.data().hasProfile
+
+        return docSnap.data()
     
     } else {
         // doc.data() will be undefined in this case

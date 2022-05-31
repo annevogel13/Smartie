@@ -35,6 +35,7 @@ export default createStore({
             state.user.role = data.role; 
             state.user.hasProfile = data.hasProfile; 
             state.user.username = data.username; 
+            console.log("state is updated")
         }
     },
     // can't change data in the state 

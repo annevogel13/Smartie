@@ -36,4 +36,4 @@ createApp(App)
     .use(store)
     .use(firestorePlugin)
     .mount('#app')
-
+    
