@@ -123,6 +123,8 @@ export async function uploadImage(file) {
             // Upload completed successfully, now we can get the download URL
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 console.log('File available at', downloadURL);
+                return downloadURL
+                
             });
         }
     );
