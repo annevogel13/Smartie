@@ -8,8 +8,12 @@
         <input type="tel" required v-model="telefoonnr">
 
         <label>Profiel foto</label>
-        <input type="file" accept="image/">
+        <button @click="click1">Kies foto</button>
+        <input type="file" ref="input1" style="display : none " @change="previewImage" accept="image/*">
 
+        <div v-if="imageData != null">
+            <img class="preview" :src="img1">
+        </div>
         <div v-if="this.$store.state.user.role == 'bedrijf'">
             <h3> Vragen specifiek voor bedrijven </h3>
         </div>
@@ -18,14 +22,15 @@
             <h3> Vragen specifiek voor cursisten </h3>
 
         </div>
+        <br>
         <button @click="uploadInformation">Bevestigen</button>
 
-        
+
     </div>
 </template>
 <script>
 
-import { update_profile } from '../db'
+import { update_profile, uploadImage } from '../db'
 
 export default {
     data() {
@@ -33,7 +38,9 @@ export default {
             profielfoto: "",
             telefoonnr: "",
             username: "",
-
+            uploadValue: 0,
+            img1: null,
+            imageData: null,
         }
     },
     methods: {
@@ -41,9 +48,22 @@ export default {
             console.log("trying to upload profile ")
             update_profile(this.$store.state.user.UID, this.username, this.telefoonnr)
             this.$router.push("./DashboardUser")
-        }
+        },
+        click1() {
+            this.$refs.input1.click()
+        },
+        previewImage(event) {
+            this.uploadValue = 0;
+            this.img1 = null;
+            this.imageData = event.target.files[0]
+            this.onUpload();
+        },
+        onUpload() {
+            uploadImage(this.imageData)
+        },
     }
 }
+
 </script>
 <style scoped >
 label {

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, getFirestore, collection } from "firebase/firestore"
+import { getFirestore, collection } from "firebase/firestore"
 import "firebase/firestore"
 
 
@@ -14,10 +14,13 @@ const firebaseConfig = {
 };
 
 const app_firebase = initializeApp(firebaseConfig);
+
+
+/***********************FIRESTORE*************************************/
+
 export const db = getFirestore(app_firebase);
 
-
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, addDoc, setDoc } from "firebase/firestore";
 
 export async function read_collection(name_collection, id_document) {
     const docRef = doc(db, name_collection, id_document);
@@ -32,6 +35,7 @@ export async function read_collection(name_collection, id_document) {
     }
 }
 
+/* Add the data_structure to the _name_collection with the variable identification as id */
 export async function add_to_collection(name_collection, data_structure, identification) {
 
     if (identification) {
@@ -48,43 +52,23 @@ export async function add_to_collection(name_collection, data_structure, identif
     console.log("Document added:", identification);
 }
 
-
+/* Returns the data of a user with the ID _UID */
 export async function get_profile_in_store(_UID) {
+
     console.log("get profile in store")
     const docRef = doc(db, "profiles", _UID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-
         return docSnap.data()
-    
     } else {
-        // doc.data() will be undefined in this case
         console.log("No such document!");
     }
 }
 
-/*
-
-            async test() {
-            const docRef = doc(db, "profiles", _UID);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                test = {
-                    UID: docSnap.data().UID,
-                    role: docSnap.data().role,
-                    hasProfile: docSnap.data().hasProfile,
-                    username: docSnap.data().username,
-                }
-                this.$store.emit("fill_state", test)
-            }
-        }
-
-*/ 
-
-import { setDoc } from 'firebase/firestore'
-
+/* Updates profile (needed on the profileUser page */
 export async function update_profile(_UID, _username, _tel) {
+
     await setDoc(doc(db, "profiles", _UID), {
         UID: _UID,
         username: _username,
@@ -94,3 +78,52 @@ export async function update_profile(_UID, _username, _tel) {
     console.log("Profile ", _UID, " updated ")
 }
 
+/******************* STORAGE **************************/
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+export const storage = getStorage(app_firebase);
+
+
+export async function uploadImage(file) {
+
+    const storageRef = ref(storage, 'images/avatars/' + file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on('state_changed',
+        (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+                case 'paused':
+                    console.log('Upload is paused');
+                    break;
+                case 'running':
+                    console.log('Upload is running');
+                    break;
+            }
+        },
+        (error) => {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    // User doesn't have permission to access the object
+                    break;
+                case 'storage/canceled':
+                    // User canceled the upload
+                    break;
+                case 'storage/unknown':
+                    // Unknown error occurred, inspect error.serverResponse
+                    break;
+            }
+        },
+        () => {
+            // Upload completed successfully, now we can get the download URL
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log('File available at', downloadURL);
+            });
+        }
+    );
+}
