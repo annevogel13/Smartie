@@ -35,8 +35,7 @@ export default {
                 .then(() => {
                     this.$store.commit('setUID', auth.currentUser.uid)
                     this.$store.commit('setRole', this.role)
-                    this.$store.commit('hasProfile', false)
-
+                
                     add_to_collection("profiles", { UID: auth.currentUser.uid, hasProfile: false, role: this.role }, auth.currentUser.uid)
                 })
                 .then(this.$router.push('./DashboardUser'))

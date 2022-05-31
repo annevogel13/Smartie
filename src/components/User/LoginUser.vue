@@ -29,7 +29,6 @@ export default {
                         console.log(data)
                         this.$store.commit('fill_state', data)
                     })
-                    // TODO : get this working !!!! state doesn't fill up 
                 })
                 .then(this.$router.push("./DashboardUser"))
                 .catch((error) => {

@@ -54,6 +54,7 @@ export default {
       signOut(auth).then(() => {
         this.$store.commit('loggingOut')
         console.log("Sign-out successful")
+        this.$router.push('/')
       }).catch((error) => {
         console.log("An error happened", error.message)
       });
@@ -94,7 +95,6 @@ body {
 ul {
   list-style-type: none;
 }
-
 
 a,
 button {

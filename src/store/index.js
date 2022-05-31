@@ -4,10 +4,11 @@ export default createStore({
     state: {
         user : {
             UID : '',
-            loggedIn : false, 
-            username : '', 
             role : '',
-            hasProfile: false,  
+            hasProfile: false, 
+            username : '', 
+
+            loggedIn : false, 
         }
     },
     // only synchronous code 
@@ -42,7 +43,9 @@ export default createStore({
     // can havae asynchronous code  
     // dispatch actions 
     actions:{
-
+        fill_state({ commit }, data){
+            commit('fill_state', data)
+        }
     },
     // change or filter ou data before we use it in our components 
     getters:{
