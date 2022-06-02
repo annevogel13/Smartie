@@ -86,27 +86,27 @@ async function get_profile_in_store_cursist(_UID) {
 /* Updates profile (needed on the profileUser page */
 export async function update_profile(_UID, _username, _tel, role){
     if(role == "bedrijf"){
-        const name_collection = "profiles_bedrijf"
-   
-    await setDoc(doc(db, name_collection, _UID), {
+    
+    await setDoc(doc(db, "profiel_bedrijf", _UID), {
         UID: _UID,
         username: _username,
         tel: _tel,
         hasProfile: true,
         likes : [],
-        dislikes : []
+        dislikes : [],
+        time : Timestamp.now()
     })
     console.log("Profile ", _UID, " updated ")
     }else {
-        const name_collection = "profiles_cursist"
-   
-        await setDoc(doc(db, name_collection, _UID), {
+
+        await setDoc(doc(db, "profiel_cursist", _UID), {
             UID: _UID,
             username: _username,
             tel: _tel,
             hasProfile: true,
             likes : [],
-            dislikes : []
+            dislikes : [],
+            time : Timestamp.now()
         })
         console.log("Profile ", _UID, " updated ")
     }
