@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore"
 import "firebase/firestore"
-
+import { Timestamp } from "firebase/firestore"
 
 const firebaseConfig = {
     apiKey: "AIzaSyBz-GuAE6HSTl47j9VM0utLN_HWaYGP83Q",

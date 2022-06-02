@@ -65,7 +65,8 @@ export default {
 </script>
 <style  >
 .format {
-  max-width: 70%;
+  width: 70%;
+  min-height : 650px;
   float: right;
   margin-top: 30px;
   margin-bottom: 30px;
