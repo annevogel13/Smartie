@@ -4,6 +4,7 @@ import PieChart from "../Charts/PieChart.vue"
 import LineChart from "../Charts/LineChart.vue"
 import PopupFeedback from "../Popups/PopupFeedback.vue"
 import PopupQuestions from "../Popups/PopupQuestions.vue"
+import { get_profile_in_store_cursist } from "../../db"
 
 export default {
     components: { PieChart, LineChart, PopupFeedback, PopupQuestions },
@@ -23,9 +24,21 @@ export default {
             this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible;
 
         },
+        get_random_UID_from_array(){
+            const max = this.$store.state.user.approved_matches.length; 
+            const index = Math.floor(Math.random() * max) ; 
+            console.log("het random numer van de dag is : ", index)
+            const tmp = this.$store.getters.getIndexApprovedMatches(index)
+            console.log(tmp)
+            get_profile_in_store_cursist(tmp).then(data => {
+                console.log(data)
+            })
+        },
         more_information() {
+            
             this.$refs.questions_visible.visible = !this.$refs.questions_visible.visible
-        }
+        },
+        
     }
 }
 </script>
@@ -33,7 +46,7 @@ export default {
 <template>
     <div class="swipeCartBusiness">
         <div class="div1 griditem">
-            <h3 class="nameCompagnie" @click="more_information"> {{ name }} </h3>
+            <h3 class="nameCompagnie" @click="get_random_UID_from_array"> {{ name }} </h3>
         </div>
         <div class="div2 griditem">
             <p>

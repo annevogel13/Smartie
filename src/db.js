@@ -68,7 +68,7 @@ export async function get_profile_in_store(_UID) {
     }
 }
 
-async function get_profile_in_store_cursist(_UID) {
+export async function get_profile_in_store_cursist(_UID) {
 
     console.log("get profile in store")
     

@@ -40,7 +40,9 @@ export default createStore({
             state.user.hasProfile = data.hasProfile; 
             state.user.username = data.username; 
             console.log("state is updated")
-        }
+        },
+
+
     },
     // can't change data in the state 
     // can havae asynchronous code  
@@ -52,6 +54,9 @@ export default createStore({
     },
     // change or filter ou data before we use it in our components 
     getters:{
+        getIndexApprovedMatches: state => index => {
+            return state.user.approved_matches[index]
+        }
 
     },
     // break up our store in smallers modules 

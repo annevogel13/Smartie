@@ -11,8 +11,7 @@ export default {
                 console.log(data)
                 this.$store.commit("setApprovedMatchs", data)
             })
-
-            
+            this.$router.push("./Swipe")            
         }
     },
     components : { SwipeDataChart },
@@ -21,7 +20,7 @@ export default {
 
 <template>
 <div class="dashboard">
-        <button @click = "test">HELLO</button>
+        <button @click = "test">Klik hier om de matches de laden in je profiel</button>
         <h3> Dashboard </h3>
         
         <div v-if="!this.$store.state.user.hasProfile" class="noProfile">
