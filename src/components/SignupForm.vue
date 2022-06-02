@@ -50,6 +50,7 @@ export default {
         uploadInformation() {
             console.log("trying to upload profile ")
             update_profile(this.$store.state.user.UID, this.username, this.telefoonnr, this.$store.state.user.role)
+            this.$store.commit('setHasProfile', true) 
             this.$router.push("./DashboardUser")
         },
         click1() {

@@ -85,12 +85,9 @@ async function get_profile_in_store_cursist(_UID) {
 
 /* Updates profile (needed on the profileUser page */
 export async function update_profile(_UID, _username, _tel, role){
-    const name_collection = ""
     if(role == "bedrijf"){
-        name_collection = "profiles_bedrijf"
-    }else name_collection = "profiel_cursist"
-    
-
+        const name_collection = "profiles_bedrijf"
+   
     await setDoc(doc(db, name_collection, _UID), {
         UID: _UID,
         username: _username,
@@ -100,7 +97,35 @@ export async function update_profile(_UID, _username, _tel, role){
         dislikes : []
     })
     console.log("Profile ", _UID, " updated ")
+    }else {
+        const name_collection = "profiles_cursist"
+   
+        await setDoc(doc(db, name_collection, _UID), {
+            UID: _UID,
+            username: _username,
+            tel: _tel,
+            hasProfile: true,
+            likes : [],
+            dislikes : []
+        })
+        console.log("Profile ", _UID, " updated ")
+    }
 }
+
+export async function add_profile_image(_UID, imageLocation, role){
+    const name_collection = ""
+    if(role == "bedrijf"){
+        name_collection = "profiles_bedrijf"
+    }else name_collection = "profiel_cursist"
+    
+
+    await setDoc(doc(db, name_collection, _UID), {
+        imageLocation : imageLocation 
+    })
+    console.log("Profile ", _UID, " updated ")
+}
+
+
 
 /******************* STORAGE **************************/
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -109,9 +134,10 @@ export const storage = getStorage(app_firebase);
 
 
 export async function uploadImage(file) {
-
-    const storageRef = ref(storage, 'images/avatars/' + file.name);
+    const fileRef = 'images/avatars/' + file.name
+    const storageRef = ref(storage, fileRef);
     const uploadTask = uploadBytesResumable(storageRef, file);
+
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
