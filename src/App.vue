@@ -66,7 +66,7 @@ export default {
 <style  >
 .format {
   width: 75%;
-  min-height : 650px;
+  min-height : 100%;
   float: right;
   margin: 30px;
   background: white; 
@@ -79,6 +79,7 @@ body {
   background-image: linear-gradient(#dbede3, #d8d2e6);
   background-repeat: no-repeat;
   background-size: cover;
+  min-height : 800px ; 
 }
 
 .navbar {

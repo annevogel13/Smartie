@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore"
+import { getFirestore, collection} from "firebase/firestore"
 import "firebase/firestore"
 import { Timestamp } from "firebase/firestore"
 
@@ -20,7 +20,7 @@ const app_firebase = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app_firebase);
 
-import { doc, getDoc, addDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, addDoc, setDoc, getDocs, query, where } from "firebase/firestore";
 
 export async function read_collection(name_collection, id_document) {
     const docRef = doc(db, name_collection, id_document);
@@ -124,6 +124,22 @@ export async function add_profile_image(_UID, imageLocation, role){
     })
     console.log("Profile ", _UID, " updated ")
 }
+
+export async function get_group_approved_users() {
+
+    console.log("Construction array")
+    const array_uid = []
+    const docRef = query(collection(db, "profiel_cursist"), where("hasProfile", "==", false));
+    const docSnap = await getDocs(docRef);
+
+    docSnap.forEach((doc) => {
+        console.log(doc.id)
+        array_uid.push(doc.id)
+    })
+
+    return array_uid
+}
+
 
 
 

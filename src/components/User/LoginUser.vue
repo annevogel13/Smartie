@@ -30,11 +30,13 @@ export default {
                         this.$store.commit('fill_state', data)
                     })
                 })
-                .then(this.$router.push("./DashboardUser"))
+                
                 .catch((error) => {
                     const errorMessage = error.message;
                     console.log(errorMessage);
-                });
+                    return; 
+                })
+                this.$router.push("./DashboardUser"); 
 
         },
 

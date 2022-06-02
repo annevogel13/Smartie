@@ -28,9 +28,10 @@ export default {
 </template>
 <style >
 .register {
-    margin-top: 40px;
-    width: 1000px;
-    vertical-align: center;
+    width : 60%;
+    margin : auto;  
+    margin-top : 50px; 
+    height : 250px;
 }
 
 input,

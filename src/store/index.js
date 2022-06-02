@@ -7,13 +7,16 @@ export default createStore({
             role : '',
             hasProfile: false, 
             username : '', 
-
+            approved_matches : [], 
             loggedIn : false, 
         }
     },
     // only synchronous code 
     // change the state 
     mutations:{
+        setApprovedMatchs(state, _array){
+            state.user.approved_matches = _array 
+        },
         setUID(state, _UID){
             state.user.UID = _UID 
             state.user.loggedIn = true 

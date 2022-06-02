@@ -2,17 +2,28 @@
 
 import { compileScript } from "@vue/compiler-sfc"
 import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
+import { get_group_approved_users } from "../db"
 
 export default {
+    methods : {
+        test(){
+            get_group_approved_users().then(data => {
+                console.log(data)
+                this.$store.commit("setApprovedMatchs", data)
+            })
+
+            
+        }
+    },
     components : { SwipeDataChart },
 }
 </script>
 
 <template>
 <div class="dashboard">
-
+        <button @click = "test">HELLO</button>
         <h3> Dashboard </h3>
-        {{this.$store.state.user.hasProfile}}
+        
         <div v-if="!this.$store.state.user.hasProfile" class="noProfile">
             <p> Je profiel is niet compleet </p>
             <button><router-link to = "/ProfileUser" >Klilk hier om naar de profiel pagina te gaan</router-link></button>
