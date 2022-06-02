@@ -65,15 +65,14 @@ export default {
 </script>
 <style  >
 .format {
-  width: 70%;
+  width: 75%;
   min-height : 650px;
   float: right;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  background: white;
+  margin: 30px;
+  background: white; 
   padding: 20px;
-  margin-right: 5%;
   border-radius: 10px;
+  text-align : center; 
 }
 
 body {
@@ -91,6 +90,7 @@ body {
   width: 15%;
   height: 100%;
   text-align: center;
+  padding : 5px; 
 }
 
 ul {

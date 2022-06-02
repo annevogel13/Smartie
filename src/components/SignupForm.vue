@@ -1,5 +1,5 @@
 <template>
-    <div class="format">
+    <div class="signup">
 
         <h2>Maak je profiel aan</h2>
         <label> Username </label>
@@ -15,8 +15,7 @@
 
         <div>
             <!-- TODO preview image  -->
-            <img class="preview"
-                src= "this.img1">
+            <img class="preview" src="this.img1">
         </div>
         <div v-if="this.$store.state.user.role == 'bedrijf'">
             <h3> Vragen specifiek voor bedrijven </h3>
@@ -74,7 +73,12 @@ export default {
 .preview {
     width: 25%;
     height: auto;
+}
 
+.signup{
+    padding : 10px; 
+    width : 75%; 
+    margin : 20px auto auto auto; 
 }
 
 label {
@@ -89,11 +93,12 @@ label {
 input,
 select {
     padding: 10px 6px;
-    width: 100%;
+    width: 90%;
     box-sizing: border-box;
     border: none;
     border-bottom: 1px solid #ddd;
-    color: #555
+    color: #555; 
+    text-align : center ; 
 }
 
 button {

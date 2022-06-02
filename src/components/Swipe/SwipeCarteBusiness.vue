@@ -97,12 +97,9 @@ export default {
 
 .swipeCartBusiness {
     display: grid;
-    background-color: aliceblue;
     padding: 10px;
-    width: 80%;
-    height: 50%;
+    width: 70%;
     margin: auto;
-    border-radius: 10px;
 }
 
 .nameCompagnie {
