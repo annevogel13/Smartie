@@ -49,7 +49,7 @@ export default {
     methods: {
         uploadInformation() {
             console.log("trying to upload profile ")
-            update_profile(this.$store.state.user.UID, this.username, this.telefoonnr)
+            update_profile(this.$store.state.user.UID, this.username, this.telefoonnr, this.$store.state.user.role)
             this.$router.push("./DashboardUser")
         },
         click1() {

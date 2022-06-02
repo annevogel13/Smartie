@@ -4,8 +4,8 @@
     <br />
     <input type="password" v-model="password" placeholder="Password" />
     <br />
-    
-    <select class="role" v-model="role" >
+
+    <select class="role" v-model="role">
         <option disabled selected>Kies de rol</option>
         <option value="bedrijf">Bedrijf</option>
         <option value="cursist">Cursist</option>
@@ -16,17 +16,18 @@
 
 <script>
 
-import { add_to_collection} from '../../db'
+import { add_to_collection } from '../../db'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Timestamp } from "firebase/firestore"
 
 export default {
-        data() {
+    data() {
         return {
             email: "",
             password: "",
             role: "",
         }
-    }, 
+    },
     methods: {
         register() {
             console.log("Register new user")
@@ -35,8 +36,13 @@ export default {
                 .then(() => {
                     this.$store.commit('setUID', auth.currentUser.uid)
                     this.$store.commit('setRole', this.role)
-                
-                    add_to_collection("profiles", { UID: auth.currentUser.uid, hasProfile: false, role: this.role }, auth.currentUser.uid)
+
+                    if (this.role == "bedrijf") {
+                        add_to_collection("profiel_bedrijf", { UID: auth.currentUser.uid, hasProfile: false, role: this.role, time: Timestamp.now() }, auth.currentUser.uid)
+                    } else if (this.role == "cursist") {
+                        add_to_collection("profiel_cursist", { UID: auth.currentUser.uid, hasProfile: false, role: this.role, time: Timestamp.now() }, auth.currentUser.uid)
+                    }
+
                 })
                 .then(this.$router.push('./DashboardUser'))
                 .catch((error) => {

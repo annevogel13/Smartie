@@ -56,24 +56,48 @@ export async function add_to_collection(name_collection, data_structure, identif
 export async function get_profile_in_store(_UID) {
 
     console.log("get profile in store")
-    const docRef = doc(db, "profiles", _UID);
+    
+    const docRef = doc(db, "profiel_bedrijf", _UID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
         return docSnap.data()
     } else {
-        console.log("No such document!");
+        console.log("Geen'bedrijf' --> trying cursist ");
+        get_profile_in_store_cursist(_UID)
+    }
+}
+
+async function get_profile_in_store_cursist(_UID) {
+
+    console.log("get profile in store")
+    
+    const docRef = doc(db, "profiel_cursist", _UID);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("cursist succesvol")
+        return docSnap.data()
+    } else {
+        console.log("Geen cursist/bedrijf heeft dit ID ");
     }
 }
 
 /* Updates profile (needed on the profileUser page */
-export async function update_profile(_UID, _username, _tel) {
+export async function update_profile(_UID, _username, _tel, role){
+    const name_collection = ""
+    if(role == "bedrijf"){
+        name_collection = "profiles_bedrijf"
+    }else name_collection = "profiel_cursist"
+    
 
-    await setDoc(doc(db, "profiles", _UID), {
+    await setDoc(doc(db, name_collection, _UID), {
         UID: _UID,
         username: _username,
         tel: _tel,
         hasProfile: true,
+        likes : [],
+        dislikes : []
     })
     console.log("Profile ", _UID, " updated ")
 }

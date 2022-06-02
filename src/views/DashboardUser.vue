@@ -47,25 +47,19 @@ export default {
 .toprecommendations{
     grid-column: 1;
     grid-row : 1; 
-    float : left; 
+    float : left;  
     
 }
 .swipeData {
 
     grid-column: 2;
     grid-row : 1; 
-    padding : 30px; 
     float : right; 
     width : 60%; 
 }
 
 .dashboard {
-    display : grid; 
-    width: 1000px;
-
+    display : grid;     
 }
 
-.quick {
-    width: 100px;
-}
 </style>
