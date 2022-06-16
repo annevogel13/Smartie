@@ -118,12 +118,13 @@ export default {
 .nameCompagnie {
     border-radius: 10px;
     text-align: center;
-    background-color: #F29292;
+    background-color: #F1D302;
     padding: 10px;
 }
 
 .nameCompagnie:hover {
-    background-color: #f29292c7;
+    background-color: #270043;
+    color : white ; 
 }
 
 .swipe-left {

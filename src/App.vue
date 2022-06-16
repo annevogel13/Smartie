@@ -94,13 +94,14 @@ body {
   position: fixed;
   background-color : #F1D302 ; /*#FF7D00 ; 
   https://coolors.co/235789-f1d302-9bb1ff-bfd7ff-ff7d00
+    #270043
   */  
   margin-left: 10px;
   top: 0;
   width: 15%;
   height: 100%;
   text-align: center;
-  padding : 5px; 
+  padding : 10px; 
 }
 
 ul {
@@ -113,9 +114,25 @@ a {
   color : black; 
 }
 
-.logo{
+a:hover{
+  color : white; 
+}
+
+.logo {
   border-radius: 50%;
   margin : 10px ;
   padding-bottom : 10px; 
+}
+
+button{
+  background-color : #F1D302 ; 
+  border-color : #270043 ;
+}
+
+
+button:hover{
+  color : white ; 
+  background-color: #270043 ;
+  border-color : #270043; 
 }
 </style>

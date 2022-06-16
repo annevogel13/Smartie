@@ -47,9 +47,8 @@ input,
 
 button {
     margin: 10px;
-    background-color: aliceblue;
-    border: aliceblue;
     padding: 5px;
 
 }
+
 </style>

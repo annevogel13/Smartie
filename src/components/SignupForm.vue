@@ -102,8 +102,4 @@ select {
     text-align : center ; 
 }
 
-button {
-    align-items: center;
-    background-color: aliceblue
-}
 </style>
