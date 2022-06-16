@@ -6,7 +6,7 @@
     <ul>
       <li>
         <router-link to="/">
-          <img alt="Logo Code Gorilla" class="logo" src="./assets/logo.png" width="125" height="125" />
+          <img alt="Logo" class="logo" src="./assets/logo2.png" width="125" height="125" />
         </router-link>
       </li>
       <li>
@@ -76,16 +76,25 @@ export default {
 }
 
 body {
-  background-image: linear-gradient(#dbede3, #d8d2e6);
+ /* background-image: linear-gradient(#dbede3, #d8d2e6); #D81159, #8F2D56
+  background-image: linear-gradient(#00A9A5, #0B5351); 
+  
+  https://coolors.co/235789-f1d302-9bb1ff-bfd7ff-ff7d00
+*/ 
+  background-image: linear-gradient(#BFD7FF, #9BB1FF);
+  background-color : #BFD7FF;
+  
   background-repeat: no-repeat;
   background-size: cover;
-  min-height : 800px ; 
+  min-height : 900px ; 
 }
 
 .navbar {
-  overflow: hidden;
-  background-color: #F29292;
+  overflow: hidden; 
   position: fixed;
+  background-color : #F1D302 ; /*#FF7D00 ; 
+  https://coolors.co/235789-f1d302-9bb1ff-bfd7ff-ff7d00
+  */  
   margin-left: 10px;
   top: 0;
   width: 15%;
@@ -98,13 +107,15 @@ ul {
   list-style-type: none;
 }
 
-a,
-button {
-  text-decoration: none;
-  color: inherit;
-  padding: 5px;
-  border-color: #dbede3;
+a {
   margin: 15px;
-  border-radius: 10px;
+  text-decoration: none;
+  color : black; 
+}
+
+.logo{
+  border-radius: 50%;
+  margin : 10px ;
+  padding-bottom : 10px; 
 }
 </style>
