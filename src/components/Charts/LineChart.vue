@@ -15,7 +15,7 @@ export default {
                     type: 'radar',
                 },
                 title: {
-                    text: 'Voorbeeld Grafiek 2'
+                    text: 'Grafiek van kernwoorden'
                 },
                 xaxis: {
                     categories: ['January', 'February', 'March', 'April', 'May', 'June']

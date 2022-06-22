@@ -17,7 +17,7 @@ export default {
                     opacity: 0.8
                 },
                 title: {
-                    text: 'Voorbeeld grafiek 1'
+                    text: 'Grafiek op kernwoorden'
                 },
                 responsive: [{
                     breakpoint: 300,
