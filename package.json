@@ -15,6 +15,7 @@
     "standard": "^17.0.0",
     "vue": "^3.2.33",
     "vue-router": "^4.0.15",
+    "vue-slider-component": "^3.2.15",
     "vue3-apexcharts": "^1.4.1",
     "vuefire": "^3.0.0-alpha.2",
     "vuex": "^4.0.2"

@@ -12,11 +12,6 @@
         <button @click="click1">Kies foto</button>
         <input type="file" ref="input1" style="display : none " @change="previewImage" accept="image/*">
 
-
-        <div>
-            <!-- TODO preview image  -->
-            <img class="preview" src="this.img1">
-        </div>
         <div v-if="this.$store.state.user.role == 'bedrijf'">
             <h3> Vragen specifiek voor bedrijven </h3>
         </div>
