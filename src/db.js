@@ -112,6 +112,24 @@ export async function update_profile(_UID, _username, _tel, role){
     }
 }
 
+// TODO zorgen dat die een veld toevoegd en niet het veld overschrijft 
+export async function add_questionnaire(Object, role, _UID){
+    console.log("add_questionnaire ")
+    if(role == "bedrijf"){
+    
+        await setDoc(doc(db, "profiel_bedrijf", _UID), {
+            Quetionnaire : Object 
+        })
+        console.log("Questionnaire of business", _UID, " filled in")
+        }else {
+    
+            await setDoc(doc(db, "profiel_cursist", _UID), {
+                Quetionnaire : Object
+            })
+            console.log("Questionnaire of user", _UID, " filled in")
+        }
+}
+
 export async function add_profile_image(_UID, imageLocation, role){
     const name_collection = ""
     if(role == "bedrijf"){
