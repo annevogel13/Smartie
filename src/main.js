@@ -12,7 +12,8 @@ import Swipe from '@/views/Swipe.vue'
 import Dashboard from '@/views/DashboardUser.vue'
 import Register from '@/views/RegisterUser.vue'
 import Test from '@/views/testDB.vue'
-import Questionnaire from '@/components/Questionnaire/FormCompany.vue'
+import QuestionnaireB from '@/components/Questionnaire/FormCompany.vue'
+import QuestionnaireC from '@/components/Questionnaire/FormCursist.vue'
 // database --> firebase 
 import { firestorePlugin } from 'vuefire';
 // store information site-wide 
@@ -24,7 +25,8 @@ const router = createRouter({
         { path: '/',                name: 'Home',           component: Home         },
         { path: '/About',           name: 'About',          component: About        },
         { path: '/ProfileUser',     name: 'MakeProfile',    component: Profile      },
-        { path: '/Questionnaire',   name: 'Questionnaire',  component: Questionnaire},
+        { path: '/QuestionnaireB',   name: 'QuestionnaireB',  component: QuestionnaireB},
+        { path: '/QuestionnaireC',   name: 'QuestionnaireC',  component: QuestionnaireC},
         { path: '/DashboardUser',   name: 'Dashboard',      component: Dashboard    },
         { path: '/Swipe',           name: 'Swipe',          component: Swipe        },
         { path: '/RegisterUser',    name: 'Register',       component: Register     },
