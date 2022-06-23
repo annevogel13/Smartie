@@ -4,7 +4,7 @@ import PieChart from "../Charts/PieChart.vue"
 import LineChart from "../Charts/LineChart.vue"
 import PopupFeedback from "../Popups/PopupFeedback.vue"
 import PopupQuestions from "../Popups/PopupQuestions.vue"
-import { get_profile_in_store_cursist } from "../../db"
+import { get_profile_in_store_cursist, add_swipe } from "../../db"
 
 export default {
     components: { PieChart, LineChart, PopupFeedback, PopupQuestions },
@@ -13,15 +13,20 @@ export default {
             name: 'Test_naam',
             s_left: false,
             s_right: false,
+            data : {} , 
         }
     },
     methods: {
         swipe_left() {
             this.s_left = !this.s_left
+            // add to this.user that UID of the evaluted person in the likes array 
+            add_swipe(this.$store.state.user.UID, data.UID, true, this.$store.state.user.UID)
         },
+
         swipe_right() {
             this.s_right = !this.s_right
             this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible;
+            add_swipe(this.$store.state.user.UID, data.UID, false, this.$store.state.user.UID)
 
         },
         get_random_UID_from_array(){
@@ -32,6 +37,7 @@ export default {
             console.log(tmp)
             get_profile_in_store_cursist(tmp).then(data => {
                 console.log(data)
+                this.data = data
             })
         },
         more_information() {

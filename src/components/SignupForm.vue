@@ -12,22 +12,13 @@
         <button @click="click1">Kies foto</button>
         <input type="file" ref="input1" style="display : none " @change="previewImage" accept="image/*">
 
-        <div v-if="this.$store.state.user.role == 'bedrijf'">
-            <h3> Vragen specifiek voor bedrijven </h3>
-        </div>
-
-        <div v-if="this.$store.state.user.role == 'cursist'">
-            <h3> Vragen specifiek voor cursisten </h3>
-            
-        </div>
-        <FormCompany></FormCompany>
         <br>
         <button @click="uploadInformation">Bevestigen</button>
 
     </div>
 </template>
 <script>
-import FormCompany from './Questionnaire/FormCompany.vue'
+
 import { update_profile, uploadImage } from '../db'
 
 export default {
@@ -61,8 +52,7 @@ export default {
             console.log(this.imageData)
             this.img1 = uploadImage(this.imageData)
         },
-    },
-    components : { FormCompany }
+    }
 }
 
 </script>

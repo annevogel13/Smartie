@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection} from "firebase/firestore"
+import { getFirestore, collection } from "firebase/firestore"
 import "firebase/firestore"
 import { Timestamp } from "firebase/firestore"
 
@@ -20,7 +20,7 @@ const app_firebase = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app_firebase);
 
-import { doc, getDoc, addDoc, setDoc, getDocs, query, where } from "firebase/firestore";
+import { doc, getDoc, addDoc, setDoc, getDocs, updateDoc, query, where } from "firebase/firestore";
 
 export async function read_collection(name_collection, id_document) {
     const docRef = doc(db, name_collection, id_document);
@@ -56,7 +56,7 @@ export async function add_to_collection(name_collection, data_structure, identif
 export async function get_profile_in_store(_UID) {
 
     console.log("get profile in store")
-    
+
     const docRef = doc(db, "profiel_bedrijf", _UID);
     const docSnap = await getDoc(docRef);
 
@@ -71,7 +71,7 @@ export async function get_profile_in_store(_UID) {
 export async function get_profile_in_store_cursist(_UID) {
 
     console.log("get profile in store")
-    
+
     const docRef = doc(db, "profiel_cursist", _UID);
     const docSnap = await getDoc(docRef);
 
@@ -84,61 +84,62 @@ export async function get_profile_in_store_cursist(_UID) {
 }
 
 /* Updates profile (needed on the profileUser page */
-export async function update_profile(_UID, _username, _tel, role){
-    if(role == "bedrijf"){
-    
-    await setDoc(doc(db, "profiel_bedrijf", _UID), {
-        UID: _UID,
-        username: _username,
-        tel: _tel,
-        hasProfile: true,
-        likes : [],
-        dislikes : [],
-        time : Timestamp.now()
-    })
-    console.log("Profile ", _UID, " updated ")
-    }else {
+export async function update_profile(_UID, _username, _tel, role) {
+    if (role == "bedrijf") {
 
-        await setDoc(doc(db, "profiel_cursist", _UID), {
+        await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             UID: _UID,
             username: _username,
             tel: _tel,
             hasProfile: true,
-            likes : [],
-            dislikes : [],
-            time : Timestamp.now()
+            likes: [],
+            dislikes: [],
+            time: Timestamp.now()
+        })
+        console.log("Profile ", _UID, " updated ")
+    } else {
+
+        await updateDoc(doc(db, "profiel_cursist", _UID), {
+            UID: _UID,
+            username: _username,
+            tel: _tel,
+            hasProfile: true,
+            likes: [],
+            dislikes: [],
+            time: Timestamp.now(),
+            questionnaire: {}
         })
         console.log("Profile ", _UID, " updated ")
     }
 }
 
 // TODO zorgen dat die een veld toevoegd en niet het veld overschrijft 
-export async function add_questionnaire(Object, role, _UID){
+export async function add_questionnaire(Object, role, _UID) {
     console.log("add_questionnaire ")
-    if(role == "bedrijf"){
-    
-        await setDoc(doc(db, "profiel_bedrijf", _UID), {
-            Quetionnaire : Object 
+    if (role == "bedrijf") {
+
+        await updateDoc(doc(db, "profiel_bedrijf", _UID), {
+            questionnaire: Object
         })
         console.log("Questionnaire of business", _UID, " filled in")
-        }else {
-    
-            await setDoc(doc(db, "profiel_cursist", _UID), {
-                Quetionnaire : Object
-            })
-            console.log("Questionnaire of user", _UID, " filled in")
-        }
+    } else {
+
+        await updateDoc(doc(db, "profiel_cursist", _UID), {
+            questionnaire: Object
+        })
+        console.log("Questionnaire of user", _UID, " filled in")
+    }
 }
 
-export async function add_profile_image(_UID, imageLocation, role){
+export async function add_profile_image(_UID, imageLocation, role) {
     const name_collection = ""
-    if(role == "bedrijf"){
+    if (role == "bedrijf") {
         name_collection = "profiles_bedrijf"
-    }else name_collection = "profiel_cursist"
-    
+    } else name_collection = "profiel_cursist"
+
 
     await setDoc(doc(db, name_collection, _UID), {
-        imageLocation : imageLocation 
+        imageLocation: imageLocation
     })
     console.log("Profile ", _UID, " updated ")
 }
@@ -159,6 +160,19 @@ export async function get_group_approved_users() {
 }
 
 
+export async function add_swipe(_UID, _UID_match, match, role) {
+    console.log("add_swipe ", match)
+    if (role == "bedrijf") {
+        if (match) {
+            await updateDoc(doc(db, "profiel_bedrijf", _UID), { likes: _UID_match })
+        } else await updateDoc(doc(db, "profiel_bedrijf", _UID), { dislikes: _UID_match })
+
+    } else {
+        if (match) {
+            await updateDoc(doc(db, "profiel_cursist", _UID), { likes: _UID_match })
+        } else await updateDoc(doc(db, "profiel_cursist", _UID), { dislikes: _UID_match })
+    }
+}
 
 
 /******************* STORAGE **************************/
@@ -208,7 +222,7 @@ export async function uploadImage(file) {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 console.log('File available at', downloadURL);
                 return downloadURL
-                
+
             });
         }
     );

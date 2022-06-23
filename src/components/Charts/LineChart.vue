@@ -18,7 +18,7 @@ export default {
                     text: 'Grafiek van kernwoorden'
                 },
                 xaxis: {
-                    categories: ['January', 'February', 'March', 'April', 'May', 'June']
+                    categories: ['Hiërarchisch', 'Thuiswerken', 'Vrijmibo', 'Muziek', 'Kernwoord5']
                 }
             },
             components: { VueApexCharts }

@@ -27,6 +27,10 @@ export default {
             <p> Je profiel is niet compleet </p>
             <button><router-link to = "/ProfileUser" >Klilk hier om naar de profiel pagina te gaan</router-link></button>
         </div>
+        <div v-if="!this.$store.state.user.hasProfile" class="noProfile">
+            <p> Heb je de vragenlijst al ingevuld?  </p>
+            <button><router-link to = "/ProfileUser" >Klilk hier om naar de profiel pagina te gaan</router-link></button>
+        </div>
 
         <div v-if = "this.$store.state.user.role == 'cursist'">
             <h3> Pagina voor cursisten </h3>

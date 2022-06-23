@@ -2,30 +2,43 @@
     <div class="formCompany">
         {{ this.$store.state.user.UID }}
         <form>
-            <br><br>
+            <h1>Welkom bij de vragenlijst</h1>
+            <p> Hieronder staan verschillende vragen die opgedeeld zijn in verschillende categorieëen. 
+                Allereerst is de categorie kernwoorden. Voor elke zin met een kernwoord moet een percentage uitgekozen worden.
+                Dit kan door het gebruik van de slider. <br><br>
+                Daarna is de categorie stellingen. Hierin staan verschillende opvattingen en als deze bij jou passen, dan vink je ze aan.  
+                Er zit geen maximum of minum aan, zolang het maar bij jou past. 
+                <br><br>
+                Als laatste zijn er ook nog een paar algemene vragen. 
+                <br><br>
+                <iframe src="https://giphy.com/embed/d1E1YlkOTe4IfdNC" width="150" height="150" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                
+            </p>
+            <hr>
             <div class="kernwoorden">
                 <h2> Kernwoorden </h2>
-                <label for="v1">Ons bedrijf is zeer <b>hiërarchisch</b></label>: {{ questionnaire.v1 }}%
-                <input type="range" id="v1" v-model.number="questionnaire.v1" min="0" max="100" step="5" />
+                <label for="k1">Ons bedrijf is zeer <b>hiërarchisch</b></label>: {{ questionnaire.k1 }}%
+                <input type="range" id="k1" v-model.number="questionnaire.k1" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="v2">Ons bedrijf en <b>thuiswerken</b> gaan goed samen </label>: {{ questionnaire.v2 }}%
-                <input type="range" id="v2" v-model.number="questionnaire.v2" min="0" max="100" step="5" />
+                <label for="k2">Ons bedrijf en <b>thuiswerken</b> gaan goed samen </label>: {{ questionnaire.k2 }}%
+                <input type="range" id="k2" v-model.number="questionnaire.k2" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="v3"><b>Vrijmibo</b> is belangrijk voor de sfeer </label>: {{ questionnaire.v3 }}%
-                <input type="range" id="v3" v-model.number="questionnaire.v3" min="0" max="100" step="5" />
+                <label for="k3"><b>Vrijmibo</b> is belangrijk voor de sfeer </label>: {{ questionnaire.k3 }}%
+                <input type="range" id="k3" v-model.number="questionnaire.k3" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="v4"><b>Muziek</b> in het kantoor is toegestaan</label> : {{ questionnaire.v4 }}%
-                <input type="range" id="v4" v-model.number="questionnaire.v4" min="0" max="100" step="5" />
+                <label for="k4"><b>Muziek</b> in het kantoor is toegestaan</label> : {{ questionnaire.k4 }}%
+                <input type="range" id="k4" v-model.number="questionnaire.k4" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="v5">Kernwoorden vraag 5 </label> : {{ questionnaire.v5 }}%
-                <input type="range" id="v5" v-model.number="questionnaire.v5" min="0" max="100" step="5" />
+                <label for="k5">Kernwoorden vraag 5 </label> : {{ questionnaire.k5 }}%
+                <input type="range" id="k5" v-model.number="questionnaire.k5" min="0" max="100" step="5" />
 
                 <br><br>
             </div>
+            <hr>
             <div class="stellingen">
                 <h2>Stellingen </h2>
                 <p> Kies de stellingen die bij uw bedrijf passen </p>
@@ -44,6 +57,7 @@
                 <label for="s4">Muziek in het kantoor is toegestaan.</label>
 
             </div>
+            <hr>
             <div class="vragen">
                 <h2>Vragen </h2>
                 vraag 1 3enz.
@@ -64,11 +78,11 @@ export default {
     data() {
         return {
             questionnaire: {
-                v1: 0,
-                v2: 25,
-                v3: 50,
-                v4: 75,
-                v5: 100,
+                k1: 0,
+                k2: 25,
+                k3: 50,
+                k4: 75,
+                k5: 100,
                 s1: true,
                 s2: false,
                 s3: false,
@@ -78,6 +92,13 @@ export default {
     },
     methods: {
         questionnaire1() {
+            this.$store.commit('set_kernwoorden', [
+                this.questionnaire.k1, 
+                this.questionnaire.k2, 
+                this.questionnaire.k3, 
+                this.questionnaire.k4, 
+                this.questionnaire.k5
+                ]) 
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
         }
 
@@ -88,7 +109,7 @@ export default {
 
 <style>
 .formCompany {
-    background-color: BFD7FF;
+    padding : 40px ; 
 }
 
 .s {
@@ -101,5 +122,11 @@ export default {
 label {
     display: inline;
     font-size: larger;
+}
+
+hr {
+    color : #270043 ; 
+    margin-top : 40px ;
+    margin-bottom : 40px ;  
 }
 </style>

@@ -9,6 +9,7 @@ export default createStore({
             username : '', 
             approved_matches : [], 
             loggedIn : false, 
+            kernwoorden : [], 
         }
     },
     // only synchronous code 
@@ -41,6 +42,9 @@ export default createStore({
             state.user.username = data.username; 
             console.log("state is updated")
         },
+        set_kernwoorden(state, data){
+            state.user.kernwoorden = data; 
+        }
 
 
     },
