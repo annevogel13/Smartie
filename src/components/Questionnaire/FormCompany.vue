@@ -3,16 +3,19 @@
         {{ this.$store.state.user.UID }}
         <form>
             <h1>Welkom bij de vragenlijst</h1>
-            <p> Hieronder staan verschillende vragen die opgedeeld zijn in verschillende categorieëen. 
-                Allereerst is de categorie kernwoorden. Voor elke zin met een kernwoord moet een percentage uitgekozen worden.
+            <p> Hieronder staan verschillende vragen die opgedeeld zijn in verschillende categorieëen.
+                Allereerst is de categorie kernwoorden. Voor elke zin met een kernwoord moet een percentage uitgekozen
+                worden.
                 Dit kan door het gebruik van de slider. <br><br>
-                Daarna is de categorie stellingen. Hierin staan verschillende opvattingen en als deze bij jou passen, dan vink je ze aan.  
-                Er zit geen maximum of minum aan, zolang het maar bij jou past. 
+                Daarna is de categorie stellingen. Hierin staan verschillende opvattingen en als deze bij jou passen,
+                dan vink je ze aan.
+                Er zit geen maximum of minum aan, zolang het maar bij jou past.
                 <br><br>
-                Als laatste zijn er ook nog een paar algemene vragen. 
+                Als laatste zijn er ook nog een paar algemene vragen.
                 <br><br>
-                <iframe src="https://giphy.com/embed/d1E1YlkOTe4IfdNC" width="150" height="150" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                
+                <iframe src="https://giphy.com/embed/d1E1YlkOTe4IfdNC" width="150" height="150" frameBorder="0"
+                    class="giphy-embed" allowFullScreen></iframe>
+
             </p>
             <hr>
             <div class="kernwoorden">
@@ -29,11 +32,11 @@
                 <input type="range" id="k3" v-model.number="questionnaire.k3" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k4"><b>Muziek</b> in het kantoor is toegestaan</label> : {{ questionnaire.k4 }}%
+                <label for="k4">Wij hebben een <b>entertainment room</b></label> : {{ questionnaire.k4 }}%
                 <input type="range" id="k4" v-model.number="questionnaire.k4" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k5">Kernwoorden vraag 5 </label> : {{ questionnaire.k5 }}%
+                <label for="k5"><b>Meedenken</b> wordt gewaardeerd </label> : {{ questionnaire.k5 }}%
                 <input type="range" id="k5" v-model.number="questionnaire.k5" min="0" max="100" step="5" />
 
                 <br><br>
@@ -60,11 +63,59 @@
             <hr>
             <div class="vragen">
                 <h2>Vragen </h2>
-                vraag 1 3enz.
+                <label>Hoeveel senioren, medioren en junioren werken er bij jullie?
+                    <br>
+                    (geef het antwoord of in de echte getallen of in verhoudingen)
+                </label>
+                <br><br>
+
+                <label class="labels_verhouding" for="verhouding_j">Junioren : </label>
+                <input class="verhouding" type="number" v-model="questionnaire.verhouding_j" id="verhouding_j"
+                    min="0" />
+                <br>
+                
+                <label class="labels_verhouding" for="verhouding_m">Medioren : </label>
+                <input class="verhouding" type="number" v-model="questionnaire.verhouding_m" id="verhouding_m"
+                    min="0" />
+                <br>
+                
+                <label class="labels_verhouding" for="verhouding_s">Senioren : </label>
+                <input class="verhouding" type="number" v-model="questionnaire.verhouding_s" id="verhouding_s"
+                    min="0" />
+                <br>
+                
+                <label for="begeleiding_h">Hoeveel begeleiding bieden jullie gemiddeld bij junioren?</label>
+                <input type="number" class="verhouding" v-model="questionnaire.begeleiding_h" id="begeleiding_h"
+                    min="0" />
+                <label> uren per week </label>
+                <br><br>
+                
+                <label>Wat typeert jullie bedrijf?</label>
+                <!-- TODO v-model vanuit een select pakken??? -->
+                <select style="margin-left : 30px;">
+                    <option value="0">Productiebedrijf</option>
+                    <option value="1">Agency</option>
+                    <option value="2">E-commerce</option>
+                    <option value="3">Non-profit</option>
+                </select><br><br>
+
+                <label for = "min_uren">Wat is het minimum aantal uren dat een werknemer moet draaien?</label>
+                <!-- TODO v-model vanuit een select pakken??? -->
+                <select id="min_uren" style="margin-left : 30px;">
+                    <option value="24">24</option>
+                    <option value="32">32</option>
+                    <option value="36">36</option>
+                    <option value="40">40</option>
+                </select>
+                <label>  uren </label>
+
+                <hr>
+
             </div>
 
         </form>
-
+                <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300"  frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                <br>
         <button @click="questionnaire1"> Bevestig vragenlijst </button>
     </div>
 
@@ -87,18 +138,22 @@ export default {
                 s2: false,
                 s3: false,
                 s4: false,
+                verhouding_j: 0,
+                verhouding_m: 0,
+                verhouding_s: 0,
+                type_bedrijf: 0,
             }
         }
     },
     methods: {
         questionnaire1() {
             this.$store.commit('set_kernwoorden', [
-                this.questionnaire.k1, 
-                this.questionnaire.k2, 
-                this.questionnaire.k3, 
-                this.questionnaire.k4, 
+                this.questionnaire.k1,
+                this.questionnaire.k2,
+                this.questionnaire.k3,
+                this.questionnaire.k4,
                 this.questionnaire.k5
-                ]) 
+            ])
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
         }
 
@@ -109,7 +164,7 @@ export default {
 
 <style>
 .formCompany {
-    padding : 40px ; 
+    padding: 40px;
 }
 
 .s {
@@ -125,8 +180,37 @@ label {
 }
 
 hr {
-    color : #270043 ; 
-    margin-top : 40px ;
-    margin-bottom : 40px ;  
+    color: #270043;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+select {
+    padding: 10px 6px;
+  
+    box-sizing: border-box;
+    border : none; 
+    text-align : center ;
+      
+}
+
+.verhouding {
+    display: inline;
+    width: 5%;
+    margin: 10px;
+}
+
+.labels_verhouding {
+    display: inline;
+    width: 20%;
+
+}
+
+.stellingen {
+    text-align: left;
+}
+
+.vragen {
+    text-align: left;
 }
 </style>
