@@ -20,23 +20,24 @@
             <hr>
             <div class="kernwoorden">
                 <h2> Kernwoorden </h2>
-                <label for="k1">Ons bedrijf is zeer <b>hiërarchisch</b></label>: {{ questionnaire.k1 }}%
+                <label for="k1"><b>Flexibele werktijden </b> zijn een belangrijk voor mij.</label>: {{ questionnaire.k1
+                }}%
                 <input type="range" id="k1" v-model.number="questionnaire.k1" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k2">Ons bedrijf en <b>thuiswerken</b> gaan goed samen </label>: {{ questionnaire.k2 }}%
+                <label for="k2">Ik <b>denk</b> graag <b>mee</b> over verbetering</label>: {{ questionnaire.k2 }}%
                 <input type="range" id="k2" v-model.number="questionnaire.k2" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k3"><b>Vrijmibo</b> is belangrijk voor de sfeer </label>: {{ questionnaire.k3 }}%
+                <label for="k3"><b>Stilteruimte</b> is voor mij belangrijk</label>: {{ questionnaire.k3 }}%
                 <input type="range" id="k3" v-model.number="questionnaire.k3" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k4">Wij hebben een <b>entertainment room</b></label> : {{ questionnaire.k4 }}%
+                <label for="k4">Ik ben een <b>geek</b></label> : {{ questionnaire.k4 }}%
                 <input type="range" id="k4" v-model.number="questionnaire.k4" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k5"><b>Meedenken</b> wordt gewaardeerd </label> : {{ questionnaire.k5 }}%
+                <label for="k5"> NOG NIET BEDACHT </label> : {{ questionnaire.k5 }}%
                 <input type="range" id="k5" v-model.number="questionnaire.k5" min="0" max="100" step="5" />
 
                 <br><br>
@@ -46,60 +47,26 @@
                 <h2>Stellingen </h2>
                 <p> Kies de stellingen die bij uw bedrijf passen </p>
                 <input type="checkbox" id="s1" v-model="questionnaire.s1" name="s1" class="s" />
-                <label for="s1">Wij vinden het belangrijk dat je je werk af hebt, en als dit om 14.00 uur al is, ben je
-                    vrij.</label>
+                <label for="s1">Werken op kantoor doe ik graag.</label>
                 <br>
                 <input type="checkbox" id="s2" v-model="questionnaire.s2" name="s2" class="s" />
-                <label for="s2">Wij zijn het bedrijf dat bijvoorbeeld elke 2 jaar een trip naar Parijs
-                    organiseren.</label>
+                <label for="s2">Diverse taken houden mij actief.</label>
                 <br>
                 <input type="checkbox" id="s3" v-model="questionnaire.s3" name="s3" class="s" />
-                <label for="s3">Wij verkiezen personaliteit over skills.</label>
+                <label for="s3">Ik erger mij aan collega's die lang bij mijn bureau blijven praten.</label>
                 <br>
                 <input type="checkbox" id="s4" v-model="questionnaire.s4" name="s4" class="s" />
-                <label for="s4">Muziek in het kantoor is toegestaan.</label>
+                <label for="s4">Ik ben spontaan.</label>
+                <br>
+                <input type="checkbox" id="s5" v-model="questionnaire.s5" name="s5" class="s" />
+                <label for="s4">Mijn koptelefoon is essentieel voor mijn concentratie.</label>
 
             </div>
             <hr>
             <div class="vragen">
                 <h2>Vragen </h2>
-                <label>Hoeveel senioren, medioren en junioren werken er bij jullie?
-                    <br>
-                    (geef het antwoord of in de echte getallen of in verhoudingen)
-                </label>
-                <br><br>
 
-                <label class="labels_verhouding" for="verhouding_j">Junioren : </label>
-                <input class="verhouding" type="number" v-model="questionnaire.verhouding_j" id="verhouding_j"
-                    min="0" />
-                <br>
-                
-                <label class="labels_verhouding" for="verhouding_m">Medioren : </label>
-                <input class="verhouding" type="number" v-model="questionnaire.verhouding_m" id="verhouding_m"
-                    min="0" />
-                <br>
-                
-                <label class="labels_verhouding" for="verhouding_s">Senioren : </label>
-                <input class="verhouding" type="number" v-model="questionnaire.verhouding_s" id="verhouding_s"
-                    min="0" />
-                <br>
-                
-                <label for="begeleiding_h">Hoeveel begeleiding bieden jullie gemiddeld bij junioren?</label>
-                <input type="number" class="verhouding" v-model="questionnaire.begeleiding_h" id="begeleiding_h"
-                    min="0" />
-                <label> uren per week </label>
-                <br><br>
-                
-                <label>Wat typeert jullie bedrijf?</label>
-                <!-- TODO v-model vanuit een select pakken??? -->
-                <select style="margin-left : 30px;">
-                    <option value="0">Productiebedrijf</option>
-                    <option value="1">Agency</option>
-                    <option value="2">E-commerce</option>
-                    <option value="3">Non-profit</option>
-                </select><br><br>
-
-                <label for = "min_uren">Wat is het minimum aantal uren dat een werknemer moet draaien?</label>
+                <label for="min_uren">Hoeveel uur per week zou je in de ideale wereld willen werken?</label>
                 <!-- TODO v-model vanuit een select pakken??? -->
                 <select id="min_uren" style="margin-left : 30px;">
                     <option value="24">24</option>
@@ -107,15 +74,68 @@
                     <option value="36">36</option>
                     <option value="40">40</option>
                 </select>
-                <label>  uren </label>
+                <label> uren </label>
 
+                <br><br>
+                <label>Ben je meer een front-end of een back-end developperer? </label><br>
+                <div class="front_backL">
+                    <label for="front">Front-end : {{ questionnaire.front }}%</label>
+                    <input type="range" id="front" v-model.number="questionnaire.front" min="0" max="100" step="5" />
+                </div>
+
+                <div class="front_backL">
+                    <label for="back">Back-end : {{ questionnaire.back }}%</label>
+                    <input type="range" id="back" v-model.number="questionnaire.back" min="0" max="100" step="5" />
+                </div>
+                <div v-if="this.questionnaire.back >= 85 && this.questionnaire.front >= 85">
+
+                    <div class="gifje">
+                        <iframe src="https://giphy.com/embed/RiuMMt2r242LqRyRZn" width="200" height="200"
+                            frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                    </div>
+                    Dus eigenlijk gewoon fullstack ;) good to know
+
+                </div>
+
+
+                <div class="casus">
+                    <p>
+                        "
+                        <br>
+                        Stel je voor je zit op kantoor. Je werkt rustig aan je taken en iemand vraagt om je help
+                        meeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeer tekst meeeeeeeeeeeeeeeeeeeeer tekste
+                        en nog wat meer en nog meer en nog meer. Beschrijft een situatie.
+                        <br>
+                        "
+                    </p>
+                </div>
+               <div class = "reaction">
+                    
+                    <iframe src="https://giphy.com/embed/spfi6nabVuq5y" width="150" height="150" frameBorder="0"
+                        class="giphy-embed" allowFullScreen></iframe>
+                        
+              </div>
+              <div class = "reaction"> 
+                
+                    <iframe src="https://giphy.com/embed/p6qWfRJ4RxltUEmrl9" width="150" height="150" frameBorder="0"
+                        class="giphy-embed" allowFullScreen></iframe>
+               </div>
+              <div class = "reaction"> 
+                <iframe src="https://giphy.com/embed/7jmyzkeInJKhHiaaje" width="150" height="150" frameBorder="0"
+                    class="giphy-embed" allowFullScreen></iframe>
+                </div>
+              <div class = "reaction"> 
+                <iframe src="https://giphy.com/embed/2gZHwhx0EC5lv3Fl36" width="150" height="150" frameBorder="0"
+                    class="giphy-embed" allowFullScreen></iframe>
+                </div>
                 <hr>
 
             </div>
 
         </form>
-                <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300"  frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                <br>
+        <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300" frameBorder="0" class="giphy-embed"
+            allowFullScreen></iframe>
+        <br>
         <button @click="questionnaire1"> Bevestig vragenlijst </button>
     </div>
 
@@ -138,9 +158,9 @@ export default {
                 s2: false,
                 s3: false,
                 s4: false,
-                verhouding_j: 0,
-                verhouding_m: 0,
-                verhouding_s: 0,
+                s5: false,
+                front: 50,
+                back: 50,
                 type_bedrijf: 0,
             }
         }
@@ -167,8 +187,34 @@ export default {
     padding: 40px;
 }
 
-.s {
+.reaction{
+    display : inline ; 
+    margin : 5% ; 
 
+}
+
+
+.casus {
+    background-color: #f2f2f2;
+    padding: 50px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.front_backL {
+    width: 30%;
+    text-align: center;
+    align-items: center;
+    display: inline-block;
+    align-self: center;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+
+.s {
     display: inline-block;
     width: 5%;
     margin-bottom: 30px;
@@ -187,11 +233,11 @@ hr {
 
 select {
     padding: 10px 6px;
-  
+
     box-sizing: border-box;
-    border : none; 
-    text-align : center ;
-      
+    border: none;
+    text-align: center;
+
 }
 
 .verhouding {
