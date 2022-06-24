@@ -5,8 +5,14 @@ import VueApexCharts from 'vue3-apexcharts'
 export default {
     data() {
         return {
-            series: [14, 23, 21, 17],
+            series: [
+                this.$store.state.user.data_to_be_displayed.questionnaire.verhouding_j,
+                this.$store.state.user.data_to_be_displayed.questionnaire.verhouding_m,
+                this.$store.state.user.data_to_be_displayed.questionnaire.verhouding_s,
+
+            ],
             chartOptions: {
+                labels: ["Junioren", "Medioren", "Senioren"],
                 chart: {
                     type: 'polarArea',
                 },
@@ -23,7 +29,7 @@ export default {
                     breakpoint: 300,
                     options: {
                         chart: {
-                            width: 150,
+                            width: 50,
                         },
                         legend: {
                             position: 'bottom'

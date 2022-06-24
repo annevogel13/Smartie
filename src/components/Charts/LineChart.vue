@@ -2,18 +2,28 @@
 
 import VueApexCharts from 'vue3-apexcharts'
 
+
+
 export default {
     data() {
         return {
             series: [{
-                name: 'Series 1',
-                data: [80, 50, 30, 40, 100, 20],
+
+                data: [
+                    this.$store.state.user.data_to_be_displayed.questionnaire.k1,
+                    this.$store.state.user.data_to_be_displayed.questionnaire.k2,
+                    this.$store.state.user.data_to_be_displayed.questionnaire.k3,
+                    this.$store.state.user.data_to_be_displayed.questionnaire.k4,
+                    this.$store.state.user.data_to_be_displayed.questionnaire.k5,
+
+                ],
             }],
             chartOptions: {
                 chart: {
                     height: 350,
                     type: 'radar',
                 },
+                labels : ['Hiërarchisch', 'Thuiswerken', 'Vrijmibo', 'Muziek', 'Kernwoord5'], 
                 title: {
                     text: 'Grafiek van kernwoorden'
                 },
@@ -21,7 +31,9 @@ export default {
                     categories: ['Hiërarchisch', 'Thuiswerken', 'Vrijmibo', 'Muziek', 'Kernwoord5']
                 }
             },
-            components: { VueApexCharts }
+            components: { VueApexCharts },
+
+
         }
     }
 }
