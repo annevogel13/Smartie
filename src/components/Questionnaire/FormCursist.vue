@@ -59,7 +59,7 @@
                 <label for="s4">Ik ben spontaan.</label>
                 <br>
                 <input type="checkbox" id="s5" v-model="questionnaire.s5" name="s5" class="s" />
-                <label for="s4">Mijn koptelefoon is essentieel voor mijn concentratie.</label>
+                <label for="s5">Mijn koptelefoon is essentieel voor mijn concentratie.</label>
 
             </div>
             <hr>
@@ -109,29 +109,32 @@
                         "
                     </p>
                 </div>
-               <div class = "reaction">
-                    
+                <div class="reaction">
+
                     <iframe src="https://giphy.com/embed/spfi6nabVuq5y" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                        
-              </div>
-              <div class = "reaction"> 
-                
+                    <input type="radio" class="selectboxes" name = "casus_reaction"  value = 0>
+                </div>
+                <div class="reaction">
+
                     <iframe src="https://giphy.com/embed/p6qWfRJ4RxltUEmrl9" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-               </div>
-              <div class = "reaction"> 
-                <iframe src="https://giphy.com/embed/7jmyzkeInJKhHiaaje" width="150" height="150" frameBorder="0"
-                    class="giphy-embed" allowFullScreen></iframe>
+                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.casus1" value = 1 >
                 </div>
-              <div class = "reaction"> 
-                <iframe src="https://giphy.com/embed/2gZHwhx0EC5lv3Fl36" width="150" height="150" frameBorder="0"
-                    class="giphy-embed" allowFullScreen></iframe>
+                <div class="reaction">
+                    <iframe src="https://giphy.com/embed/7jmyzkeInJKhHiaaje" width="150" height="150" frameBorder="0"
+                        class="giphy-embed" allowFullScreen></iframe>
+                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.casus1"  value = 2>
                 </div>
+                <div class="reaction">
+                    <iframe src="https://giphy.com/embed/2gZHwhx0EC5lv3Fl36" width="150" height="150" frameBorder="0"
+                        class="giphy-embed" allowFullScreen></iframe>
+                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.casus1"  value = 3>
+                </div>
+
                 <hr>
-
             </div>
-
+            
         </form>
         <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300" frameBorder="0" class="giphy-embed"
             allowFullScreen></iframe>
@@ -162,6 +165,7 @@ export default {
                 front: 50,
                 back: 50,
                 type_bedrijf: 0,
+                casus1 : 0 , 
             }
         }
     },
@@ -187,12 +191,17 @@ export default {
     padding: 40px;
 }
 
-.reaction{
-    display : inline ; 
-    margin : 5% ; 
+.reaction {
+    display: inline;
+    margin: 5%;
 
 }
 
+
+.selectboxes {
+    width: 10px;
+
+}
 
 .casus {
     background-color: #f2f2f2;
