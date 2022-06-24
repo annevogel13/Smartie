@@ -123,7 +123,7 @@
 
 <script>
 // TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
-import { add_questionnaire } from "../../db"
+import { add_questionnaire, filled_in_questionnaire } from "../../db"
 
 export default {
     data() {
@@ -155,8 +155,10 @@ export default {
                 this.questionnaire.k5
             ])
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
+            this.$store.emit("setFilledInQuestionnaire", true)
+            filled_in_questionnaire(this.$user.state.UID, this.$user.state.role)
+            this.$router.push("./DashboardUser"); 
         }
-
     }
 
 }

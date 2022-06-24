@@ -6,6 +6,7 @@ export default createStore({
             UID : '',
             role : '',
             hasProfile: false, 
+            filledInQuestionnaire : false,
             username : '', 
             approved_matches : [], 
             loggedIn : false, 
@@ -34,6 +35,9 @@ export default createStore({
         },
         setHasProfile(state, _hasProfile){
             state.user.hasProfile = _hasProfile
+        },
+        setFilledInQuestionnaire(state, _filledInQuestionnaire){
+            state.user.filledInQuestionnaire = _filledInQuestionnaire
         },
         fill_state(state, data){
             state.user.UID = data.UID; 

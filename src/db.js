@@ -174,6 +174,12 @@ export async function add_swipe(_UID, _UID_match, match, role) {
     }
 }
 
+export async function filled_in_questionnaire(_UID, role) {
+    if (role == "bedrijf") {
+        await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })
+    } else await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })
+}
+
 
 /******************* STORAGE **************************/
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";

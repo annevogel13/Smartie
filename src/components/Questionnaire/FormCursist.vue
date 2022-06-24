@@ -1,6 +1,6 @@
 <template>
     <div class="formCompany">
-        {{ this.$store.state.user.UID }}
+
         <form>
             <h1>Welkom bij de vragenlijst C</h1>
             <p> Hieronder staan verschillende vragen die opgedeeld zijn in verschillende categorieëen.
@@ -109,8 +109,8 @@
                         "
                     </p>
                 </div>
+                
                 <div class="reaction">
-
                     <iframe src="https://giphy.com/embed/spfi6nabVuq5y" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
                     <input type="radio" class="selectboxes" name = "casus_reaction"  value = 0>
@@ -131,6 +131,7 @@
                         class="giphy-embed" allowFullScreen></iframe>
                     <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.casus1"  value = 3>
                 </div>
+                
 
                 <hr>
             </div>
@@ -164,7 +165,6 @@ export default {
                 s5: false,
                 front: 50,
                 back: 50,
-                type_bedrijf: 0,
                 casus1 : 0 , 
             }
         }
@@ -178,7 +178,11 @@ export default {
                 this.questionnaire.k4,
                 this.questionnaire.k5
             ])
-            add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
+            
+            add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
+            this.$store.emit("setFilledInQuestionnaire", true)
+            this.$router.push("./DashboardUser"); 
+
         }
 
     }
@@ -193,8 +197,7 @@ export default {
 
 .reaction {
     display: inline;
-    margin: 5%;
-
+    margin : 2%; 
 }
 
 
@@ -202,6 +205,7 @@ export default {
     width: 10px;
 
 }
+
 
 .casus {
     background-color: #f2f2f2;

@@ -127,8 +127,8 @@ a:hover{
 button{
   background-color : #F1D302 ; 
   border-color : #270043 ;
+  
 }
-
 
 button:hover{
   color : white ; 
