@@ -123,7 +123,7 @@ export async function add_questionnaire(Object, role, _UID) {
         })
         console.log("Questionnaire of business", _UID, " filled in")
     } else {
-
+        console.log("HIERRRRRRRRRRRRRRRRR")
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             questionnaire: Object
         })
@@ -144,21 +144,52 @@ export async function add_profile_image(_UID, imageLocation, role) {
     console.log("Profile ", _UID, " updated ")
 }
 
-export async function get_group_approved_users() {
+export async function get_group_approved_users(role) {
 
     console.log("Construction array")
     const array_uid = []
-    const docRef = query(collection(db, "profiel_cursist"), where("hasProfile", "==", false));
-    const docSnap = await getDocs(docRef);
+    if (role == "bedrijf") {
+        console.log("bedrijf --> cursist")
+        const docRef = query(collection(db, "profiel_cursist"), where("hasProfile", "==", true));
+        const docSnap = await getDocs(docRef);
 
-    docSnap.forEach((doc) => {
-        console.log(doc.id)
-        array_uid.push(doc.id)
-    })
+        docSnap.forEach((doc) => {
+            console.log(doc.id)
+            array_uid.push(doc.id)
+        })
 
-    return array_uid
+        return array_uid
+    } else {
+        console.log("cursist --> bedrijf")
+        const docRef = query(collection(db, "profiel_bedrijf"), where("hasProfile", "==", true));
+        const docSnap = await getDocs(docRef);
+
+        docSnap.forEach((doc) => {
+            console.log(doc.id)
+            array_uid.push(doc.id)
+        })
+
+        return array_uid
+    }
+
 }
 
+export async function get_data_user_swipe(_UID, role) {
+    console.log("get_data_user_swipe( .. )", _UID, " + role = ", role)
+
+    if (role == "bedrijf") {
+        const docRef = doc(db, "profiel_cursist", _UID)
+        const docSnap = await getDoc(docRef)
+        console.log("resultaat : ", docSnap.data())
+        return docSnap.data();
+
+    } else {
+        const docRef = doc(db, "profiel_bedrijf", _UID);
+        const docSnap = await getDoc(docRef)
+        console.log("resultaat : ", docSnap.data())
+        return docSnap.data();
+    }
+}
 
 export async function add_swipe(_UID, _UID_match, match, role) {
     console.log("add_swipe ", match)

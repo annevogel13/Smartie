@@ -10,10 +10,10 @@ export default {
     components: { PieChart, LineChart, PopupFeedback, PopupQuestions },
     data() {
         return {
-            name: 'Test_naam',
+
             s_left: false,
             s_right: false,
-            data : {} , 
+            data: this.$store.state.user.data_to_be_displayed,
         }
     },
     methods: {
@@ -29,9 +29,9 @@ export default {
             add_swipe(this.$store.state.user.UID, data.UID, false, this.$store.state.user.UID)
 
         },
-        get_random_UID_from_array(){
-            const max = this.$store.state.user.approved_matches.length; 
-            const index = Math.floor(Math.random() * max) ; 
+        get_random_UID_from_array() {
+            const max = this.$store.state.user.approved_matches.length;
+            const index = Math.floor(Math.random() * max);
             console.log("het random numer van de dag is : ", index)
             const tmp = this.$store.getters.getIndexApprovedMatches(index)
             console.log(tmp)
@@ -41,10 +41,10 @@ export default {
             })
         },
         more_information() {
-            
+
             this.$refs.questions_visible.visible = !this.$refs.questions_visible.visible
         },
-        
+
     }
 }
 </script>
@@ -52,17 +52,14 @@ export default {
 <template>
     <div class="swipeCartBusiness">
         <div class="div1 griditem">
-            <h3 class="nameCompagnie" @click="get_random_UID_from_array"> {{ name }} </h3>
+            <h3 class="nameCompagnie" @click="get_random_UID_from_array"> {{
+                    this.$store.state.user.data_to_be_displayed.username
+            }} </h3>
         </div>
         <div class="div2 griditem">
             <p>
                 korte beschrijving van het bedrijf met bijvoorbeeld een opsomming met elementen :
-            <ol>
-                <li>ding 1 </li>
-                <li>ding 1 </li>
-                <li>ding 1 </li>
-                <li>ding 1 </li>
-            </ol>
+                
             </p>
         </div>
         <div class="div3 griditem">
@@ -130,7 +127,7 @@ export default {
 
 .nameCompagnie:hover {
     background-color: #270043;
-    color : white ; 
+    color: white;
 }
 
 .swipe-left {

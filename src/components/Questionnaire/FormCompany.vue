@@ -1,6 +1,6 @@
 <template>
     <div class="formCompany">
-        {{ this.$store.state.user.UID }}
+        
         <form>
             <h1>Welkom bij de vragenlijst</h1>
             <p> Hieronder staan verschillende vragen die opgedeeld zijn in verschillende categorieëen.
@@ -73,23 +73,23 @@
                 <input class="verhouding" type="number" v-model="questionnaire.verhouding_j" id="verhouding_j"
                     min="0" />
                 <br>
-                
+
                 <label class="labels_verhouding" for="verhouding_m">Medioren : </label>
                 <input class="verhouding" type="number" v-model="questionnaire.verhouding_m" id="verhouding_m"
                     min="0" />
                 <br>
-                
+
                 <label class="labels_verhouding" for="verhouding_s">Senioren : </label>
                 <input class="verhouding" type="number" v-model="questionnaire.verhouding_s" id="verhouding_s"
                     min="0" />
                 <br>
-                
+
                 <label for="begeleiding_h">Hoeveel begeleiding bieden jullie gemiddeld bij junioren?</label>
                 <input type="number" class="verhouding" v-model="questionnaire.begeleiding_h" id="begeleiding_h"
                     min="0" />
                 <label> uren per week </label>
                 <br><br>
-                
+
                 <label>Wat typeert jullie bedrijf?</label>
                 <!-- TODO v-model vanuit een select pakken??? -->
                 <select style="margin-left : 30px;">
@@ -99,7 +99,7 @@
                     <option value="3">Non-profit</option>
                 </select><br><br>
 
-                <label for = "min_uren">Wat is het minimum aantal uren dat een werknemer moet draaien?</label>
+                <label for="min_uren">Wat is het minimum aantal uren dat een werknemer moet draaien?</label>
                 <!-- TODO v-model vanuit een select pakken??? -->
                 <select id="min_uren" style="margin-left : 30px;">
                     <option value="24">24</option>
@@ -107,15 +107,17 @@
                     <option value="36">36</option>
                     <option value="40">40</option>
                 </select>
-                <label>  uren </label>
+                <label> uren </label>
 
+                <!-- TODO beschrijving van het bedrijf -->
                 <hr>
 
             </div>
 
         </form>
-                <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300"  frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                <br>
+        <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300" frameBorder="0" class="giphy-embed"
+            allowFullScreen></iframe>
+        <br>
         <button @click="questionnaire1"> Bevestig vragenlijst </button>
     </div>
 
@@ -155,12 +157,11 @@ export default {
                 this.questionnaire.k5
             ])
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
-            this.$store.emit("setFilledInQuestionnaire", true)
+            this.$store.commit("setFilledInQuestionnaire", true)
             filled_in_questionnaire(this.$user.state.UID, this.$user.state.role)
-            this.$router.push("./DashboardUser"); 
+            this.$router.push("./DashboardUser");
         }
     }
-
 }
 </script>
 
@@ -189,11 +190,9 @@ hr {
 
 select {
     padding: 10px 6px;
-  
     box-sizing: border-box;
-    border : none; 
-    text-align : center ;
-      
+    border: none;
+    text-align: center;
 }
 
 .verhouding {

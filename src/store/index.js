@@ -10,7 +10,9 @@ export default createStore({
             username : '', 
             approved_matches : [], 
             loggedIn : false, 
-            kernwoorden : [], 
+            kernwoorden : [],
+            UID_to_be_displayed : '',
+            data_to_be_displayed : {},   
         }
     },
     // only synchronous code 
@@ -48,6 +50,11 @@ export default createStore({
         },
         set_kernwoorden(state, data){
             state.user.kernwoorden = data; 
+        },
+        set_data_to_be_displayed(state, data){
+            console.log("set_data_to_be_displayed")
+            console.log(data)
+            state.user.data_to_be_displayed = data ; 
         }
 
 

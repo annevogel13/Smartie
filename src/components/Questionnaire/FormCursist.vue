@@ -180,13 +180,11 @@ export default {
             ])
             
             add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
-            this.$store.emit("setFilledInQuestionnaire", true)
+            this.$store.commit("setFilledInQuestionnaire", true)
             this.$router.push("./DashboardUser"); 
 
         }
-
     }
-
 }
 </script>
 
