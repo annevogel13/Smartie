@@ -37,7 +37,7 @@
                 <input type="range" id="k4" v-model.number="questionnaire.k4" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k5"> NOG NIET BEDACHT </label> : {{ questionnaire.k5 }}%
+                <label for="k5">Intercollegiale sfeer is belangrijk</label> : {{ questionnaire.k5 }}%
                 <input type="range" id="k5" v-model.number="questionnaire.k5" min="0" max="100" step="5" />
 
                 <br><br>

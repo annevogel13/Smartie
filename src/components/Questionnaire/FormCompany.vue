@@ -57,6 +57,8 @@
                 <br>
                 <input type="checkbox" id="s4" v-model="questionnaire.k52" name="s4" class="s" />
                 <label for="s4">Muziek in het kantoor is toegestaan.</label>
+                 <input type="checkbox" id="s4" v-model="questionnaire.k3" name="s4" class="s" />
+                <label for="s4">Kantoor kan aangepast worden naar benodigdheden </label>
 
             </div>
             <hr>
@@ -96,7 +98,7 @@
 
                 <label for="min_uren">Wat is het minimum aantal uren dat een werknemer moet draaien?</label>
                 <!-- TODO v-model vanuit een select pakken??? -->
-                <select id="min_uren" style="margin-left : 30px;">
+                <select id="min_uren" style="margin-left : 30px;" v-model = "questionnaire.d4">
                     <option value="24">24</option>
                     <option value="32">32</option>
                     <option value="36">36</option>
