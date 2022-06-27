@@ -1,6 +1,6 @@
 <template>
     <div class="formCompany">
-        
+
         <form>
             <h1>Welkom bij de vragenlijst</h1>
             <p> Hieronder staan verschillende vragen die opgedeeld zijn in verschillende categorieëen.
@@ -20,15 +20,15 @@
             <hr>
             <div class="kernwoorden">
                 <h2> Kernwoorden </h2>
-                <label for="k1">Ons bedrijf is zeer <b>hiërarchisch</b></label>: {{ questionnaire.k1 }}%
+                <label for="k1">Ons bedrijf is zeer <b>hiërarchisch</b></label>: {{ questionnaire.k53 }}%
                 <input type="range" id="k1" v-model.number="questionnaire.k1" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k2">Ons bedrijf en <b>thuiswerken</b> gaan goed samen </label>: {{ questionnaire.k2 }}%
+                <label for="k2">Ons bedrijf en <b>thuiswerken</b> gaan goed samen </label>: {{ questionnaire.s1 }}%
                 <input type="range" id="k2" v-model.number="questionnaire.k2" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k3"><b>Vrijmibo</b> is belangrijk voor de sfeer </label>: {{ questionnaire.k3 }}%
+                <label for="k3"><b>Vrijmibo</b> is belangrijk voor de sfeer </label>: {{ questionnaire.k50 }}%
                 <input type="range" id="k3" v-model.number="questionnaire.k3" min="0" max="100" step="5" />
 
                 <br><br>
@@ -36,7 +36,7 @@
                 <input type="range" id="k4" v-model.number="questionnaire.k4" min="0" max="100" step="5" />
 
                 <br><br>
-                <label for="k5"><b>Meedenken</b> wordt gewaardeerd </label> : {{ questionnaire.k5 }}%
+                <label for="k5"><b>Meedenken</b> wordt gewaardeerd </label> : {{ questionnaire.k2 }}%
                 <input type="range" id="k5" v-model.number="questionnaire.k5" min="0" max="100" step="5" />
 
                 <br><br>
@@ -45,18 +45,17 @@
             <div class="stellingen">
                 <h2>Stellingen </h2>
                 <p> Kies de stellingen die bij uw bedrijf passen </p>
-                <input type="checkbox" id="s1" v-model="questionnaire.s1" name="s1" class="s" />
-                <label for="s1">Wij vinden het belangrijk dat je je werk af hebt, en als dit om 14.00 uur al is, ben je
-                    vrij.</label>
+                <input type="checkbox" id="s1" v-model="questionnaire.k1" name="s1" class="s" />
+                <label for="s1">De focus ligt bij ons op je taken afhebben en niet op aantal werkuren. </label>
                 <br>
-                <input type="checkbox" id="s2" v-model="questionnaire.s2" name="s2" class="s" />
+                <input type="checkbox" id="s2" v-model="questionnaire.k51" name="s2" class="s" />
                 <label for="s2">Wij zijn het bedrijf dat bijvoorbeeld elke 2 jaar een trip naar Parijs
                     organiseren.</label>
                 <br>
-                <input type="checkbox" id="s3" v-model="questionnaire.s3" name="s3" class="s" />
+                <input type="checkbox" id="s3" v-model="questionnaire.s2" name="s3" class="s" />
                 <label for="s3">Wij verkiezen personaliteit over skills.</label>
                 <br>
-                <input type="checkbox" id="s4" v-model="questionnaire.s4" name="s4" class="s" />
+                <input type="checkbox" id="s4" v-model="questionnaire.k52" name="s4" class="s" />
                 <label for="s4">Muziek in het kantoor is toegestaan.</label>
 
             </div>
@@ -70,23 +69,19 @@
                 <br><br>
 
                 <label class="labels_verhouding" for="verhouding_j">Junioren : </label>
-                <input class="verhouding" type="number" v-model="questionnaire.verhouding_j" id="verhouding_j"
-                    min="0" />
+                <input class="verhouding" type="number" v-model="questionnaire.d60" id="verhouding_j" min="0" />
                 <br>
 
                 <label class="labels_verhouding" for="verhouding_m">Medioren : </label>
-                <input class="verhouding" type="number" v-model="questionnaire.verhouding_m" id="verhouding_m"
-                    min="0" />
+                <input class="verhouding" type="number" v-model="questionnaire.d61" id="verhouding_m" min="0" />
                 <br>
 
                 <label class="labels_verhouding" for="verhouding_s">Senioren : </label>
-                <input class="verhouding" type="number" v-model="questionnaire.verhouding_s" id="verhouding_s"
-                    min="0" />
+                <input class="verhouding" type="number" v-model="questionnaire.d62" id="verhouding_s" min="0" />
                 <br>
 
                 <label for="begeleiding_h">Hoeveel begeleiding bieden jullie gemiddeld bij junioren?</label>
-                <input type="number" class="verhouding" v-model="questionnaire.begeleiding_h" id="begeleiding_h"
-                    min="0" />
+                <input type="number" class="verhouding" v-model="questionnaire.d63" id="begeleiding_h" min="0" />
                 <label> uren per week </label>
                 <br><br>
 
@@ -135,15 +130,22 @@ export default {
                 k2: 25,
                 k3: 50,
                 k4: 75,
-                k5: 100,
+                
+                k50: 100,
+                k51: 100,
+                k52: 100,
+                k53: 100,
+
                 s1: true,
                 s2: false,
-                s3: false,
-                s4: false,
-                verhouding_j: 0,
-                verhouding_m: 0,
-                verhouding_s: 0,
-                type_bedrijf: 0,
+                
+                d4: 0,
+                d5: 0,
+                
+                d60: 0,
+                d61: 0,
+                d62: 0,
+                d63: 0,
             }
         }
     },

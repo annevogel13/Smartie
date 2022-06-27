@@ -47,18 +47,18 @@
                 <h2>Stellingen </h2>
                 <p> Kies de stellingen die bij uw bedrijf passen </p>
                 <input type="checkbox" id="s1" v-model="questionnaire.s1" name="s1" class="s" />
-                <label for="s1">Werken op kantoor doe ik graag.</label>
+                <label for="s1">Ik werk liever thuis.</label>
                 <br>
-                <input type="checkbox" id="s2" v-model="questionnaire.s2" name="s2" class="s" />
+                <input type="checkbox" id="s2" v-model="questionnaire.s21" name="s2" class="s" />
                 <label for="s2">Diverse taken houden mij actief.</label>
                 <br>
-                <input type="checkbox" id="s3" v-model="questionnaire.s3" name="s3" class="s" />
+                <input type="checkbox" id="s3" v-model="questionnaire.s22" name="s3" class="s" />
                 <label for="s3">Ik erger mij aan collega's die lang bij mijn bureau blijven praten.</label>
                 <br>
-                <input type="checkbox" id="s4" v-model="questionnaire.s4" name="s4" class="s" />
+                <input type="checkbox" id="s4" v-model="questionnaire.s23" name="s4" class="s" />
                 <label for="s4">Ik ben spontaan.</label>
                 <br>
-                <input type="checkbox" id="s5" v-model="questionnaire.s5" name="s5" class="s" />
+                <input type="checkbox" id="s5" v-model="questionnaire.s24" name="s5" class="s" />
                 <label for="s5">Mijn koptelefoon is essentieel voor mijn concentratie.</label>
 
             </div>
@@ -68,7 +68,7 @@
 
                 <label for="min_uren">Hoeveel uur per week zou je in de ideale wereld willen werken?</label>
                 <!-- TODO v-model vanuit een select pakken??? -->
-                <select id="min_uren" style="margin-left : 30px;">
+                <select id="min_uren" style="margin-left : 30px;" v-model = "questionnaire.d4">
                     <option value="24">24</option>
                     <option value="32">32</option>
                     <option value="36">36</option>
@@ -80,12 +80,12 @@
                 <label>Ben je meer een front-end of een back-end developperer? </label><br>
                 <div class="front_backL">
                     <label for="front">Front-end : {{ questionnaire.front }}%</label>
-                    <input type="range" id="front" v-model.number="questionnaire.front" min="0" max="100" step="5" />
+                    <input type="range" id="front" v-model.number="questionnaire.d1" min="0" max="100" step="5" />
                 </div>
 
                 <div class="front_backL">
                     <label for="back">Back-end : {{ questionnaire.back }}%</label>
-                    <input type="range" id="back" v-model.number="questionnaire.back" min="0" max="100" step="5" />
+                    <input type="range" id="back" v-model.number="questionnaire.d2" min="0" max="100" step="5" />
                 </div>
                 <div v-if="this.questionnaire.back >= 85 && this.questionnaire.front >= 85">
 
@@ -119,17 +119,17 @@
 
                     <iframe src="https://giphy.com/embed/p6qWfRJ4RxltUEmrl9" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.casus1" value = 1 >
+                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.s25" value = 1 >
                 </div>
                 <div class="reaction">
                     <iframe src="https://giphy.com/embed/7jmyzkeInJKhHiaaje" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.casus1"  value = 2>
+                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.s25"  value = 2>
                 </div>
                 <div class="reaction">
                     <iframe src="https://giphy.com/embed/2gZHwhx0EC5lv3Fl36" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.casus1"  value = 3>
+                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.s25"  value = 3>
                 </div>
                 
 
@@ -159,13 +159,14 @@ export default {
                 k4: 75,
                 k5: 100,
                 s1: true,
-                s2: false,
-                s3: false,
-                s4: false,
-                s5: false,
-                front: 50,
-                back: 50,
-                casus1 : 0 , 
+                s21: false,
+                s22: false,
+                s23: false,
+                s24: false,
+                d1: 50,
+                d2: 50,
+                d4 : 0,  
+                s25 : 0 , 
             }
         }
     },
