@@ -35,9 +35,11 @@ const router = createRouter({
 })
 
 // Neural network 
-//const model = await tf.loadLayersModel('../TF-Model/finalModel/model.json');
+const model = await tf.loadLayersModel('../TF-Model/finalModel29/model.json');
+//const test = tf.tensor([66, 55, 100, 45, 56, 87, 100, 84])
+//const test = {'k1': 66, 55 100, 45, 56, 87, 100, 84}
 
-
+console.log(model.predict(tf.tensor[66, 55, 100, 45, 56, 87, 100, 84]))
 
 createApp(App)
     .use(router)
