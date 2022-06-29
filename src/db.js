@@ -130,7 +130,7 @@ export async function add_questionnaire(Object, role, _UID) {
         console.log("Questionnaire of user", _UID, " filled in")
     }
 }
-
+/*
 export async function add_profile_image(_UID, imageLocation, role) {
     const name_collection = ""
     if (role == "bedrijf") {
@@ -142,7 +142,7 @@ export async function add_profile_image(_UID, imageLocation, role) {
         imageLocation: imageLocation
     })
     console.log("Profile ", _UID, " updated ")
-}
+} */
 
 export async function get_group_approved_users(role) {
 

@@ -33,21 +33,9 @@ const router = createRouter({
         { path: '/TestDB', name: 'Test', component: Test }
     ]
 })
-/*
-CustomModelDownloadConditions conditions = new CustomModelDownloadConditions.Builder()
-    .requireWifi()
-    .build();
-FirebaseModelDownloader.getInstance()
-    .getModel("Matching_tool", DownloadType.LOCAL_MODEL, conditions)
-    .addOnSuccessListener(new OnSuccessListener<CustomModel>() {
-      @Override
-      public void onSuccess(CustomModel model) {
-        // Download complete. Depending on your app, you could enable
-        // the ML feature, or switch from the local model to the remote
-        // model, etc.
-      }
-    }); 
-*/
+
+// Neural network 
+//const model = await tf.loadLayersModel('../TF-Model/finalModel/model.json');
 
 
 

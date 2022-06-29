@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^3.18.0",
     "apexcharts": "^3.35.2",
     "firebase": "^9.8.1-20220509172230",
     "jquery": "^3.6.0",
