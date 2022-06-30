@@ -167,6 +167,7 @@ export default {
                 d1: 50,
                 d2: 50,
                 d4: 0,
+                personality : 0 , 
 
             }
         }
@@ -200,6 +201,7 @@ export default {
             */
             const personality = this.questionnaire.s21 * 20  + this.questionnaire.s22 * 20 + this.questionnaire.s23 * 20 + this.questionnaire.s24 * 20 +  parseInt(this.questionnaire.s25)* 5 
             console.log(this.questionnaire.s21 ,this.questionnaire.s22 ,this.questionnaire.s23 , this.questionnaire.s24 ,  parseInt(this.questionnaire.s25) , " = ", personality  )  
+            this.personality = personality
             return personality; 
         }
 
