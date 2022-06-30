@@ -68,7 +68,7 @@
 
                 <label for="min_uren">Hoeveel uur per week zou je in de ideale wereld willen werken?</label>
                 <!-- TODO v-model vanuit een select pakken??? -->
-                <select id="min_uren" style="margin-left : 30px;" v-model = "questionnaire.d4">
+                <select id="min_uren" style="margin-left : 30px;" v-model="questionnaire.d4">
                     <option value="24">24</option>
                     <option value="32">32</option>
                     <option value="36">36</option>
@@ -109,33 +109,33 @@
                         "
                     </p>
                 </div>
-                
+
                 <div class="reaction">
                     <iframe src="https://giphy.com/embed/spfi6nabVuq5y" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                    <input type="radio" class="selectboxes" name = "casus_reaction"  value = 0>
+                    <input type="radio" class="selectboxes" name="casus_reaction" value=1>
                 </div>
                 <div class="reaction">
 
                     <iframe src="https://giphy.com/embed/p6qWfRJ4RxltUEmrl9" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.s25" value = 1 >
+                    <input type="radio" class="selectboxes" name="casus_reaction" v-model="questionnaire.s25" value=2>
                 </div>
                 <div class="reaction">
                     <iframe src="https://giphy.com/embed/7jmyzkeInJKhHiaaje" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.s25"  value = 2>
+                    <input type="radio" class="selectboxes" name="casus_reaction" v-model="questionnaire.s25" value=3>
                 </div>
                 <div class="reaction">
                     <iframe src="https://giphy.com/embed/2gZHwhx0EC5lv3Fl36" width="150" height="150" frameBorder="0"
                         class="giphy-embed" allowFullScreen></iframe>
-                    <input type="radio" class="selectboxes" name = "casus_reaction" v-model = "questionnaire.s25"  value = 3>
+                    <input type="radio" class="selectboxes" name="casus_reaction" v-model="questionnaire.s25" value=4>
                 </div>
-                
+
 
                 <hr>
             </div>
-            
+
         </form>
         <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300" frameBorder="0" class="giphy-embed"
             allowFullScreen></iframe>
@@ -163,10 +163,11 @@ export default {
                 s22: false,
                 s23: false,
                 s24: false,
+                s25: 0,
                 d1: 50,
                 d2: 50,
-                d4 : 0,  
-                s25 : 0 , 
+                d4: 0,
+
             }
         }
     },
@@ -179,12 +180,30 @@ export default {
                 this.questionnaire.k4,
                 this.questionnaire.k5
             ])
-            
+
             add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
             this.$store.commit("setFilledInQuestionnaire", true)
-            this.$router.push("./DashboardUser"); 
+            this.$router.push("./DashboardUser");
 
+        },
+        calculate_personality() {
+            /*
+
+                s21: false, // x 20
+                s22: false, // x 20 
+                s23: false, // x 20
+                s24: false, // x 20
+                s25: 0,     // x 5 
+                ----------------------- + 
+                        range 0-100
+
+            */
+            const personality = this.questionnaire.s21 * 20  + this.questionnaire.s22 * 20 + this.questionnaire.s23 * 20 + this.questionnaire.s24 * 20 +  parseInt(this.questionnaire.s25)* 5 
+            console.log(this.questionnaire.s21 ,this.questionnaire.s22 ,this.questionnaire.s23 , this.questionnaire.s24 ,  parseInt(this.questionnaire.s25) , " = ", personality  )  
+            return personality; 
         }
+
+
     }
 }
 </script>
@@ -196,7 +215,7 @@ export default {
 
 .reaction {
     display: inline;
-    margin : 2%; 
+    margin: 2%;
 }
 
 

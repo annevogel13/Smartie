@@ -1,3 +1,6 @@
+// WORDT NIET MEER GERBUIKT 
+
+
 // importing the data 
 console.log("Loading data .. ")
 const train_features = tf.data.csv("./ModelData/train_features.csv")

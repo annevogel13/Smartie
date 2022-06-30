@@ -35,12 +35,19 @@ const router = createRouter({
 })
 
 // Neural network 
-const model = await tf.loadLayersModel('../TF-Model/finalModel29/model.json');
+const model = await tf.loadLayersModel('../TF-Model/finalModel29/model.json')
 
-const logg = model.predict(tf.tensor([0, 55, 90, 44, 56, 88, 100, 84]).expandDims())
-const result = Math.round(logg.dataSync()[0])
-console.log(result)
+export function prediction_model(k1, k2, k3, k4, k5, s1, s2, d4) {
 
+    const logg = model.predict(tf.tensor([k1, k2, k3, k4, k5, s1, s2, d4]).expandDims())
+    const result = Math.round(logg.dataSync()[0])
+    console.log("Prediction : ",  result)
+
+    return result 
+
+}
+
+// Alles mounten 
 createApp(App)
     .use(router)
     .use(VueApexCharts)

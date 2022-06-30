@@ -21,15 +21,15 @@
             <div class="kernwoorden">
                 <h2> Kernwoorden </h2>
                 <label for="k1">Ons bedrijf is zeer <b>hiërarchisch</b></label>: {{ questionnaire.k53 }}%
-                <input type="range" id="k1" v-model.number="questionnaire.k1" min="0" max="100" step="5" />
+                <input type="range" id="k1" v-model.number="questionnaire.k53" min="0" max="100" step="5" />
 
                 <br><br>
                 <label for="k2">Ons bedrijf en <b>thuiswerken</b> gaan goed samen </label>: {{ questionnaire.s1 }}%
-                <input type="range" id="k2" v-model.number="questionnaire.k2" min="0" max="100" step="5" />
+                <input type="range" id="k2" v-model.number="questionnaire.s1" min="0" max="100" step="5" />
 
                 <br><br>
                 <label for="k3"><b>Vrijmibo</b> is belangrijk voor de sfeer </label>: {{ questionnaire.k50 }}%
-                <input type="range" id="k3" v-model.number="questionnaire.k3" min="0" max="100" step="5" />
+                <input type="range" id="k3" v-model.number="questionnaire.k50" min="0" max="100" step="5" />
 
                 <br><br>
                 <label for="k4">Wij hebben een <b>entertainment room</b></label> : {{ questionnaire.k4 }}%
@@ -37,7 +37,7 @@
 
                 <br><br>
                 <label for="k5"><b>Meedenken</b> wordt gewaardeerd </label> : {{ questionnaire.k2 }}%
-                <input type="range" id="k5" v-model.number="questionnaire.k5" min="0" max="100" step="5" />
+                <input type="range" id="k5" v-model.number="questionnaire.k2" min="0" max="100" step="5" />
 
                 <br><br>
             </div>
@@ -57,7 +57,7 @@
                 <br>
                 <input type="checkbox" id="s4" v-model="questionnaire.k52" name="s4" class="s" />
                 <label for="s4">Muziek in het kantoor is toegestaan.</label>
-                 <input type="checkbox" id="s4" v-model="questionnaire.k3" name="s4" class="s" />
+                <input type="checkbox" id="s4" v-model="questionnaire.k3" name="s4" class="s" />
                 <label for="s4">Kantoor kan aangepast worden naar benodigdheden </label>
 
             </div>
@@ -115,6 +115,7 @@
         <iframe src="https://giphy.com/embed/hcpVSCSwDcKju" width="300" frameBorder="0" class="giphy-embed"
             allowFullScreen></iframe>
         <br>
+
         <button @click="questionnaire1"> Bevestig vragenlijst </button>
     </div>
 
@@ -132,13 +133,14 @@ export default {
                 k2: 25,
                 k3: 50,
                 k4: 75,
+                k5: 0 , 
                 
                 k50: 100,
-                k51: 100,
-                k52: 100,
+                k51: false,
+                k52: true,
                 k53: 100,
 
-                s1: true,
+                s1: 0,
                 s2: false,
                 
                 d4: 0,
@@ -164,6 +166,22 @@ export default {
             this.$store.commit("setFilledInQuestionnaire", true)
             filled_in_questionnaire(this.$user.state.UID, this.$user.state.role)
             this.$router.push("./DashboardUser");
+        },
+        calculate_ambiance() {
+            /*
+                s21: false, // x 20
+                s22: false, // x 20 
+                s23: false, // x 20
+                s24: false, // x 20
+                s25: 0,     // x 5 
+                ----------------------- + 
+                        range 0-100
+
+            */
+            
+            const ambiance = this.questionnaire.k50 * 0.25  + this.questionnaire.k51 * 25 + this.questionnaire.k52 * 25 + this.questionnaire.k53 * 0.25
+            console.log(this.questionnaire.k50 , this.questionnaire.k51 , this.questionnaire.k52, this.questionnaire.k53 , " = ", ambiance)
+            return ambiance; 
         }
     }
 }
