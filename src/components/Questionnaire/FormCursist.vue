@@ -87,7 +87,7 @@
                     <label for="back">Back-end : {{ questionnaire.d2 }}%</label>
                     <input type="range" id="back" v-model.number="questionnaire.d2" min="0" max="100" step="5" />
                 </div>
-                <div v-if="this.questionnaire.back >= 85 && this.questionnaire.front >= 85">
+                <div v-if="this.questionnaire.d1 >= 85 && this.questionnaire.d2 >= 85">
 
                     <div class="gifje">
                         <iframe src="https://giphy.com/embed/RiuMMt2r242LqRyRZn" width="200" height="200"
@@ -172,8 +172,7 @@ export default {
                 d2: 50,
                 d4: 0,
                 // conclusie vanuit meerdere vragen 
-                personality : 0 , 
-
+                personality : 0  
             }
         }
     },
@@ -192,7 +191,7 @@ export default {
             */
             const personality = this.questionnaire.s21 * 20  + this.questionnaire.s22 * 20 + this.questionnaire.s23 * 20 + this.questionnaire.s24 * 20 +  parseInt(this.questionnaire.s25)* 5 
             console.log(this.questionnaire.s21 ,this.questionnaire.s22 ,this.questionnaire.s23 , this.questionnaire.s24 ,  parseInt(this.questionnaire.s25) , " = ", personality  )  
-            this.questionnare.personality = personality
+            this.questionnaire.personality = personality
             return personality; 
         }, 
         questionnaire1() {

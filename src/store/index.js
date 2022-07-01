@@ -6,7 +6,7 @@ export default createStore({
             UID : '',
             role : '',
             profile: false, 
-            questionnaire : false,
+            questionnaireCompleted : false,
             username : '', 
             approved_matches : [], 
             loggedIn : false, 
@@ -43,26 +43,24 @@ export default createStore({
             state.user.profile = _profile
         },
         setQuestionnaire(state, _questionnaire){
-            state.user.questionnaire = _questionnaire
+            state.user.questionnaireCompleted = _questionnaire
         },
         fillStateVuex(state, data){
             // User data 
             console.log("fillState" , data)
-            state.user.UID              = data.UID
-            state.user.role             = data.role
-            state.user.profile          = data.profile
-            state.user.questionnaire    = data.questionnaire
-            state.user.username         = data.username
-            state.user.loggedIn         = true
+            state.user.UID                      = data.UID
+            state.user.role                     = data.role
+            state.user.profile                  = data.profile
+            state.user.questionnaireCompleted   = data.questionnaireCompleted
+            state.user.username                 = data.username
+            state.user.loggedIn                 = true
             // Swipe history 
-            state.user.swipeChoice.dislikes = data.dislikes
-            state.user.swipeChoice.likes = data.likes
-
-            // matches
-            state.user.approved_matches = data.approved_matches
-
-            // questionnaire 
-            state.user.questionnaire_state = data.questionnaire
+            state.user.swipeChoice.dislikes     = data.dislikes
+            state.user.swipeChoice.likes        = data.likes
+            // Matches
+            state.user.approved_matches         = data.approved_matches
+            // Questionnaire 
+            state.user.questionnaire_state      = data.questionnaire
 
             console.log("state is updated")
         },

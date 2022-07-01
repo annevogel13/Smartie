@@ -123,7 +123,7 @@
 
 <script>
 // TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
-import { add_questionnaire, add_prediction, filled_in_questionnaire } from "../../db"
+import { add_questionnaire, add_prediction } from "../../db"
 import { prediction_model } from "../../main"
 
 export default {

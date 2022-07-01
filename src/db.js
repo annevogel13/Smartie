@@ -78,9 +78,9 @@ export async function get_profile_in_store_cursist(_UID) {
     const docRef = doc(db, "profiel_cursist", _UID);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) { 
+    if (docSnap.exists()) {
         store.commit('fillStateVuex', docSnap.data())
-        
+
     } else {
         console.log("Geen cursist/bedrijf heeft dit ID ");
     }
@@ -88,15 +88,15 @@ export async function get_profile_in_store_cursist(_UID) {
 
 /* Updates profile (needed on the profileUser page */
 export async function update_profile(_UID, _data, role) {
-    console.log("update profiel met data : ", _data )
+    console.log("update profiel met data : ", _data)
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             UID: _UID,
             username: _data.username,
-            //tel: _data.tel,
+            tel: _data.tel,
             profile: true,
-
+            questionnaireCompleted : false,
             time: Timestamp.now()
         })
         console.log("Profile ", _UID, " updated ")
@@ -105,14 +105,15 @@ export async function update_profile(_UID, _data, role) {
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             UID: _UID,
             username: _data.username,
-           // tel: _data.telefoonnr,
+            tel: _data.telefoonnr,
             profile: true,
+            questionnaireCompleted : false,
             time: Timestamp.now(),
         })
         console.log("Profile ", _UID, " updated ")
     }
 
-    
+
 }
 
 // TODO zorgen dat die een veld toevoegd en niet het veld overschrijft 
@@ -126,7 +127,7 @@ export async function add_questionnaire(Object, role, _UID) {
         store.commit("setQuestionnaire", true)
         console.log("Questionnaire of business", _UID, " filled in")
     } else {
-        
+
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             questionnaire: Object
         })
@@ -144,7 +145,7 @@ export async function add_prediction(Object, role, _UID) {
         })
         console.log("Prediction of user", _UID, " filled in")
     } else {
-        
+
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             prediction: Object
         })
@@ -212,13 +213,13 @@ export async function add_swipe(_UID, _UID_match, match, role) {
         } else await updateDoc(doc(db, "profiel_cursist", _UID), { dislikes: _UID_match })
     }
 }
-
+/*
 export async function filled_in_questionnaire(_UID, role) {
     console.log("filled in q : ", _UID, role)
     if (role == "bedrijf") {
         await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })
     } else await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })
-}
+} */ 
 
 
 /******************* STORAGE **************************/

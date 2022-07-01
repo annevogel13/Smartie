@@ -9,7 +9,7 @@
                 <router-link to="/ProfileUser">Klilk hier om naar de profiel pagina te gaan</router-link>
             </button>
         </div>
-        <div v-if="!this.$store.state.user.questionnaire">
+        <div v-if="!this.$store.state.user.questionnaireCompleted">
             <p> Heb je de vragenlijst al ingevuld? </p>
             <button v-if="this.$store.state.user.role == 'bedrijf'">
                 <router-link to="/QuestionnaireB">Klik hier om naar de profiel pagina te gaan</router-link>
