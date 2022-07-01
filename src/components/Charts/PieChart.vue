@@ -6,9 +6,9 @@ export default {
     data() {
         return {
             series: [
-                this.$store.state.user.data_to_be_displayed.questionnaire.verhouding_j,
-                this.$store.state.user.data_to_be_displayed.questionnaire.verhouding_m,
-                this.$store.state.user.data_to_be_displayed.questionnaire.verhouding_s,
+                this.$store.state.user.data_to_be_displayed.questionnaire.d60,
+                this.$store.state.user.data_to_be_displayed.questionnaire.d61,
+                this.$store.state.user.data_to_be_displayed.questionnaire.d62,
 
             ],
             chartOptions: {
@@ -29,7 +29,7 @@ export default {
                     breakpoint: 300,
                     options: {
                         chart: {
-                            width: 50,
+                            width: 100,
                         },
                         legend: {
                             position: 'bottom'

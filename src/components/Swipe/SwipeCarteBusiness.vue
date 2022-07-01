@@ -63,7 +63,7 @@ export default {
             </p>
         </div>
         <div class="div3 griditem">
-            <PieChart></PieChart>
+            <!--<PieChart></PieChart> -->
             <LineChart></LineChart>
         </div>
 

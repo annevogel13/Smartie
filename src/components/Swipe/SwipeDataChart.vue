@@ -8,7 +8,7 @@ export default {
             chartOptions: {
                 chart: {
                     type: 'line',
-                    height: 350
+                    //height: 350
                 },
                 stroke: {
                     curve: 'stepline',

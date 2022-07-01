@@ -1,6 +1,6 @@
 <template>
     <div class="dashboard">
-        <button @click="test">Klik hier om de matches de laden in je profiel</button>
+        <button @click="prepare_matches">Klik hier om de matches de laden in je profiel</button>
         <h3> Dashboard </h3>
 
         <div v-if="!this.$store.state.user.profile" class="noProfile">
@@ -50,7 +50,7 @@ import { get_group_approved_users, get_data_user_swipe } from "../db"
 
 export default {
     methods: {
-        test() {
+        prepare_matches() {
             get_group_approved_users(this.$store.state.user.role).then(data => {
                 console.log("get group approved users" , data)
                 this.$store.commit("setApprovedMatchs", data)
