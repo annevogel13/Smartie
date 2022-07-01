@@ -3,6 +3,8 @@ import { getFirestore, collection } from "firebase/firestore"
 import "firebase/firestore"
 import { Timestamp } from "firebase/firestore"
 
+import store from "./store"
+
 const firebaseConfig = {
     apiKey: "AIzaSyBz-GuAE6HSTl47j9VM0utLN_HWaYGP83Q",
     authDomain: "smartie-v1.firebaseapp.com",
@@ -67,7 +69,7 @@ export async function get_profile_in_store(_UID) {
         get_profile_in_store_cursist(_UID)
     }
 }
-import store from "./store";
+
 
 export async function get_profile_in_store_cursist(_UID) {
 
@@ -86,12 +88,13 @@ export async function get_profile_in_store_cursist(_UID) {
 
 /* Updates profile (needed on the profileUser page */
 export async function update_profile(_UID, _data, role) {
+    console.log("update profiel met data : ", _data )
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             UID: _UID,
             username: _data.username,
-            tel: _data.tel,
+            //tel: _data.tel,
             profile: true,
 
             time: Timestamp.now()
@@ -102,12 +105,14 @@ export async function update_profile(_UID, _data, role) {
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             UID: _UID,
             username: _data.username,
-            tel: _data.tel,
+           // tel: _data.telefoonnr,
             profile: true,
             time: Timestamp.now(),
         })
         console.log("Profile ", _UID, " updated ")
     }
+
+    
 }
 
 // TODO zorgen dat die een veld toevoegd en niet het veld overschrijft 
@@ -141,23 +146,9 @@ export async function add_prediction(Object, role, _UID) {
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             questionnaire: Object
         })
-        console.log("Questionnaire of user", _UID, " filled in")
+        console.log("Prediction of user", _UID, " filled in")
     }
 }
-
-/*
-export async function add_profile_image(_UID, imageLocation, role) {
-    const name_collection = ""
-    if (role == "bedrijf") {
-        name_collection = "profiles_bedrijf"
-    } else name_collection = "profiel_cursist"
-
-
-    await setDoc(doc(db, name_collection, _UID), {
-        imageLocation: imageLocation
-    })
-    console.log("Profile ", _UID, " updated ")
-} */
 
 export async function get_group_approved_users(role) {
 
@@ -221,6 +212,7 @@ export async function add_swipe(_UID, _UID_match, match, role) {
 }
 
 export async function filled_in_questionnaire(_UID, role) {
+    console.log("filled in q : ", _UID, role)
     if (role == "bedrijf") {
         await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })
     } else await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })

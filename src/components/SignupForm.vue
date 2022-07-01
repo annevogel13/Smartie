@@ -3,9 +3,9 @@
 
         <h2>Maak je profiel compleet</h2>
         <label> Username </label>
-        <input type="text" required v-model="username">
+        <input type="text" required v-model="this.data.username">
         <label> Telefoonnummer </label>
-        <input type="tel" required v-model="telefoonnr">
+        <input type="tel" required v-model="this.data.telefoonnr">
 
         <label>Profiel foto</label>
         <br>
@@ -20,7 +20,7 @@
 <script>
 
 import { update_profile, uploadImage } from '../db'
-
+import { get_profile_in_store } from '../db'
 export default {
     data() {
         return {
@@ -39,6 +39,7 @@ export default {
         uploadInformation() {
             console.log("trying to upload profile ")
             update_profile(this.$store.state.user.UID, this.data, this.$store.state.user.role)
+            get_profile_in_store(this.$store.state.user.UID)
             this.$store.commit('setProfile', true)
             this.$router.push("./DashboardUser")
         },

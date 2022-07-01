@@ -57,8 +57,8 @@
                 <br>
                 <input type="checkbox" id="s4" v-model="questionnaire.k52" name="s4" class="s" />
                 <label for="s4">Muziek in het kantoor is toegestaan.</label>
-                <input type="checkbox" id="s4" v-model="questionnaire.k3" name="s4" class="s" />
-                <label for="s4">Kantoor kan aangepast worden naar benodigdheden </label>
+                <input type="checkbox" id="s5" v-model="questionnaire.k3" name="s4" class="s" />
+                <label for="s5">Kantoor kan aangepast worden naar benodigdheden </label>
 
             </div>
             <hr>
@@ -123,7 +123,7 @@
 
 <script>
 // TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
-import { add_questionnaire, filled_in_questionnaire } from "../../db"
+import { add_questionnaire, add_prediction, filled_in_questionnaire } from "../../db"
 import { prediction_model } from "../../main"
 
 export default {
@@ -157,23 +157,6 @@ export default {
         }
     },
     methods: {
-        questionnaire1() {
-            this.$store.commit('set_kernwoorden', [
-                this.questionnaire.k1,
-                this.questionnaire.k2,
-                this.questionnaire.k3,
-                this.questionnaire.k4,
-                this.questionnaire.k5
-            ])
-            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, this.questionnaire.d4)
-            add_questionnaire(prediction, 'bedrijf', this.$store.state.user.UID)
-            add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
-            this.$store.commit("setFilledInQuestionnaire", true)
-
-            filled_in_questionnaire(this.$user.state.UID, this.$user.state.role)
-            this.$router.push("./DashboardUser");
-
-        },
         calculate_ambiance() {
             /*
                 s21: false, // x 20
@@ -190,6 +173,23 @@ export default {
             console.log(this.questionnaire.k50, this.questionnaire.k51, this.questionnaire.k52, this.questionnaire.k53, " = ", ambiance)
             this.ambiance = ambiance
             return ambiance;
+        },
+        questionnaire1() {
+            this.$store.commit('set_kernwoorden', [
+                this.questionnaire.k1,
+                this.questionnaire.k2,
+                this.questionnaire.k3,
+                this.questionnaire.k4,
+                this.questionnaire.k5
+            ])
+            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, this.questionnaire.d4)
+            add_prediction(prediction, 'bedrijf', this.$store.state.user.UID)
+            add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
+            this.$store.commit("setFilledInQuestionnaire", true)
+
+            filled_in_questionnaire(this.$store.state.user.UID, this.$store.state.user.role)
+            this.$router.push("./DashboardUser");
+
         }
     }
 }
