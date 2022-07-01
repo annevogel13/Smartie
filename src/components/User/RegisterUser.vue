@@ -38,9 +38,9 @@ export default {
                     this.$store.commit('setRole', this.role)
 
                     if (this.role == "bedrijf") {
-                        add_to_collection("profiel_bedrijf", { UID: auth.currentUser.uid, profile: false, filledInQuestionnaire : false, role: this.role, time: Timestamp.now() }, auth.currentUser.uid)
+                        add_to_collection("profiel_bedrijf", { UID: auth.currentUser.uid, profile: false, questionnaire : false, role: this.role, time: Timestamp.now() }, auth.currentUser.uid)
                     } else if (this.role == "cursist") {
-                        add_to_collection("profiel_cursist", { UID: auth.currentUser.uid, profile: false, filledInQuestionnaire : false, role: this.role, time: Timestamp.now() }, auth.currentUser.uid)
+                        add_to_collection("profiel_cursist", { UID: auth.currentUser.uid, profile: false, questionnaire : false, role: this.role, time: Timestamp.now() }, auth.currentUser.uid)
                     }
 
                 })

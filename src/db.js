@@ -138,13 +138,13 @@ export async function add_prediction(Object, role, _UID) {
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
-            questionnaire: Object
+            prediction: Object
         })
-        console.log("Questionnaire of business", _UID, " filled in")
+        console.log("Prediction of user", _UID, " filled in")
     } else {
         
         await updateDoc(doc(db, "profiel_cursist", _UID), {
-            questionnaire: Object
+            prediction: Object
         })
         console.log("Prediction of user", _UID, " filled in")
     }

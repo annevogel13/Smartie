@@ -178,7 +178,7 @@ export default {
         }
     },
     methods: {
-                calculate_personality() {
+            calculate_personality() {
             /*
 
                 s21: false, // x 20
@@ -192,7 +192,7 @@ export default {
             */
             const personality = this.questionnaire.s21 * 20  + this.questionnaire.s22 * 20 + this.questionnaire.s23 * 20 + this.questionnaire.s24 * 20 +  parseInt(this.questionnaire.s25)* 5 
             console.log(this.questionnaire.s21 ,this.questionnaire.s22 ,this.questionnaire.s23 , this.questionnaire.s24 ,  parseInt(this.questionnaire.s25) , " = ", personality  )  
-            this.personality = personality
+            this.questionnare.personality = personality
             return personality; 
         }, 
         questionnaire1() {
@@ -205,7 +205,7 @@ export default {
                 this.questionnaire.k4,
                 this.questionnaire.k5
             ])
-            calculate_personality()
+            this.calculate_personality()
             
             const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.k5, this.questionnaire.s1, this.questionnaire.personality, this.questionnaire.d4)
             add_questionnaire(prediction,  'cursist', this.$store.state.user.UID)

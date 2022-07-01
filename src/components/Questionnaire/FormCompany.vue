@@ -158,6 +158,7 @@ export default {
     },
     methods: {
         calculate_ambiance() {
+            
             /*
                 s21: false, // x 20
                 s22: false, // x 20 
@@ -171,7 +172,7 @@ export default {
 
             const ambiance = this.questionnaire.k50 * 0.25 + this.questionnaire.k51 * 25 + this.questionnaire.k52 * 25 + this.questionnaire.k53 * 0.25
             console.log(this.questionnaire.k50, this.questionnaire.k51, this.questionnaire.k52, this.questionnaire.k53, " = ", ambiance)
-            this.ambiance = ambiance
+            this.questionnaire.ambiance = ambiance
             return ambiance;
         },
         questionnaire1() {
@@ -182,12 +183,12 @@ export default {
                 this.questionnaire.k4,
                 this.questionnaire.k5
             ])
-            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, this.questionnaire.d4)
+
+            this.calculate_ambiance() 
+            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, parseInt(this.questionnaire.d4))
             add_prediction(prediction, 'bedrijf', this.$store.state.user.UID)
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
             this.$store.commit("setFilledInQuestionnaire", true)
-
-            filled_in_questionnaire(this.$store.state.user.UID, this.$store.state.user.role)
             this.$router.push("./DashboardUser");
 
         }
