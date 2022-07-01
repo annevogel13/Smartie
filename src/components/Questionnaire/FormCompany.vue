@@ -98,7 +98,7 @@
 
                 <label for="min_uren">Wat is het minimum aantal uren dat een werknemer moet draaien?</label>
                 <!-- TODO v-model vanuit een select pakken??? -->
-                <select id="min_uren" style="margin-left : 30px;" v-model = "questionnaire.d4">
+                <select id="min_uren" style="margin-left : 30px;" v-model="questionnaire.d4">
                     <option value="24">24</option>
                     <option value="32">32</option>
                     <option value="36">36</option>
@@ -124,6 +124,7 @@
 <script>
 // TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
 import { add_questionnaire, filled_in_questionnaire } from "../../db"
+import { prediction_model } from "../../main"
 
 export default {
     data() {
@@ -133,8 +134,8 @@ export default {
                 k2: 25,
                 k3: 50,
                 k4: 75,
-                k5: 0 , 
-                
+                k5: 0,
+
                 k50: 100,
                 k51: false,
                 k52: true,
@@ -142,16 +143,16 @@ export default {
 
                 s1: 0,
                 s2: false,
-                
+
                 d4: 0,
                 d5: 0,
-                
+
                 d60: 0,
                 d61: 0,
                 d62: 0,
                 d63: 0,
 
-                ambiance : 0 
+                ambiance: 0
             }
         }
     },
@@ -164,10 +165,14 @@ export default {
                 this.questionnaire.k4,
                 this.questionnaire.k5
             ])
+            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, this.questionnaire.d4)
+            add_questionnaire(prediction, 'bedrijf', this.$store.state.user.UID)
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
             this.$store.commit("setFilledInQuestionnaire", true)
+
             filled_in_questionnaire(this.$user.state.UID, this.$user.state.role)
             this.$router.push("./DashboardUser");
+
         },
         calculate_ambiance() {
             /*
@@ -180,11 +185,11 @@ export default {
                         range 0-100
 
             */
-            
-            const ambiance = this.questionnaire.k50 * 0.25  + this.questionnaire.k51 * 25 + this.questionnaire.k52 * 25 + this.questionnaire.k53 * 0.25
-            console.log(this.questionnaire.k50 , this.questionnaire.k51 , this.questionnaire.k52, this.questionnaire.k53 , " = ", ambiance)
-            this.ambiance = ambiance 
-            return ambiance; 
+
+            const ambiance = this.questionnaire.k50 * 0.25 + this.questionnaire.k51 * 25 + this.questionnaire.k52 * 25 + this.questionnaire.k53 * 0.25
+            console.log(this.questionnaire.k50, this.questionnaire.k51, this.questionnaire.k52, this.questionnaire.k53, " = ", ambiance)
+            this.ambiance = ambiance
+            return ambiance;
         }
     }
 }

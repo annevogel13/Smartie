@@ -79,12 +79,12 @@
                 <br><br>
                 <label>Ben je meer een front-end of een back-end developperer? </label><br>
                 <div class="front_backL">
-                    <label for="front">Front-end : {{ questionnaire.front }}%</label>
+                    <label for="front">Front-end : {{ questionnaire.d1 }}%</label>
                     <input type="range" id="front" v-model.number="questionnaire.d1" min="0" max="100" step="5" />
                 </div>
 
                 <div class="front_backL">
-                    <label for="back">Back-end : {{ questionnaire.back }}%</label>
+                    <label for="back">Back-end : {{ questionnaire.d2 }}%</label>
                     <input type="range" id="back" v-model.number="questionnaire.d2" min="0" max="100" step="5" />
                 </div>
                 <div v-if="this.questionnaire.back >= 85 && this.questionnaire.front >= 85">
@@ -148,46 +148,37 @@
 <script>
 // TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
 import { add_questionnaire } from "../../db"
+import { prediction_model } from "../../main"
 
 export default {
     data() {
         return {
             questionnaire: {
+                // kernwoorden 
                 k1: 0,
                 k2: 25,
                 k3: 50,
                 k4: 75,
                 k5: 100,
+                // stelingen 
                 s1: true,
                 s21: false,
                 s22: false,
                 s23: false,
                 s24: false,
                 s25: 0,
+                // diverse vragen 
                 d1: 50,
                 d2: 50,
                 d4: 0,
+                // conclusie vanuit meerdere vragen 
                 personality : 0 , 
 
             }
         }
     },
     methods: {
-        questionnaire1() {
-            this.$store.commit('set_kernwoorden', [
-                this.questionnaire.k1,
-                this.questionnaire.k2,
-                this.questionnaire.k3,
-                this.questionnaire.k4,
-                this.questionnaire.k5
-            ])
-
-            add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
-            this.$store.commit("setFilledInQuestionnaire", true)
-            this.$router.push("./DashboardUser");
-
-        },
-        calculate_personality() {
+                calculate_personality() {
             /*
 
                 s21: false, // x 20
@@ -203,7 +194,28 @@ export default {
             console.log(this.questionnaire.s21 ,this.questionnaire.s22 ,this.questionnaire.s23 , this.questionnaire.s24 ,  parseInt(this.questionnaire.s25) , " = ", personality  )  
             this.personality = personality
             return personality; 
-        }
+        }, 
+        questionnaire1() {
+
+
+            this.$store.commit('set_kernwoorden', [
+                this.questionnaire.k1,
+                this.questionnaire.k2,
+                this.questionnaire.k3,
+                this.questionnaire.k4,
+                this.questionnaire.k5
+            ])
+            calculate_personality()
+            
+            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.k5, this.questionnaire.s1, this.questionnaire.personality, this.questionnaire.d4)
+            add_questionnaire(prediction,  'cursist', this.$store.state.user.UID)
+            console.log("Prediction voor deze user/vragenlijst is : ")
+
+            add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
+            this.$store.commit("setFilledInQuestionnaire", true)
+            this.$router.push("./DashboardUser");
+
+        },
 
 
     }

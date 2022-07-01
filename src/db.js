@@ -123,13 +123,31 @@ export async function add_questionnaire(Object, role, _UID) {
         })
         console.log("Questionnaire of business", _UID, " filled in")
     } else {
-        console.log("HIERRRRRRRRRRRRRRRRR")
+        
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             questionnaire: Object
         })
         console.log("Questionnaire of user", _UID, " filled in")
     }
 }
+
+export async function add_prediction(Object, role, _UID) {
+    console.log("add prediction  ")
+    if (role == "bedrijf") {
+
+        await updateDoc(doc(db, "profiel_bedrijf", _UID), {
+            questionnaire: Object
+        })
+        console.log("Questionnaire of business", _UID, " filled in")
+    } else {
+        
+        await updateDoc(doc(db, "profiel_cursist", _UID), {
+            questionnaire: Object
+        })
+        console.log("Questionnaire of user", _UID, " filled in")
+    }
+}
+
 /*
 export async function add_profile_image(_UID, imageLocation, role) {
     const name_collection = ""
