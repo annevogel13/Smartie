@@ -1,21 +1,3 @@
-<!--<script>
-    
-    import SignupForm from "./SignupForm.vue"
-
-    export default {
-        name : 'ProfileUser',
-        components : { SignupForm }
-    }
-    
-</script>
-
-
-<template>
-    <div class="profileUser" >
-        <signup-form />
-    </div>
-</template>
--->
 <template>
     <div class="signup">
 
@@ -24,7 +6,10 @@
         <input type="text" required v-model="this.data.username">
         <label> Telefoonnummer </label>
         <input type="tel" required v-model="this.data.telefoonnr">
-
+        <label>Korte beschrijving</label>
+        <textarea type="textfield" class="textfield"></textarea>
+        <label>Link naar de bedrijfswebsite of github pagina</label>
+        <input type="text" required v-model="this.data.link">
         <label>Profiel foto</label>
         <br>
         <button @click="click1">Kies foto</button>
@@ -46,7 +31,8 @@ export default {
                 profielfoto: "",
                 telefoonnr: "",
                 username: "",
-                description : ""
+                description: "",
+                link : "", 
             },
             uploadValue: 0,
             img1: null,
@@ -79,6 +65,14 @@ export default {
 
 </script>
 <style scoped >
+.textfield {
+    max-width: 85%;
+    min-width: 85%;
+    height : 100px; 
+    min-height: 50px;
+    max-height : 200px; 
+}
+
 .preview {
     width: 25%;
     height: auto;

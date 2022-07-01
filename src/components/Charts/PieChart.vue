@@ -14,8 +14,8 @@ export default {
             chartOptions: {
                 labels: ["Junioren", "Medioren", "Senioren"],
                 chart: {
-                    type: 'polarArea',
-                },
+                    type: 'polarArea', // polarArea
+                }, 
                 stroke: {
                     colors: ['#fff']
                 },
@@ -24,7 +24,7 @@ export default {
                 },
                 title: {
                     text: 'Grafiek op kernwoorden'
-                },
+                }, 
                 responsive: [{
                     breakpoint: 300,
                     options: {
@@ -35,7 +35,13 @@ export default {
                             position: 'bottom'
                         }
                     }
-                }]
+                }],
+                yaxis : {
+                    show : false 
+                },
+                xaxis : {
+                    show : false 
+                }
             },
             components: { VueApexCharts }
         }

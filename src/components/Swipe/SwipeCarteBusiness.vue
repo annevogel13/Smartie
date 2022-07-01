@@ -57,13 +57,15 @@ export default {
             }} </h3>
         </div>
         <div class="div2 griditem">
+            <h4>Beschrijving van {{ this.$store.state.user.data_to_be_displayed.username }}:</h4>
             <p>
-                korte beschrijving van het bedrijf met bijvoorbeeld een opsomming met elementen :
-                
+             {{this.$store.state.user.data_to_be_displayed.description }} 
             </p>
+
+            <h4><a href = "{{ this.$store.state.user.data_to_be_displayed.link}}">Link naar {{ this.$store.state.user.data_to_be_displayed.username }}'s webpagina</a></h4>
         </div>
         <div class="div3 griditem">
-            <!--<PieChart></PieChart> -->
+            <PieChart v-if="this.$store.state.user.data_to_be_displayed.role == 'bedrijf'"></PieChart>
             <LineChart></LineChart>
         </div>
 
@@ -94,27 +96,25 @@ export default {
 
     grid-column: 1;
     grid-row: 2;
-
 }
 
 .div3 {
 
     grid-column: 2 / 4;
     grid-row: 2;
-    padding: 10px;
+    
 }
 
 .div4 {
 
     grid-column: 1/3;
     grid-row: 4;
-    padding: 10px;
+    
 }
 
 .swipeCartBusiness {
     display: grid;
-    padding: 10px;
-    width: 70%;
+    width: 85%;
     margin: auto;
 }
 
