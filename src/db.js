@@ -91,7 +91,7 @@ export async function update_profile(_UID, _username, _tel, role) {
             UID: _UID,
             username: _username,
             tel: _tel,
-            hasProfile: true,
+            profile: true,
             likes: [],
             dislikes: [],
             time: Timestamp.now()
@@ -103,7 +103,7 @@ export async function update_profile(_UID, _username, _tel, role) {
             UID: _UID,
             username: _username,
             tel: _tel,
-            hasProfile: true,
+            profile: true,
             likes: [],
             dislikes: [],
             time: Timestamp.now(),
@@ -168,7 +168,7 @@ export async function get_group_approved_users(role) {
     const array_uid = []
     if (role == "bedrijf") {
         console.log("bedrijf --> cursist")
-        const docRef = query(collection(db, "profiel_cursist"), where("hasProfile", "==", true));
+        const docRef = query(collection(db, "profiel_cursist"), where("profile", "==", true));
         const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {
@@ -179,7 +179,7 @@ export async function get_group_approved_users(role) {
         return array_uid
     } else {
         console.log("cursist --> bedrijf")
-        const docRef = query(collection(db, "profiel_bedrijf"), where("hasProfile", "==", true));
+        const docRef = query(collection(db, "profiel_bedrijf"), where("profile", "==", true));
         const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {

@@ -3,7 +3,7 @@
         <button @click="test">Klik hier om de matches de laden in je profiel</button>
         <h3> Dashboard </h3>
 
-        <div v-if="!this.$store.state.user.hasProfile" class="noProfile">
+        <div v-if="!this.$store.state.user.profile" class="noProfile">
             <p> Je profiel is niet compleet </p>
             <button>
                 <router-link to="/ProfileUser">Klilk hier om naar de profiel pagina te gaan</router-link>

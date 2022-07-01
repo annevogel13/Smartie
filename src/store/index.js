@@ -5,8 +5,8 @@ export default createStore({
         user : {
             UID : '',
             role : '',
-            hasProfile: false, 
-            filledInQuestionnaire : false,
+            profile: false, 
+            questionnaire : false,
             username : '', 
             approved_matches : [], 
             loggedIn : false, 
@@ -35,8 +35,8 @@ export default createStore({
         loggingOut(state){
             state.user.loggedIn = false 
         },
-        setHasProfile(state, _hasProfile){
-            state.user.hasProfile = _hasProfile
+        setProfile(state, _profile){
+            state.user.profile = _profile
         },
         setFilledInQuestionnaire(state, _filledInQuestionnaire){
             state.user.filledInQuestionnaire = _filledInQuestionnaire
@@ -44,7 +44,7 @@ export default createStore({
         fill_state(state, data){
             state.user.UID = data.UID; 
             state.user.role = data.role; 
-            state.user.hasProfile = data.hasProfile; 
+            state.user.profile = data.profile; 
             state.user.username = data.username; 
             console.log("state is updated")
         },
