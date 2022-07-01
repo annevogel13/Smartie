@@ -42,8 +42,8 @@ export default createStore({
         setProfile(state, _profile){
             state.user.profile = _profile
         },
-        setFilledInQuestionnaire(state, _filledInQuestionnaire){
-            state.user.questionnaire = _filledInQuestionnaire
+        setQuestionnaire(state, _questionnaire){
+            state.user.questionnaire = _questionnaire
         },
         fillStateVuex(state, data){
             // User data 

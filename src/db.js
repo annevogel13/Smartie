@@ -123,12 +123,14 @@ export async function add_questionnaire(Object, role, _UID) {
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             questionnaire: Object
         })
+        store.commit("setQuestionnaire", true)
         console.log("Questionnaire of business", _UID, " filled in")
     } else {
         
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             questionnaire: Object
         })
+        store.commit("setQuestionnaire", true)
         console.log("Questionnaire of user", _UID, " filled in")
     }
 }

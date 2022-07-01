@@ -212,7 +212,6 @@ export default {
             console.log("Prediction voor deze user/vragenlijst is : ")
 
             add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
-            this.$store.commit("setFilledInQuestionnaire", true)
             this.$router.push("./DashboardUser");
 
         },

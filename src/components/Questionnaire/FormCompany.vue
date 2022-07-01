@@ -188,7 +188,6 @@ export default {
             const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, parseInt(this.questionnaire.d4))
             add_prediction(prediction, 'bedrijf', this.$store.state.user.UID)
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
-            this.$store.commit("setFilledInQuestionnaire", true)
             this.$router.push("./DashboardUser");
 
         }
