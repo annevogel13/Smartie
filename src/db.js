@@ -94,7 +94,7 @@ export async function update_profile(_UID, _data, role) {
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             UID: _UID,
             username: _data.username,
-            tel: _data.tel,
+            //tel: _data.tel,
             profile: true,
             questionnaireCompleted : false,
             time: Timestamp.now()
@@ -105,15 +105,13 @@ export async function update_profile(_UID, _data, role) {
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             UID: _UID,
             username: _data.username,
-            tel: _data.telefoonnr,
+            //tel: _data.telefoonnr,
             profile: true,
             questionnaireCompleted : false,
             time: Timestamp.now(),
         })
         console.log("Profile ", _UID, " updated ")
     }
-
-
 }
 
 // TODO zorgen dat die een veld toevoegd en niet het veld overschrijft 
