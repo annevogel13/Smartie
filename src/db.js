@@ -55,45 +55,45 @@ export async function add_to_collection(name_collection, data_structure, identif
 /* Returns the data of a user with the ID _UID */
 export async function get_profile_in_store(_UID) {
 
-    console.log("get profile in store")
+    console.log("get profile out of firebase (compagny)")
 
     const docRef = doc(db, "profiel_bedrijf", _UID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        return docSnap.data()
+        store.commit('fillStateVuex', docSnap.data())
     } else {
         console.log("Geen'bedrijf' --> trying cursist ");
         get_profile_in_store_cursist(_UID)
     }
 }
+import store from "./store";
 
 export async function get_profile_in_store_cursist(_UID) {
 
-    console.log("get profile in store")
+    console.log("get profile in firebase (cursist)")
 
     const docRef = doc(db, "profiel_cursist", _UID);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-        console.log("cursist succesvol")
-        return docSnap.data()
+    if (docSnap.exists()) { 
+        store.commit('fillStateVuex', docSnap.data())
+        
     } else {
         console.log("Geen cursist/bedrijf heeft dit ID ");
     }
 }
 
 /* Updates profile (needed on the profileUser page */
-export async function update_profile(_UID, _username, _tel, role) {
+export async function update_profile(_UID, _data, role) {
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             UID: _UID,
-            username: _username,
-            tel: _tel,
+            username: _data.username,
+            tel: _data.tel,
             profile: true,
-            likes: [],
-            dislikes: [],
+
             time: Timestamp.now()
         })
         console.log("Profile ", _UID, " updated ")
@@ -101,13 +101,10 @@ export async function update_profile(_UID, _username, _tel, role) {
 
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             UID: _UID,
-            username: _username,
-            tel: _tel,
+            username: _data.username,
+            tel: _data.tel,
             profile: true,
-            likes: [],
-            dislikes: [],
             time: Timestamp.now(),
-            questionnaire: {}
         })
         console.log("Profile ", _UID, " updated ")
     }

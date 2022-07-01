@@ -16,28 +16,27 @@ export default {
         return {
             email: "",
             password: "",
+            
         }
     },
     methods: {
-        login_user() {
+        async login_user() {
+            // authenticate with firebase 
             const auth = getAuth();
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     console.log("Ingelogged")
-                    this.$store.commit("setUID", auth.currentUser.uid)
-                    get_profile_in_store(auth.currentUser.uid).then(data =>{
-                        console.log(data)
-                        this.$store.commit('fill_state', data)
-                    })
+                    // fill the vuex state 
+                    get_profile_in_store(auth.currentUser.uid)
                 })
-                
+
                 .catch((error) => {
                     const errorMessage = error.message;
                     console.log(errorMessage);
-                    return; 
+                    return;
                 })
-                this.$router.push("./DashboardUser"); 
 
+                this.$router.push("./DashboardUser"); 
         },
 
     },

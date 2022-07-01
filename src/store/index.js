@@ -10,7 +10,11 @@ export default createStore({
             username : '', 
             approved_matches : [], 
             loggedIn : false, 
-            kernwoorden : [],
+            questionnaire_state : {}, 
+            swipeChoice : {
+                dislikes : [],
+                likes : [], 
+            }, 
             UID_to_be_displayed : '',
             data_to_be_displayed : {},   
         }
@@ -24,7 +28,7 @@ export default createStore({
         setUID(state, _UID){
             state.user.UID = _UID 
             state.user.loggedIn = true 
-            console.log("USER LOGGED IN ", state.user.UID, state.user.loggedIn)
+            console.log("USER LOGGED IN ", state.user.UID)
         }, 
         setUser(state, _username){
             state.user.username = _username 
@@ -41,11 +45,25 @@ export default createStore({
         setFilledInQuestionnaire(state, _filledInQuestionnaire){
             state.user.filledInQuestionnaire = _filledInQuestionnaire
         },
-        fill_state(state, data){
-            state.user.UID = data.UID; 
-            state.user.role = data.role; 
-            state.user.profile = data.profile; 
-            state.user.username = data.username; 
+        fillStateVuex(state, data){
+            // User data 
+            console.log("fillState" , data)
+            state.user.UID              = data.UID
+            state.user.role             = data.role
+            state.user.profile          = data.profile
+            state.user.questionnaire    = data.questionnaire
+            state.user.username         = data.username
+            state.user.loggedIn         = true
+            // Swipe history 
+            state.user.swipeChoice.dislikes = data.dislikes
+            state.user.swipeChoice.likes = data.likes
+
+            // matches
+            state.user.approved_matches = data.approved_matches
+
+            // questionnaire 
+            state.user.questionnaire_state = data.questionnaire
+
             console.log("state is updated")
         },
         set_kernwoorden(state, data){

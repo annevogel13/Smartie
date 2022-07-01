@@ -1,7 +1,7 @@
 <template>
     <div class="signup">
 
-        <h2>Maak je profiel aan</h2>
+        <h2>Maak je profiel compleet</h2>
         <label> Username </label>
         <input type="text" required v-model="username">
         <label> Telefoonnummer </label>
@@ -24,9 +24,12 @@ import { update_profile, uploadImage } from '../db'
 export default {
     data() {
         return {
-            profielfoto: "",
-            telefoonnr: "",
-            username: "",
+            data: {
+                profielfoto: "",
+                telefoonnr: "",
+                username: "",
+                description : ""
+            },
             uploadValue: 0,
             img1: null,
             imageData: null,
@@ -35,8 +38,8 @@ export default {
     methods: {
         uploadInformation() {
             console.log("trying to upload profile ")
-            update_profile(this.$store.state.user.UID, this.username, this.telefoonnr, this.$store.state.user.role)
-            this.$store.commit('setProfile', true) 
+            update_profile(this.$store.state.user.UID, this.data, this.$store.state.user.role)
+            this.$store.commit('setProfile', true)
             this.$router.push("./DashboardUser")
         },
         click1() {
@@ -62,10 +65,10 @@ export default {
     height: auto;
 }
 
-.signup{
-    padding : 10px; 
-    width : 75%; 
-    margin : 20px auto auto auto; 
+.signup {
+    padding: 10px;
+    width: 75%;
+    margin: 20px auto auto auto;
 }
 
 label {
@@ -84,8 +87,7 @@ select {
     box-sizing: border-box;
     border: none;
     border-bottom: 1px solid #ddd;
-    color: #555; 
-    text-align : center ; 
+    color: #555;
+    text-align: center;
 }
-
 </style>

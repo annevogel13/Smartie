@@ -14,7 +14,7 @@
             <button v-if="this.$store.state.user.role == 'bedrijf'">
                 <router-link to="/QuestionnaireB">Klik hier om naar de profiel pagina te gaan</router-link>
             </button>
-           test :  {{ this.$store.state.user.role }}
+
             <button v-if="this.$store.state.user.role == 'cursist'">
                 <router-link to="/QuestionnaireC">Klik hier om naar vragenlijst te gaan </router-link>
             </button>
