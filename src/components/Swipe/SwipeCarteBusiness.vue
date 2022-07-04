@@ -39,14 +39,17 @@ export default {
                 console.log(data)
                 this.data = data
             })
+
+
         },
         more_information() {
 
             this.$refs.questions_visible.visible = !this.$refs.questions_visible.visible
         },
-
     }
 }
+
+
 </script>
 
 <template>
@@ -59,14 +62,20 @@ export default {
         <div class="div2 griditem">
             <h4>Beschrijving van {{ this.$store.state.user.data_to_be_displayed.username }}:</h4>
             <p>
-             {{this.$store.state.user.data_to_be_displayed.description }} 
+                {{ this.$store.state.user.data_to_be_displayed.description }}
             </p>
+            <!-- TODO klink knopje werkend maken -->
+            <button onclick=''>Link naar {{
+                    this.$store.state.user.data_to_be_displayed.username
+            }}'s webpagina</button>
 
-            <h4><a href = "{{ this.$store.state.user.data_to_be_displayed.link}}">Link naar {{ this.$store.state.user.data_to_be_displayed.username }}'s webpagina</a></h4>
         </div>
         <div class="div3 griditem">
-            <PieChart v-if="this.$store.state.user.data_to_be_displayed.role == 'bedrijf'"></PieChart>
-            <LineChart></LineChart>
+
+            <!-- TODO piechart fixen 
+                <PieChart v-if="this.$store.state.user.data_to_be_displayed.role == 'bedrijf'"></PieChart>
+            -->
+            <LineChart></LineChart> 
         </div>
 
         <div class="div4 griditem btn_tinder">
@@ -102,14 +111,15 @@ export default {
 
     grid-column: 2 / 4;
     grid-row: 2;
-    
+ 
+
 }
 
 .div4 {
 
     grid-column: 1/3;
     grid-row: 4;
-    
+
 }
 
 .swipeCartBusiness {
