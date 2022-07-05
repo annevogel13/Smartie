@@ -43,7 +43,11 @@ export default {
 
 </script>
 <template>
-    <div id="chart">
-        <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
+    <div class="chart">
+        <apexchart type="bar" height="350" width = "300" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
+<style scoped>
+
+
+</style>

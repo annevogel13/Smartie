@@ -66,7 +66,12 @@ export default {
 </script>
 
 <template>
-    <div class="swipeCartBusiness" v-if = "!this.noMoreMatches">
+    <div v-if = "!this.$store.state.user.loggedIn">
+        <img src = "/error robot.png" style = "width : 400px">
+        <h2> Je bent niet ingelogd </h2>
+        <button><router-link to = "./RegisterUser">Ga naar de inlog pagina</router-link></button>
+    </div>
+    <div class="swipeCartBusiness" v-if = "!this.noMoreMatches && this.$store.state.user.loggedIn">
         <div class="div1 griditem">
             <h3 class="nameCompagnie" @click="get_random_UID_from_array"> {{
                     this.$store.state.user.data_to_be_displayed.username

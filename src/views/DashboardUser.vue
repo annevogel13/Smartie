@@ -25,17 +25,21 @@
 
 
             <div class="toprecommendations">
-                <ol>
-                    <li>ABC</li>
-                    <li>ABC</li>
-                    <li>ABC</li>
-                    <li>ABC</li>
-                    <li>ABC</li>
-                </ol>
-                <button>Contact</button>
+                <h4>Feedback gekregen vanuit swipes (aantal : {{ this.$store.state.user.feedback.length }})</h4>
+
+                <li v-for="item in this.$store.state.user.feedback" :key="item.id">"{{ item }}"</li>
+                <br><br><br>
+                <div class="btnClass">
+                    <img src="/public/laptop reading.png" style="width : 200px">
+                    <div>
+                        <button>Pas je profiel aan (X)</button>
+                        <br>
+                        <button>Pas de antwoorden op de vragenlijst aan (X)</button>
+                    </div>
+                </div>
             </div>
             <div class="swipeData">
-
+                <h3>Statistieken</h3>
                 <SwipeDataChart></SwipeDataChart>
             </div>
         </div>
@@ -85,10 +89,12 @@ export default {
     grid-column: 2;
     grid-row: 1;
     float: right;
-    width: 60%;
+
 }
 
 .dashboard {
     display: grid;
+    width: 80%;
+    margin: auto;
 }
 </style>
