@@ -1,11 +1,33 @@
 <template>
     <div class="home">
         <h1>Home</h1>
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <router-link to ='./About'>About</router-link>
-        <br>
-        <router-link to ='./ProfileUser'> Go to make profile page</router-link>
+        <div>   Welkom bij de Smartie webapplicatie. Deze site is nog in ontwikkeling, dus errors zijn nog vollop aanwezig ;) 
+
+                <br><br>
+                De volgende webpaginas zijn error vrij : 
+                <br><br>
+                <li>
+                    About
+                </li>
+                <li>
+                    Presenatie
+                </li>
+                <li>
+                    Stage rapport
+                </li>
+                <br>
+                De login knop werkt, en je kan een account aanmaken. 
+                En natuurlijk het swipen werkt 
+
+                
+
+        </div>
+        <img class = "explication" src = "../../public/Matching Tool.png">
     </div>
 </template>
+<style scoped>
+.explication{
+    width : 50%; 
+    
+}
+</style>

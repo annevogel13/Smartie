@@ -29,16 +29,17 @@
       <li v-if="this.$store.state.user.loggedIn">
         <router-link to="/DashboardUser"> Dashboard</router-link>
       </li>
-      <li  v-if="this.$store.state.user.loggedIn">
+      <li v-if="this.$store.state.user.loggedIn">
         <router-link to="/Swipe"> Swipe page</router-link>
       </li>
       <br>
       <li v-if="!this.$store.state.user.loggedIn">
-        <label for = "pointer"><img src="../public/point.png" class = "pointer"></label>
-        <button id = "pointer" class="logout">
+        <router-link to= "/RegisterUser"><img src="../public/point.png"
+            class="pointer"></router-link>
+        <button id="pointer" class="logout">
           <router-link to="/RegisterUser">Log in</router-link>
         </button>
-        
+
       </li>
       <li v-if="this.$store.state.user.loggedIn">
         <button class="logout" @click="log_out()">
@@ -72,22 +73,21 @@ export default {
         this.$router.push('/')
       }).catch((error) => {
         console.log("An error happened", error.message)
-      });
+      })
     },
   }
 }
 
 </script>
 <style  >
-
 .pointer {
-  width : 90px; 
-  display : inline-block; 
-  margin : 0px; 
-  vertical-align : top; 
+  width: 90px;
+  display: inline-block;
+  margin: 0px;
+  vertical-align: top;
 }
 
-.logout{
+.logout {
   display: inline-block;
 }
 
