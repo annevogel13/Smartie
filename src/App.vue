@@ -24,6 +24,12 @@
       <li>
         <router-link to="/Swipe"> Swipe page</router-link>
       </li>
+      <li>
+        <router-link to="/Presentatie">Presentatie</router-link>
+      </li>
+      <li>
+        <router-link to="/StageRapport">StageRapport</router-link>
+      </li>
       <li v-if="!this.$store.state.user.loggedIn">
         <button class="logout">
           <router-link to="/RegisterUser">Log in</router-link>
@@ -66,42 +72,43 @@ export default {
 <style  >
 .format {
   width: 75%;
-  min-height : 100%;
+  min-height: 100%;
   float: right;
   margin: 30px;
-  background: white; 
+  background: white;
   padding: 20px;
   border-radius: 10px;
-  text-align : center; 
+  text-align: center;
 }
 
 body {
- /* background-image: linear-gradient(#dbede3, #d8d2e6); #D81159, #8F2D56
+  /* background-image: linear-gradient(#dbede3, #d8d2e6); #D81159, #8F2D56
   background-image: linear-gradient(#00A9A5, #0B5351); 
   
   https://coolors.co/235789-f1d302-9bb1ff-bfd7ff-ff7d00
-*/ 
+*/
   background-image: linear-gradient(#BFD7FF, #9BB1FF);
-  background-color : #BFD7FF;
-  
+  background-color: #BFD7FF;
+
   background-repeat: no-repeat;
   background-size: cover;
-  min-height : 900px ; 
+  min-height: 900px;
 }
 
 .navbar {
-  overflow: hidden; 
+  overflow: hidden;
   position: fixed;
-  background-color : #F1D302 ; /*#FF7D00 ; 
+  background-color: #F1D302;
+  /*#FF7D00 ; 
   https://coolors.co/235789-f1d302-9bb1ff-bfd7ff-ff7d00
     #270043
-  */  
+  */
   margin-left: 10px;
   top: 0;
   width: 15%;
   height: 100%;
   text-align: center;
-  padding : 10px; 
+  padding: 10px;
 }
 
 ul {
@@ -111,28 +118,28 @@ ul {
 a {
   margin: 15px;
   text-decoration: none;
-  color : black; 
+  color: black;
 }
 
-a:hover{
-  color : white; 
+a:hover {
+  color: white;
 }
 
 .logo {
   border-radius: 50%;
-  margin : 10px ;
-  padding-bottom : 10px; 
+  margin: 10px;
+  padding-bottom: 10px;
 }
 
-button{
-  background-color : #F1D302 ; 
-  border-color : #270043 ;
-  
+button {
+  background-color: #F1D302;
+  border-color: #270043;
+
 }
 
-button:hover{
-  color : white ; 
-  background-color: #270043 ;
-  border-color : #270043; 
+button:hover {
+  color: white;
+  background-color: #270043;
+  border-color: #270043;
 }
 </style>

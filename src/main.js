@@ -12,6 +12,8 @@ import Swipe from '@/views/Swipe.vue'
 import Dashboard from '@/views/DashboardUser.vue'
 import Register from '@/views/RegisterUser.vue'
 import Test from '@/views/testDB.vue'
+import Presentatie from '@/views/Presentatie.vue'
+import StageRapport from '@/views/StageRapport.vue'
 import QuestionnaireB from '@/components/Questionnaire/FormCompany.vue'
 import QuestionnaireC from '@/components/Questionnaire/FormCursist.vue'
 // database --> firebase 
@@ -25,6 +27,8 @@ const router = createRouter({
         { path: '/', name: 'Home', component: Home },
         { path: '/About', name: 'About', component: About },
         { path: '/ProfileUser', name: 'MakeProfile', component: Profile },
+        { path: '/StageRapport', name: 'StageRapport', component: StageRapport},
+        { path: '/Presentatie', name: 'Presentatie', component: Presentatie },
         { path: '/QuestionnaireB', name: 'QuestionnaireB', component: QuestionnaireB },
         { path: '/QuestionnaireC', name: 'QuestionnaireC', component: QuestionnaireC },
         { path: '/DashboardUser', name: 'Dashboard', component: Dashboard },
