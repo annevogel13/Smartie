@@ -51,6 +51,10 @@ export default createStore({
         setQuestionnaire(state, _questionnaire){
             state.user.questionnaireCompleted = _questionnaire
         },
+        giveFeedback(state, feedback){
+            state.user.data_to_be_displayed.feedback.push(feedback) 
+        }
+        ,
         fillStateVuex(state, data){
             // User data 
             console.log("fillState" , data)

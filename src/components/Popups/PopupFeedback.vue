@@ -1,12 +1,21 @@
 <script>
+import { add_feedback } from '../../db'
+
 export default {
   data() {
     return {
       visible: false,
+      feedback: '',
     }
 
   },
   methods: {
+    submit() {
+      // feedback toevoegen aan data_to_be_displayed is een array
+      add_feedback(this.feedback, this.$store.state.user.data_to_be_displayed.role, this.$store.state.user.data_to_be_displayed.UID)
+      this.visible = false 
+      this.feedback = ''
+    }
   }
 }
 
@@ -18,8 +27,8 @@ export default {
       <div class="modal-content">
         <span class="close" @click="visible = !visible">&times;</span>
         <p>Wil je feedback geven waarom je niet voor dit bedrijf/cursist kiest ? </p>
-        <input type="texte" placeholder="Give your feedback">
-        <button type="submit">Submit</button>
+        <input type="texte" v-model="feedback" placeholder="Give your feedback">
+        <button type="submit" @click="submit">Submit</button>
         <button type="reset" @click="visible = !visible">Annuleren</button>
       </div>
 

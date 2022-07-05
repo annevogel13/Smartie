@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore"
+import { getFirestore, collection, arrayUnion } from "firebase/firestore"
 import "firebase/firestore"
 import { Timestamp } from "firebase/firestore"
 
@@ -106,7 +106,8 @@ export async function update_profile(_UID, _data, role) {
             //tel: _data.tel,
             profile: true,
             questionnaireCompleted : false,
-            time: Timestamp.now()
+            time: Timestamp.now(),
+            feedback : []
         })
         console.log("Profile ", _UID, " updated ")
     } else {
@@ -118,6 +119,7 @@ export async function update_profile(_UID, _data, role) {
             profile: true,
             questionnaireCompleted : false,
             time: Timestamp.now(),
+            feedback : []
         })
         console.log("Profile ", _UID, " updated ")
     }
@@ -137,6 +139,25 @@ export async function add_questionnaire(Object, role, _UID) {
 
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             questionnaire: Object
+        })
+        store.commit("setQuestionnaire", true)
+        console.log("Questionnaire of user", _UID, " filled in")
+    }
+}
+
+export async function add_feedback(Object, role, _UID) {
+    console.log("add_questionnaire ")
+    if (role == "bedrijf") {
+
+        await updateDoc(doc(db, "profiel_bedrijf", _UID), {
+            feedback: arrayUnion(Object)
+        })
+        store.commit("setQuestionnaire", true)
+        console.log("Questionnaire of business", _UID, " filled in")
+    } else {
+
+        await updateDoc(doc(db, "profiel_cursist", _UID), {
+            feedback: arrayUnion(Object)
         })
         store.commit("setQuestionnaire", true)
         console.log("Questionnaire of user", _UID, " filled in")
@@ -211,8 +232,8 @@ export async function add_swipe(_UID, _UID_match, match, role) {
     console.log("add_swipe ", match)
     if (role == "bedrijf") {
         if (match) {
-            await updateDoc(doc(db, "profiel_bedrijf", _UID), { likes: _UID_match })
-        } else await updateDoc(doc(db, "profiel_bedrijf", _UID), { dislikes: _UID_match })
+            await updateDoc(doc(db, "profiel_bedrijf", _UID), { likes: arrayUnion(_UID_match) })
+        } else await updateDoc(doc(db, "profiel_bedrijf", _UID), { dislikes: arrayUnion(_UID_match)})
 
     } else {
         if (match) {
