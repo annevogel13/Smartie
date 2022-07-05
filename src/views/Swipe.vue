@@ -38,11 +38,14 @@ export default {
 
             const max = this.$store.state.user.swipe.approved_matches.length;
             const index = this.$store.state.user.swipe.index
-            if (index <= max) {
-                const tmp = this.$store.state.user.swipe.approved_matches[index + 1]
+            if (index < max) {
+
+                const tmp = this.$store.state.user.swipe.approved_matches[index]
                 console.log(tmp)
                 get_profile_in_store(tmp, true)
+                this.$store.commit('augmentIndex') 
             } else {
+                console.log("Geen matches meer over")
                 this.noMoreMatches = true;
             }
         },
@@ -58,7 +61,7 @@ export default {
 </script>
 
 <template>
-    <div class="swipeCartBusiness">
+    <div class="swipeCartBusiness" v-if = "!this.noMoreMatches">
         <div class="div1 griditem">
             <h3 class="nameCompagnie" @click="get_random_UID_from_array"> {{
                     this.$store.state.user.data_to_be_displayed.username
@@ -91,6 +94,13 @@ export default {
         <PopupFeedback ref="feedback_visible"></PopupFeedback>
         <PopupQuestions ref="questions_visible"></PopupQuestions>
 
+    </div>
+    <div v-if = "this.noMoreMatches">
+        <br><br><br><br>
+        <h2>Dit waren alle matches voor vandaag </h2>
+        
+        <img src = "/public/wait for it.png" style = "width : 200px">
+        <br><br><br><br>
     </div>
 </template>
 

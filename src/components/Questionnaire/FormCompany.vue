@@ -89,7 +89,6 @@
                 <br><br>
 
                 <label>Wat typeert jullie bedrijf?</label>
-                <!-- TODO v-model vanuit een select pakken??? -->
                 <select style="margin-left : 30px;">
                     <option value="0">Productiebedrijf</option>
                     <option value="1">Agency</option>
@@ -98,7 +97,7 @@
                 </select><br><br>
 
                 <label for="min_uren">Wat is het minimum aantal uren dat een werknemer moet draaien?</label>
-                <!-- TODO v-model vanuit een select pakken??? -->
+
                 <select id="min_uren" style="margin-left : 30px;" v-model="questionnaire.d4">
                     <option value="24">24</option>
                     <option value="32">32</option>
@@ -106,8 +105,6 @@
                     <option value="40">40</option>
                 </select>
                 <label> uren </label>
-
-                <!-- TODO beschrijving van het bedrijf -->
                 <hr>
 
             </div>
@@ -117,13 +114,13 @@
             allowFullScreen></iframe>
         <br>
 
-        <button @click="questionnaire1"> Bevestig vragenlijst </button>
+        <button @click="questionnaire"> Bevestig vragenlijst </button>
     </div>
 
 </template>
 
 <script>
-// TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
+
 import { add_questionnaire, add_prediction } from "../../db"
 import { prediction_model } from "../../main"
 
@@ -176,14 +173,7 @@ export default {
             this.questionnaire.ambiance = ambiance
             return ambiance;
         },
-        questionnaire1() {
-            this.$store.commit('set_kernwoorden', [
-                this.questionnaire.k1,
-                this.questionnaire.k2,
-                this.questionnaire.k3,
-                this.questionnaire.k4,
-                this.questionnaire.k5
-            ])
+        questionnaire() {
 
             this.calculate_ambiance() 
             const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, parseInt(this.questionnaire.d4))

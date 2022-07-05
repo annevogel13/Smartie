@@ -74,9 +74,6 @@ export default createStore({
 
             console.log("state is updated")
         },
-        set_kernwoorden(state, data){
-            state.user.kernwoorden = data; 
-        },
         set_data_to_be_displayed(state, data){
             console.log("set_data_to_be_displayed")
             console.log(data)
