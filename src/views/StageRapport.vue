@@ -25,7 +25,7 @@ export default {
     },
     data(){
         return {
-            source1 : "../../public/StageRapport.pdf"
+            source1 : "/public/StageRapport.pdf"
         }
     }
 }

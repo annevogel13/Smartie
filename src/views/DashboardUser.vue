@@ -1,31 +1,29 @@
 <template>
     <div class="dashboard">
         <button @click="prepare_matches">Klik hier om de matches de laden in je profiel</button>
-        <h3> Dashboard </h3>
+        <h3 v-if="this.$store.state.user.role == 'cursist'">Dashboard cursisten </h3>
+        <h3 v-if="this.$store.state.user.role == 'bedrijf'">Dashboard bedrijven </h3>
+        <br>
 
-        <div v-if="!this.$store.state.user.profile" class="noProfile">
-            <p> Je profiel is niet compleet </p>
-            <button>
-                <router-link to="/ProfileUser">Klilk hier om naar de profiel pagina te gaan</router-link>
-            </button>
-        </div>
-        <div v-if="!this.$store.state.user.questionnaireCompleted">
-            <p> Heb je de vragenlijst al ingevuld? </p>
-            <button v-if="this.$store.state.user.role == 'bedrijf'">
-                <router-link to="/QuestionnaireB">Klik hier om naar de profiel pagina te gaan</router-link>
-            </button>
+        <div>
+            <div v-if="!this.$store.state.user.profile" class="noProfile">
+                <p> Je profiel is niet compleet </p>
+                <button>
+                    <router-link to="/ProfileUser">Klilk hier om naar de profiel pagina te gaan</router-link>
+                </button>
+            </div>
+            <div v-if="!this.$store.state.user.questionnaireCompleted">
+                <p> Heb je de vragenlijst al ingevuld? </p>
+                <button v-if="this.$store.state.user.role == 'bedrijf'">
+                    <router-link to="/QuestionnaireB">Klik hier om naar de profiel pagina te gaan</router-link>
+                </button>
 
-            <button v-if="this.$store.state.user.role == 'cursist'">
-                <router-link to="/QuestionnaireC">Klik hier om naar vragenlijst te gaan </router-link>
-            </button>
-        </div>
+                <button v-if="this.$store.state.user.role == 'cursist'">
+                    <router-link to="/QuestionnaireC">Klik hier om naar vragenlijst te gaan </router-link>
+                </button>
+            </div>
 
-        <div v-if="this.$store.state.user.role == 'cursist'">
-            <h3> Pagina voor cursisten </h3>
-        </div>
 
-        <div v-if="this.$store.state.user.role == 'bedrijf'">
-            <h3> Pagina voor bedrijven </h3>
             <div class="toprecommendations">
                 <ol>
                     <li>ABC</li>
@@ -37,7 +35,7 @@
                 <button>Contact</button>
             </div>
             <div class="swipeData">
-            
+
                 <SwipeDataChart></SwipeDataChart>
             </div>
         </div>
@@ -52,9 +50,9 @@ export default {
     methods: {
         prepare_matches() {
             get_group_approved_users(this.$store.state.user.role).then(data => {
-                console.log("get group approved users" , data)
+                console.log("get group approved users", data)
                 this.$store.commit("setApprovedMatchs", data)
-                
+
                 this.prepare_data_for_swipe_show(data[0])
             })
             this.$router.push("./Swipe")

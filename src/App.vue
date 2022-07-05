@@ -34,8 +34,7 @@
       </li>
       <br>
       <li v-if="!this.$store.state.user.loggedIn">
-        <router-link to= "/RegisterUser"><img src="../public/point.png"
-            class="pointer"></router-link>
+        <router-link to="/RegisterUser"><img src="/point.png" class="pointer"></router-link>
         <button id="pointer" class="logout">
           <router-link to="/RegisterUser">Log in</router-link>
         </button>

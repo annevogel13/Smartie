@@ -22,7 +22,7 @@
                 
 
         </div>
-        <img class = "explication" src = "../../public/Matching Tool.png">
+        <img class = "explication" src = "/public/Matching Tool.png">
     </div>
 </template>
 <style scoped>
