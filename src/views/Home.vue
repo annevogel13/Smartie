@@ -19,10 +19,8 @@
                 De login knop werkt, en je kan een account aanmaken. 
                 En natuurlijk het swipen werkt 
 
-                
-
         </div>
-        <img class = "explication" src = "/public/Matching Tool.png">
+        <img class = "explication" src = "/Matching Tool.png">
     </div>
 </template>
 <style scoped>

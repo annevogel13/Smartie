@@ -3,7 +3,7 @@
 
         
 
-        <img class="profielfoto" src="../../public/profielfoto.png">
+        <img class="profielfoto" src="/profielfoto.png">
         <div class="next">
             <h3>Over mij</h3>
             Hoi
@@ -18,7 +18,7 @@
             <button class="verhogen" @click="openUrl('./Presentatie')">Presentatie</button>
             <button class="verhogen" @click="openUrl('./StageRapport')">Stage rapport</button>
             <button class="verhogen" @click="openUrl('https://github.com/annevogel13/Smartie')"><img
-                    src="/public/githublogo.png" class="logoBtn">Github</button>
+                    src="/githublogo.png" class="logoBtn">Github</button>
             </div>
         </div>
     </div>

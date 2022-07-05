@@ -11,7 +11,7 @@ import Profile from '@/views/ProfileUser.vue'
 import Swipe from '@/views/Swipe.vue'
 import Dashboard from '@/views/DashboardUser.vue'
 import Register from '@/views/RegisterUser.vue'
-import Test from '@/views/testDB.vue'
+
 import Presentatie from '@/views/Presentatie.vue'
 import StageRapport from '@/views/StageRapport.vue'
 import QuestionnaireB from '@/components/Questionnaire/FormCompany.vue'
@@ -34,7 +34,6 @@ const router = createRouter({
         { path: '/DashboardUser', name: 'Dashboard', component: Dashboard },
         { path: '/Swipe', name: 'Swipe', component: Swipe },
         { path: '/RegisterUser', name: 'Register', component: Register },
-        { path: '/TestDB', name: 'Test', component: Test }
     ]
 })
 
