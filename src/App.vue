@@ -12,9 +12,17 @@
       <li>
         <router-link to="/">Home</router-link>
       </li>
+      <br>
       <li>
         <router-link to="/About">About</router-link>
       </li>
+      <li>
+        <router-link to="/Presentatie">Presentatie</router-link>
+      </li>
+      <li>
+        <router-link to="/StageRapport">Stage rapport</router-link>
+      </li>
+      <br>
       <li v-if="!this.$store.state.user.profile">
         <router-link to="/ProfileUser"> Profile page</router-link>
       </li>
@@ -24,12 +32,7 @@
       <li>
         <router-link to="/Swipe"> Swipe page</router-link>
       </li>
-      <li>
-        <router-link to="/Presentatie">Presentatie</router-link>
-      </li>
-      <li>
-        <router-link to="/StageRapport">StageRapport</router-link>
-      </li>
+      <br>
       <li v-if="!this.$store.state.user.loggedIn">
         <button class="logout">
           <router-link to="/RegisterUser">Log in</router-link>
