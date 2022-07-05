@@ -12,6 +12,7 @@ export default createStore({
                 approved_matches : [], 
                 index : 0 , 
             },
+            prediction : 0 , 
             loggedIn : false, 
             questionnaire_state : {}, 
             swipeChoice : {
@@ -64,6 +65,7 @@ export default createStore({
             state.user.questionnaireCompleted   = data.questionnaireCompleted
             state.user.username                 = data.username
             state.user.loggedIn                 = true
+            state.user.prediction               = data.prediction
             // Swipe history 
             state.user.swipeChoice.dislikes     = data.dislikes
             state.user.swipeChoice.likes        = data.likes

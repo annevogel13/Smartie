@@ -23,7 +23,7 @@ const app_firebase = initializeApp(firebaseConfig);
 export const db = getFirestore(app_firebase);
 
 import { doc, getDoc, addDoc, setDoc, getDocs, updateDoc, query, where } from "firebase/firestore";
-
+/*
 export async function read_collection(name_collection, id_document) {
     const docRef = doc(db, name_collection, id_document);
     const docSnap = await getDoc(docRef);
@@ -35,7 +35,7 @@ export async function read_collection(name_collection, id_document) {
 
         console.log("No such document!");
     }
-}
+}*/ 
 
 /* Add the data_structure to the _name_collection with the variable identification as id */
 export async function add_to_collection(name_collection, data_structure, identification) {
@@ -75,7 +75,6 @@ export async function get_profile_in_store(_UID, state = false) {
     }
 }
 
-
 export async function get_profile_in_store_cursist(_UID, state = false) {
 
     console.log("get profile in firebase (cursist)")
@@ -95,7 +94,7 @@ export async function get_profile_in_store_cursist(_UID, state = false) {
     }
 }
 
-/* Updates profile (needed on the profileUser page */
+/* Updates profile (needed on the profileUser page) */
 export async function update_profile(_UID, _data, role) {
     console.log("update profiel met data : ", _data)
     if (role == "bedrijf") {
@@ -125,7 +124,7 @@ export async function update_profile(_UID, _data, role) {
     }
 }
 
-// TODO zorgen dat die een veld toevoegd en niet het veld overschrijft 
+
 export async function add_questionnaire(Object, role, _UID) {
     console.log("add_questionnaire ")
     if (role == "bedrijf") {
@@ -187,7 +186,8 @@ export async function get_group_approved_users(role) {
     const array_uid = []
     if (role == "bedrijf") {
         console.log("bedrijf --> cursist")
-        const docRef = query(collection(db, "profiel_cursist"), where("profile", "==", true));
+        // TODO let op net aangepast 
+        const docRef = query(collection(db, "profiel_cursist"), where("prediction", "==", store.state.user.prediction));
         const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {
@@ -198,7 +198,7 @@ export async function get_group_approved_users(role) {
         return array_uid
     } else {
         console.log("cursist --> bedrijf")
-        const docRef = query(collection(db, "profiel_bedrijf"), where("profile", "==", true));
+        const docRef = query(collection(db, "profiel_bedrijf"), where("prediction", "==", store.state.user.prediction));
         const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {
@@ -237,18 +237,10 @@ export async function add_swipe(_UID, _UID_match, match, role) {
 
     } else {
         if (match) {
-            await updateDoc(doc(db, "profiel_cursist", _UID), { likes: _UID_match })
-        } else await updateDoc(doc(db, "profiel_cursist", _UID), { dislikes: _UID_match })
+            await updateDoc(doc(db, "profiel_cursist", _UID), { likes: arrayUnion(_UID_match) })
+        } else await updateDoc(doc(db, "profiel_cursist", _UID), { dislikes: arrayUnion(_UID_match) })
     }
 }
-/*
-export async function filled_in_questionnaire(_UID, role) {
-    console.log("filled in q : ", _UID, role)
-    if (role == "bedrijf") {
-        await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })
-    } else await updateDoc(doc(db, "profiel_cursist", _UID), { filledInQuestionnaire: true })
-} */ 
-
 
 /******************* STORAGE **************************/
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -260,7 +252,6 @@ export async function uploadImage(file) {
     const fileRef = 'images/avatars/' + file.name
     const storageRef = ref(storage, fileRef);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',

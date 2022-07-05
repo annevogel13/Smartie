@@ -99,7 +99,7 @@ export default {
         <br><br><br><br>
         <h2>Dit waren alle matches voor vandaag </h2>
         
-        <img src = "/public/wait for it.png" style = "width : 200px">
+        <img src = "/wait for it.png" style = "width : 200px">
         <br><br><br><br>
     </div>
 </template>
