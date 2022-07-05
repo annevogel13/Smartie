@@ -3,28 +3,39 @@ export default {
     data() {
         return {
             series: [{
-                data: [34, 44, 54, 21, 12, 43, 33, 23, 66, 66, 58]
-            }],
+                name: "likes",
+                data: [this.$store.state.user.swipeChoice.likes.length ],
+            },
+            {
+                name: "dislikes",
+                data: [this.$store.state.user.swipeChoice.dislikes.length]
+            }
+            ],
             chartOptions: {
                 chart: {
-                    type: 'line',
-                    //height: 350
+                    type: 'bar',
+                    height: 350
                 },
-                stroke: {
-                    curve: 'stepline',
+
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+                xaxis: {
+                    categories: ['Aantal (dis)likes']
                 },
                 dataLabels: {
                     enabled: false
                 },
-                title: {
-                    text: 'Statitieken ',
-                    align: 'center'
+                stroke: {
+                    show: true,
+                    width: 2,
+
                 },
-                markers: {
-                    hover: {
-                        sizeOffset: 4
-                    }
-                }
+                fill: {
+                    opacity: 1
+                },
             },
         }
     }
@@ -33,6 +44,6 @@ export default {
 </script>
 <template>
     <div id="chart">
-        <apexchart type="line" height="350" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>

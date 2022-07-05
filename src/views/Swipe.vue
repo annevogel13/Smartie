@@ -53,6 +53,11 @@ export default {
 
             this.$refs.questions_visible.visible = !this.$refs.questions_visible.visible
         },
+        reload(){
+            console.log("Update de state")
+            get_profile_in_store(this.$store.state.user.UID, false)
+            this.$router.push("./")
+        }
 
     }
 }
@@ -101,6 +106,7 @@ export default {
         
         <img src = "/wait for it.png" style = "width : 200px">
         <br><br><br><br>
+        <button @click = "this.reload()">naar de home pagina</button>
     </div>
 </template>
 

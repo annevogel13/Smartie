@@ -52,13 +52,18 @@ export default {
             get_group_approved_users(this.$store.state.user.role).then(data => {
                 console.log("get group approved users", data)
                 this.$store.commit("setApprovedMatchs", data)
+                if (typeof (data.length) != "undefined") {
+                    this.prepare_data_for_swipe_show(data[0])
+                    this.$router.push("./Swipe")
+                } else {
+                    this.$router.push("./Dashboard")
+                }
 
-                this.prepare_data_for_swipe_show(data[0])
             })
-            this.$router.push("./Swipe")
+
         },
         prepare_data_for_swipe_show(_UID) {
-            
+
             get_data_user_swipe(_UID, this.$store.state.user.role).then(data => {
                 this.$store.commit("set_data_to_be_displayed", data)
             })

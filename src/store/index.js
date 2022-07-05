@@ -21,6 +21,7 @@ export default createStore({
             }, 
             UID_to_be_displayed : '',
             data_to_be_displayed : {},   
+            feedback : [], 
         }
     },
     // only synchronous code 
@@ -67,12 +68,15 @@ export default createStore({
             state.user.loggedIn                 = true
             state.user.prediction               = data.prediction
             // Swipe history 
+            console.log(data.likes)
             state.user.swipeChoice.dislikes     = data.dislikes
             state.user.swipeChoice.likes        = data.likes
             // Matches
             state.user.swipe.approved_matches    = data.approved_matches
             // Questionnaire 
             state.user.questionnaire_state      = data.questionnaire
+            // feedback
+            state.user.feedback                 = data.feedback 
 
             console.log("state is updated")
         },
