@@ -30,7 +30,7 @@ export default {
 
         },
         get_random_UID_from_array() {
-            const max = this.$store.state.user.approved_matches.length;
+            const max = this.$store.state.user.swipe.approved_matches.length;
             const index = Math.floor(Math.random() * max);
             console.log("het random numer van de dag is : ", index)
             const tmp = this.$store.getters.getIndexApprovedMatches(index)

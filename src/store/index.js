@@ -8,7 +8,10 @@ export default createStore({
             profile: false, 
             questionnaireCompleted : false,
             username : '', 
-            approved_matches : [], 
+            swipe : {
+                approved_matches : [], 
+                index : 0 , 
+            },
             loggedIn : false, 
             questionnaire_state : {}, 
             swipeChoice : {
@@ -23,7 +26,7 @@ export default createStore({
     // change the state 
     mutations:{
         setApprovedMatchs(state, _array){
-            state.user.approved_matches = _array 
+            state.user.swipe.approved_matches = _array 
         },
         setUID(state, _UID){
             state.user.UID = _UID 
@@ -38,6 +41,9 @@ export default createStore({
         },
         loggingOut(state){
             state.user.loggedIn = false 
+        },
+        augmentIndex(state){
+            state.user.swipe.index = state.user.swipe.index+1 
         },
         setProfile(state, _profile){
             state.user.profile = _profile
@@ -58,7 +64,7 @@ export default createStore({
             state.user.swipeChoice.dislikes     = data.dislikes
             state.user.swipeChoice.likes        = data.likes
             // Matches
-            state.user.approved_matches         = data.approved_matches
+            state.user.swipe.approved_matches    = data.approved_matches
             // Questionnaire 
             state.user.questionnaire_state      = data.questionnaire
 
@@ -84,14 +90,7 @@ export default createStore({
         }
     },
     // change or filter ou data before we use it in our components 
-    getters:{
-        getIndexApprovedMatches: state => index => {
-            return state.user.approved_matches[index]
-        }
-
-    },
+    getters : {}, 
     // break up our store in smallers modules 
-    modules:{
-
-    }
+    modules:{}
 })

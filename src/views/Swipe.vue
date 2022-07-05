@@ -4,7 +4,7 @@ import PieChart from "../components/Charts/PieChart.vue"
 import LineChart from "../components/Charts/LineChart.vue"
 import PopupFeedback from "../components/Popups/PopupFeedback.vue"
 import PopupQuestions from "../components/Popups/PopupQuestions.vue"
-import { get_profile_in_store_cursist, add_swipe } from "../db"
+import { get_profile_in_store, add_swipe } from "../db"
 
 export default {
     components: { PieChart, LineChart, PopupFeedback, PopupQuestions },
@@ -13,7 +13,8 @@ export default {
 
             s_left: false,
             s_right: false,
-            data: this.$store.state.user.data_to_be_displayed,
+            noMoreMatches: false,
+
         }
     },
     methods: {
@@ -22,29 +23,28 @@ export default {
             window.open(url)
         },
         swipe_left() {
-            this.s_left = !this.s_left
-            // add to this.user that UID of the evaluted person in the likes array 
-            add_swipe(this.$store.state.user.UID, data.UID, true, this.$store.state.user.UID)
+            this.s_left = !this.s_left 
+            add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, true, this.$store.state.user.UID)
+            this.get_new_profile()
         },
 
         swipe_right() {
             this.s_right = !this.s_right
             this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible;
-            add_swipe(this.$store.state.user.UID, data.UID, false, this.$store.state.user.UID)
+            add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, false, this.$store.state.user.UID)
 
         },
-        get_random_UID_from_array() {
-            const max = this.$store.state.user.approved_matches.length;
-            const index = Math.floor(Math.random() * max);
-            console.log("het random numer van de dag is : ", index)
-            const tmp = this.$store.getters.getIndexApprovedMatches(index)
-            console.log(tmp)
-            get_profile_in_store_cursist(tmp).then(data => {
-                console.log(data)
-                this.data = data
-            })
+        get_new_profile() {
 
-
+            const max = this.$store.state.user.swipe.approved_matches.length;
+            const index = this.$store.state.user.swipe.index
+            if (index <= max) {
+                const tmp = this.$store.state.user.swipe.approved_matches[index + 1]
+                console.log(tmp)
+                get_profile_in_store(tmp, true)
+            } else {
+                this.noMoreMatches = true;
+            }
         },
         more_information() {
 
@@ -69,7 +69,7 @@ export default {
             <p>
                 {{ this.$store.state.user.data_to_be_displayed.description }}
             </p>
-            
+
             <button @click="openUrl()">Link naar {{
                     this.$store.state.user.data_to_be_displayed.username
             }}'s webpagina</button>
@@ -77,9 +77,8 @@ export default {
         </div>
         <div class="div3 griditem">
 
-            <!--  TODO piechart fixen -->
+            
             <PieChart v-if="this.$store.state.user.data_to_be_displayed.role == 'bedrijf'"></PieChart>
-
             <LineChart></LineChart>
         </div>
 

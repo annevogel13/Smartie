@@ -58,9 +58,9 @@ export default {
             this.$router.push("./Swipe")
         },
         prepare_data_for_swipe_show(_UID) {
-            console.log(_UID, " + ", this.$store.state.user.role)
+            //console.log(_UID, " + ", this.$store.state.user.role)
             get_data_user_swipe(_UID, this.$store.state.user.role).then(data => {
-                console.log(data)
+                //console.log(data)
                 this.$store.commit("set_data_to_be_displayed", data)
             })
         }

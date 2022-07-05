@@ -55,7 +55,7 @@ export async function add_to_collection(name_collection, data_structure, identif
 }
 
 /* Returns the data of a user with the ID _UID */
-export async function get_profile_in_store(_UID) {
+export async function get_profile_in_store(_UID, state = false) {
 
     console.log("get profile out of firebase (compagny)")
 
@@ -63,15 +63,20 @@ export async function get_profile_in_store(_UID) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        store.commit('fillStateVuex', docSnap.data())
+        if(!state){
+            store.commit('fillStateVuex', docSnap.data())
+        }else{
+            store.commit('set_data_to_be_displayed', docSnap.data())
+        }
+
     } else {
         console.log("Geen'bedrijf' --> trying cursist ");
-        get_profile_in_store_cursist(_UID)
+        get_profile_in_store_cursist(_UID, state)
     }
 }
 
 
-export async function get_profile_in_store_cursist(_UID) {
+export async function get_profile_in_store_cursist(_UID, state = false) {
 
     console.log("get profile in firebase (cursist)")
 
@@ -79,7 +84,11 @@ export async function get_profile_in_store_cursist(_UID) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        store.commit('fillStateVuex', docSnap.data())
+        if(!state){
+            store.commit('fillStateVuex', docSnap.data())
+        }else{
+            store.commit('set_data_to_be_displayed', docSnap.data())
+        }
 
     } else {
         console.log("Geen cursist/bedrijf heeft dit ID ");
