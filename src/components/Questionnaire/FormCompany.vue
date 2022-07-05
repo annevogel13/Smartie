@@ -57,6 +57,7 @@
                 <br>
                 <input type="checkbox" id="s4" v-model="questionnaire.k52" name="s4" class="s" />
                 <label for="s4">Muziek in het kantoor is toegestaan.</label>
+                <br>
                 <input type="checkbox" id="s5" v-model="questionnaire.k3" name="s4" class="s" />
                 <label for="s5">Kantoor kan aangepast worden naar benodigdheden </label>
 

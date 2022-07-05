@@ -1,16 +1,38 @@
 <template>
-    <div class = "about">
-        <h1>About</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce ullamcorper dapibus nisl. In id dui. Nunc pulvinar erat et nibh. Integer sollicitudin. Quisque faucibus. Sed eleifend sapien sed nunc. Pellentesque congue leo et felis eleifend scelerisque. In a mauris ultricies diam tincidunt pharetra. Etiam venenatis facilisis orci. Donec quam dui, mattis eu, posuere a, tristique ut, pede. Sed quis nibh. Praesent augue metus, dapibus ac, consectetuer a, convallis eu, elit. Etiam et dui.
+    <div class="about">
+        <h1>Resources</h1>
+        <p>Deze webapplicatie is gemaakt in opdracht voor Code Gorilla. 
+            Hieronder staan ale relevante documenten die ik geproduceerd heb. 
+            Te beginnen met mijn stage rapport, onderzoek en github link. 
+            Voor vragen ben ik altijd beschikbaar ;) 
         </p>
-        <p>
-        Cras tempus, tellus quis facilisis dignissim, lorem libero rhoncus dolor, in venenatis neque arcu a mauris. Vivamus arcu quam, egestas sed, tempor quis, imperdiet sit amet, justo. Aliquam sem ipsum, sagittis id, imperdiet eu, scelerisque non, lorem. Cras aliquet, augue gravida iaculis tincidunt, elit sapien egestas libero, in dictum ipsum velit vel orci. Etiam mi nulla, lacinia nec, pretium vitae, blandit vel, tortor. Praesent eget libero. In accumsan laoreet lacus. Vivamus enim.
-        </p>
-        <p>
-        Vestibulum vitae metus sed purus elementum malesuada. Aliquam feugiat metus ut orci. Etiam scelerisque lacus eu tellus. Praesent neque est, placerat in, rhoncus nec, tempor eleifend, sem. Mauris quis leo ut urna porttitor auctor. Nulla a mi. Nulla risus turpis, rhoncus auctor, tempus eu, molestie rhoncus, metus.
-        </p>
+        <div class = "presentatie">
+            <iframe loading="lazy"
+                style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFFdOb--4o&#x2F;view?embed"
+                allowfullscreen="allowfullscreen" allow="fullscreen">
+            </iframe>
+        </div>
+        <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFFdOb--4o&#x2F;view?utm_content=DAFFdOb--4o&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link"
+            target="_blank" rel="noopener">Matching Tool</a> door Anne Merel de Jong
 
     </div>
 
 </template>
+<style scoped>
+
+.presentatie {
+    position: relative; 
+    width: 100%; 
+    height: 0; 
+    padding-top: 56.2500%;
+    padding-bottom: 48px; 
+    box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); 
+    margin-top: 1.6em; 
+    margin-bottom: 0.9em; 
+    overflow: hidden;
+    border-radius: 8px; 
+    will-change: transform;
+}
+
+</style>
