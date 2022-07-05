@@ -23,26 +23,32 @@
         <router-link to="/StageRapport">Stage rapport</router-link>
       </li>
       <br>
-      <li v-if="!this.$store.state.user.profile">
+      <li v-if="this.$store.state.user.loggedIn && !this.$store.state.user.profile">
         <router-link to="/ProfileUser"> Profile page</router-link>
       </li>
       <li v-if="this.$store.state.user.loggedIn">
         <router-link to="/DashboardUser"> Dashboard</router-link>
       </li>
-      <li>
+      <li  v-if="this.$store.state.user.loggedIn">
         <router-link to="/Swipe"> Swipe page</router-link>
       </li>
       <br>
       <li v-if="!this.$store.state.user.loggedIn">
-        <button class="logout">
+        <label for = "pointer"><img src="../public/point.png" class = "pointer"></label>
+        <button id = "pointer" class="logout">
           <router-link to="/RegisterUser">Log in</router-link>
         </button>
+        
       </li>
       <li v-if="this.$store.state.user.loggedIn">
         <button class="logout" @click="log_out()">
           <router-link to="/">Log uit</router-link>
         </button>
       </li>
+      <li>
+
+      </li>
+
     </ul>
   </div>
 
@@ -73,6 +79,18 @@ export default {
 
 </script>
 <style  >
+
+.pointer {
+  width : 90px; 
+  display : inline-block; 
+  margin : 0px; 
+  vertical-align : top; 
+}
+
+.logout{
+  display: inline-block;
+}
+
 .format {
   width: 75%;
   min-height: 100%;
