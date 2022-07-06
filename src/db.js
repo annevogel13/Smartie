@@ -23,19 +23,6 @@ const app_firebase = initializeApp(firebaseConfig);
 export const db = getFirestore(app_firebase);
 
 import { doc, getDoc, addDoc, setDoc, getDocs, updateDoc, query, where } from "firebase/firestore";
-/*
-export async function read_collection(name_collection, id_document) {
-    const docRef = doc(db, name_collection, id_document);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        return docSnap.data();
-    } else {
-
-        console.log("No such document!");
-    }
-}*/ 
 
 /* Add the data_structure to the _name_collection with the variable identification as id */
 export async function add_to_collection(name_collection, data_structure, identification) {
@@ -126,7 +113,7 @@ export async function update_profile(_UID, _data, role) {
 
 
 export async function add_questionnaire(Object, role, _UID) {
-    console.log("add_questionnaire ")
+   
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
@@ -147,26 +134,26 @@ export async function add_questionnaire(Object, role, _UID) {
 }
 
 export async function add_feedback(Object, role, _UID) {
-    console.log("add_questionnaire ")
+    
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             feedback: arrayUnion(Object)
         })
-        store.commit("setQuestionnaire", true)
-        console.log("Questionnaire of business", _UID, " filled in")
+        
+        console.log("Feedback of business", _UID, " filled in")
     } else {
 
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             feedback: arrayUnion(Object)
         })
-        store.commit("setQuestionnaire", true)
-        console.log("Questionnaire of user", _UID, " filled in")
+        
+        console.log("Feedback of cursist", _UID, " filled in")
     }
 }
 
 export async function add_prediction(Object, role, _UID) {
-    console.log("add prediction  ")
+
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
@@ -184,7 +171,7 @@ export async function add_prediction(Object, role, _UID) {
 
 export async function get_group_approved_users(role) {
 
-    console.log("Construction array")
+    
     const array_uid = []
     if (role == "bedrijf") {
         console.log("bedrijf --> cursist")
