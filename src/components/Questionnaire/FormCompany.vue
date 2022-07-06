@@ -114,7 +114,7 @@
             allowFullScreen></iframe>
         <br>
 
-        <button @click="questionnaire"> Bevestig vragenlijst </button>
+        <button @click="submitQuestionnaire"> Bevestig vragenlijst </button>
     </div>
 
 </template>
@@ -173,7 +173,7 @@ export default {
             this.questionnaire.ambiance = ambiance
             return ambiance;
         },
-        questionnaire() {
+        submitQuestionnaire() {
 
             this.calculate_ambiance() 
             const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, parseInt(this.questionnaire.d4))

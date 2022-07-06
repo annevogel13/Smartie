@@ -21,7 +21,8 @@
     "vue-slider-component": "^3.2.15",
     "vue3-apexcharts": "^1.4.1",
     "vuefire": "^3.0.0-alpha.2",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-extensions": "^1.1.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
