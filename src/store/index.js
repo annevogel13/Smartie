@@ -69,8 +69,14 @@ export default createStore({
             state.user.prediction               = data.prediction
             // Swipe history 
             console.log(data.likes)
-            state.user.swipeChoice.dislikes     = data.dislikes
-            state.user.swipeChoice.likes        = data.likes
+            if( typeof(data.dislikes) == 'undefined' || typeof(data.likes) == 'undefined' ){
+                state.user.swipeChoice.dislikes     = []
+                state.user.swipeChoice.likes        = []
+            }else {
+                state.user.swipeChoice.dislikes     = data.dislikes
+                state.user.swipeChoice.likes        = data.likes
+            }
+
             // Matches
             state.user.swipe.approved_matches    = data.approved_matches
             // Questionnaire 

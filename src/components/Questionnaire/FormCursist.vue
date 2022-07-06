@@ -147,7 +147,7 @@
 
 <script>
 // TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
-import { add_questionnaire } from "../../db"
+import { add_questionnaire , add_prediction} from "../../db"
 import { prediction_model } from "../../main"
 
 export default {
@@ -207,7 +207,7 @@ export default {
             this.calculate_personality()
             
             const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.k5, this.questionnaire.s1, this.questionnaire.personality, this.questionnaire.d4)
-            add_questionnaire(prediction,  'cursist', this.$store.state.user.UID)
+            add_prediction(prediction,  'cursist', this.$store.state.user.UID)
             console.log("Prediction voor deze user/vragenlijst is : ")
 
             add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)

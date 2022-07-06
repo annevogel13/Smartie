@@ -1,5 +1,6 @@
 <template>
-    <div class="dashboard">
+
+    <div class="dashboard" v-if = "this.$store.state.user.loggedIn">
         <button @click="prepare_matches">Klik hier om de matches de laden in je profiel</button>
         <h3 v-if="this.$store.state.user.role == 'cursist'">Dashboard cursisten </h3>
         <h3 v-if="this.$store.state.user.role == 'bedrijf'">Dashboard bedrijven </h3>
@@ -42,12 +43,20 @@
                 <h3>Statistieken</h3>
                 <SwipeDataChart></SwipeDataChart>
             </div>
+
+            <PopUpNoMatches ref = "noMatches"></PopUpNoMatches>
         </div>
+    </div>
+        <div v-if = "!this.$store.state.user.loggedIn">
+        <img src = "/error_robot.png" style = "width : 400px">
+        <h2> Je bent niet ingelogd </h2>
+        <button><router-link to = "./RegisterUser">Ga naar de inlog pagina</router-link></button>
     </div>
 
 </template>
 <script>
 import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
+import PopUpNoMatches from "../components/Popups/PopUpNoMatches.vue"
 import { get_group_approved_users, get_data_user_swipe } from "../db"
 
 export default {
@@ -55,12 +64,15 @@ export default {
         prepare_matches() {
             get_group_approved_users(this.$store.state.user.role).then(data => {
                 console.log("get group approved users", data)
-                this.$store.commit("setApprovedMatchs", data)
-                if (typeof (data.length) != "undefined") {
+                
+                if (typeof (data.length) != "undefined" && data.length != 0) {
+                    this.$store.commit("setApprovedMatchs", data)
                     this.prepare_data_for_swipe_show(data[0])
                     this.$router.push("./Swipe")
                 } else {
-                    this.$router.push("./Dashboard")
+                    console.log("Geen matches")
+                    this.$refs.noMatches.visibel = !this.$refs.noMatches.visibel
+                    this.$router.push("./DashboardUser")
                 }
 
             })
@@ -73,7 +85,7 @@ export default {
             })
         }
     },
-    components: { SwipeDataChart },
+    components: { SwipeDataChart , PopUpNoMatches},
 }
 </script>
 <style scoped>

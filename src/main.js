@@ -38,7 +38,7 @@ const router = createRouter({
 })
 
 // Neural network 
-const model = tf.loadLayersModel('/finalModel29/model.json')
+const model = await tf.loadLayersModel('/finalModel29/model.json')
 // was eer await bij 
 export function prediction_model(k1, k2, k3, k4, k5, s1, s2, d4) {
 
