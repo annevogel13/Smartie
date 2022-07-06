@@ -68,7 +68,7 @@ export default {
         prepare_matches() {
             get_group_approved_users(this.$store.state.user.role).then(data => {
                 console.log("get group approved users", data)
-
+                this.$store.commit("nullifyIndex")
                 if (typeof (data.length) != "undefined" && data.length != 0) {
                     this.$store.commit("setApprovedMatchs", data)
                     this.prepare_data_for_swipe_show(data[0])

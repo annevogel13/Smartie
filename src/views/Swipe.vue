@@ -14,18 +14,26 @@ export default {
             s_left: false,
             s_right: false,
             noMoreMatches: false,
+            chart_reload1: 0,
+            chart_reload2: 0,
+
 
         }
     },
     methods: {
+        chart_reload() {
+            this.chart_reload1++;
+            this.chart_reload2++;
+        },
         openUrl() {
             const url = this.$store.state.user.data_to_be_displayed.link
             window.open(url)
         },
         swipe_left() {
-            this.s_left = !this.s_left 
+            this.s_left = !this.s_left
             add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, true, this.$store.state.user.UID)
             this.get_new_profile()
+            this.chart_reload()
         },
 
         swipe_right() {
@@ -33,17 +41,19 @@ export default {
             this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible;
             add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, false, this.$store.state.user.UID)
             this.get_new_profile()
+            this.chart_reload()
         },
         get_new_profile() {
 
             const max = this.$store.state.user.swipe.approved_matches.length;
             const index = this.$store.state.user.swipe.index
+            console.log("max : ", max, " index : ", index)
             if (index < max) {
 
                 const tmp = this.$store.state.user.swipe.approved_matches[index]
                 console.log(tmp)
                 get_profile_in_store(tmp, true)
-                this.$store.commit('augmentIndex') 
+                this.$store.commit('augmentIndex')
             } else {
                 console.log("Geen matches meer over")
                 this.noMoreMatches = true;
@@ -53,11 +63,12 @@ export default {
 
             this.$refs.questions_visible.visible = !this.$refs.questions_visible.visible
         },
-        reload(){
+        reload() {
             console.log("Update de state")
             get_profile_in_store(this.$store.state.user.UID, false)
             this.$router.push("./")
-        }
+        },
+
 
     }
 }
@@ -66,12 +77,14 @@ export default {
 </script>
 
 <template>
-    <div v-if = "!this.$store.state.user.loggedIn">
-        <img src = "/error_robot.png" style = "width : 400px">
+    <div v-if="!this.$store.state.user.loggedIn">
+        <img src="/error_robot.png" style="width : 400px">
         <h2> Je bent niet ingelogd </h2>
-        <button><router-link to = "./RegisterUser">Ga naar de inlog pagina</router-link></button>
+        <button>
+            <router-link to="./RegisterUser">Ga naar de inlog pagina</router-link>
+        </button>
     </div>
-    <div class="swipeCartBusiness" v-if = "!this.noMoreMatches && this.$store.state.user.loggedIn">
+    <div class="swipeCartBusiness" v-if="!this.noMoreMatches && this.$store.state.user.loggedIn">
         <div class="div1 griditem">
             <h3 class="nameCompagnie" @click="get_random_UID_from_array"> {{
                     this.$store.state.user.data_to_be_displayed.username
@@ -89,10 +102,8 @@ export default {
 
         </div>
         <div class="div3 griditem">
-
-            
-            <PieChart v-if="this.$store.state.user.data_to_be_displayed.role == 'bedrijf'"></PieChart>
-            <LineChart></LineChart>
+            <PieChart :key="chart_reload1"></PieChart>
+            <LineChart :key="chart_reload2"></LineChart>
         </div>
 
         <div class="div4 griditem btn_tinder">
@@ -105,13 +116,13 @@ export default {
         <PopupQuestions ref="questions_visible"></PopupQuestions>
 
     </div>
-    <div v-if = "this.noMoreMatches">
+    <div v-if="this.noMoreMatches">
         <br><br><br><br>
         <h2>Dit waren alle matches voor vandaag </h2>
-        
-        <img src = "/wait_for_it.png" style = "width : 200px">
+
+        <img src="/wait_for_it.png" style="width : 200px">
         <br><br><br><br>
-        <button @click = "this.reload()">naar de home pagina</button>
+        <button @click="this.reload()">naar de home pagina</button>
     </div>
 </template>
 
@@ -130,13 +141,14 @@ export default {
 
     grid-column: 1;
     grid-row: 2;
+    
 }
 
 .div3 {
 
     grid-column: 2 / 4;
     grid-row: 2;
-
+    max-width : 100%; 
 
 }
 
@@ -144,7 +156,7 @@ export default {
 
     grid-column: 1/3;
     grid-row: 4;
-
+ 
 }
 
 .swipeCartBusiness {

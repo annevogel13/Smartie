@@ -130,14 +130,16 @@ export async function add_questionnaire(Object, role, _UID) {
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
-            questionnaire: Object
+            questionnaire: Object, 
+            questionnaireCompleted : true
         })
         store.commit("setQuestionnaire", true)
         console.log("Questionnaire of business", _UID, " filled in")
     } else {
 
         await updateDoc(doc(db, "profiel_cursist", _UID), {
-            questionnaire: Object
+            questionnaire: Object,
+            questionnaireCompleted : true
         })
         store.commit("setQuestionnaire", true)
         console.log("Questionnaire of user", _UID, " filled in")
@@ -187,7 +189,9 @@ export async function get_group_approved_users(role) {
     if (role == "bedrijf") {
         console.log("bedrijf --> cursist")
         // TODO let op net aangepast 
-        const docRef = query(collection(db, "profiel_cursist"), where("prediction", "==", store.state.user.prediction));
+        //const docRef = query(collection(db, "profiel_cursist"), where("prediction", "==", store.state.user.prediction));
+        const docRef = query(collection(db, "profiel_cursist"), where("questionnaireCompleted", "==", true));
+        
         const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {
@@ -198,8 +202,10 @@ export async function get_group_approved_users(role) {
         return array_uid
     } else {
         console.log("cursist --> bedrijf")
-        const docRef = query(collection(db, "profiel_bedrijf"), where("prediction", "==", store.state.user.prediction));
-        const docSnap = await getDocs(docRef);
+       // const docRef = query(collection(db, "profiel_bedrijf"), where("prediction", "==", store.state.user.prediction));
+        const docRef = query(collection(db, "profiel_bedrijf"), where("questionnaireCompleted", "==", true));
+        
+       const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {
             console.log(doc.id)

@@ -74,6 +74,9 @@ export default createStore({
         augmentIndex(state) {
             state.user.swipe.index = state.user.swipe.index + 1
         },
+        nullifyIndex(state) {
+            state.user.swipe.index = 0 
+        },
         setProfile(state, _profile) {
             state.user.profile = _profile
         },

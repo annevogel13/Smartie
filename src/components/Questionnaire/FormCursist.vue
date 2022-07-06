@@ -196,14 +196,6 @@ export default {
         }, 
         questionnaire1() {
 
-
-            this.$store.commit('set_kernwoorden', [
-                this.questionnaire.k1,
-                this.questionnaire.k2,
-                this.questionnaire.k3,
-                this.questionnaire.k4,
-                this.questionnaire.k5
-            ])
             this.calculate_personality()
             
             const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.k5, this.questionnaire.s1, this.questionnaire.personality, this.questionnaire.d4)
@@ -211,6 +203,7 @@ export default {
             console.log("Prediction voor deze user/vragenlijst is : ")
 
             add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
+            this.$store.commit("setQuestionnaire", true)
             this.$router.push("./DashboardUser");
 
         },
