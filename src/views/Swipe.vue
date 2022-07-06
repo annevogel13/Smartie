@@ -67,7 +67,7 @@ export default {
 
 <template>
     <div v-if = "!this.$store.state.user.loggedIn">
-        <img src = "/error robot.png" style = "width : 400px">
+        <img src = "/error_robot.png" style = "width : 400px">
         <h2> Je bent niet ingelogd </h2>
         <button><router-link to = "./RegisterUser">Ga naar de inlog pagina</router-link></button>
     </div>
@@ -109,7 +109,7 @@ export default {
         <br><br><br><br>
         <h2>Dit waren alle matches voor vandaag </h2>
         
-        <img src = "/wait for it.png" style = "width : 200px">
+        <img src = "/wait_for_it.png" style = "width : 200px">
         <br><br><br><br>
         <button @click = "this.reload()">naar de home pagina</button>
     </div>

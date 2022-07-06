@@ -20,7 +20,7 @@
                 En natuurlijk het swipen werkt 
 
         </div>
-        <img class = "explication" src = "/Matching Tool.png">
+        <img class = "explication" src = "/Matching_Tool.png">
     </div>
 </template>
 <style scoped>
