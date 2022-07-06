@@ -44,7 +44,7 @@ export async function add_to_collection(name_collection, data_structure, identif
 /* Returns the data of a user with the ID _UID */
 export async function get_profile_in_store(_UID, state = false) {
 
-    console.log("get profile out of firebase (compagny)")
+    console.log("get profile out of firebase (company)")
 
     const docRef = doc(db, "profiel_bedrijf", _UID);
     const docSnap = await getDoc(docRef);
