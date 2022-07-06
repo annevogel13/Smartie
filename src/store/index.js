@@ -43,6 +43,7 @@ export default createStore({
         },
         loggingOut(state){
             state.user.loggedIn = false 
+            state.reset() 
         },
         augmentIndex(state){
             state.user.swipe.index = state.user.swipe.index+1 

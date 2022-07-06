@@ -1,7 +1,9 @@
 <template>
 
-    <div class="dashboard" v-if = "this.$store.state.user.loggedIn">
-        <button @click="prepare_matches">Klik hier om de matches de laden in je profiel</button>
+    <div class="dashboard" v-if="this.$store.state.user.loggedIn">
+        <button @click="prepare_matches" v-if="this.$store.state.user.questionnaireCompleted">
+            <h4>Het is tijd om te swipen</h4>
+        </button>
         <h3 v-if="this.$store.state.user.role == 'cursist'">Dashboard cursisten </h3>
         <h3 v-if="this.$store.state.user.role == 'bedrijf'">Dashboard bedrijven </h3>
         <br>
@@ -44,13 +46,15 @@
                 <SwipeDataChart></SwipeDataChart>
             </div>
 
-            <PopUpNoMatches ref = "noMatches"></PopUpNoMatches>
+            <PopUpNoMatches ref="noMatches"></PopUpNoMatches>
         </div>
     </div>
-        <div v-if = "!this.$store.state.user.loggedIn">
-        <img src = "/error_robot.png" style = "width : 400px">
+    <div v-if="!this.$store.state.user.loggedIn">
+        <img src="/error_robot.png" style="width : 400px">
         <h2> Je bent niet ingelogd </h2>
-        <button><router-link to = "./RegisterUser">Ga naar de inlog pagina</router-link></button>
+        <button>
+            <router-link to="./RegisterUser">Ga naar de inlog pagina</router-link>
+        </button>
     </div>
 
 </template>
@@ -64,7 +68,7 @@ export default {
         prepare_matches() {
             get_group_approved_users(this.$store.state.user.role).then(data => {
                 console.log("get group approved users", data)
-                
+
                 if (typeof (data.length) != "undefined" && data.length != 0) {
                     this.$store.commit("setApprovedMatchs", data)
                     this.prepare_data_for_swipe_show(data[0])
@@ -85,7 +89,7 @@ export default {
             })
         }
     },
-    components: { SwipeDataChart , PopUpNoMatches},
+    components: { SwipeDataChart, PopUpNoMatches },
 }
 </script>
 <style scoped>
