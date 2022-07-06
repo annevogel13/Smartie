@@ -29,9 +29,7 @@
       <li v-if="this.$store.state.user.loggedIn">
         <router-link to="/DashboardUser"> Dashboard</router-link>
       </li>
-      <li v-if="this.$store.state.user.loggedIn">
-        <router-link to="/Swipe"> Swipe page</router-link>
-      </li>
+
       <br>
       <li v-if="!this.$store.state.user.loggedIn">
         <router-link to="/RegisterUser"><img src="/point.png" class="pointer"></router-link>
