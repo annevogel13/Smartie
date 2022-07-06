@@ -22,7 +22,7 @@ import { firestorePlugin } from 'vuefire';
 import store from './store'
 
 const router = createRouter({
-    //history: createWebHistory(),
+    history: createWebHistory(),
     routes: [
         { path: '/', name: 'Home', component: Home },
         { path: '/About', name: 'About', component: About },
@@ -38,12 +38,12 @@ const router = createRouter({
 })
 
 // Neural network 
-//const model = await tf.loadLayersModel('/finalModel29/model.json')
+const model = await tf.loadLayersModel('/finalModel29/model.json')
 // was eer await bij 
 export function prediction_model(k1, k2, k3, k4, k5, s1, s2, d4) {
 
-    //const logg = model.predict(tf.tensor([k1, k2, k3, k4, k5, s1, s2, d4]).expandDims())
-    const result = Math.round(2)//logg.dataSync()[0])
+    const logg = model.predict(tf.tensor([k1, k2, k3, k4, k5, s1, s2, d4]).expandDims())
+    const result = Math.round(logg.dataSync()[0])
     console.log("Prediction : ",  result)
 
     return result 
