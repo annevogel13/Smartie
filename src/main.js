@@ -38,8 +38,8 @@ const router = createRouter({
 })
 
 // Neural network 
-const model = await tf.loadLayersModel('../TF-Model/finalModel29/model.json')
-
+const model = tf.loadLayersModel('../TF-Model/finalModel29/model.json')
+// was eer await bij 
 export function prediction_model(k1, k2, k3, k4, k5, s1, s2, d4) {
 
     const logg = model.predict(tf.tensor([k1, k2, k3, k4, k5, s1, s2, d4]).expandDims())

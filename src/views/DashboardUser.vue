@@ -30,7 +30,7 @@
                 <li v-for="item in this.$store.state.user.feedback" :key="item.id">"{{ item }}"</li>
                 <br><br><br>
                 <div class="btnClass">
-                    <img src="/public/laptop reading.png" style="width : 200px">
+                    <img src="/laptop_reading.png" style="width : 200px">
                     <div>
                         <button>Pas je profiel aan (X)</button>
                         <br>
