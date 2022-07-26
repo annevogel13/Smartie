@@ -32,6 +32,7 @@ export default {
         swipe_left() {
             this.s_left = !this.s_left
             add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, true, this.$store.state.user.UID)
+            this.$store.commit("setLike", this.$store.state.user.data_to_be_displayed.UID )
             this.get_new_profile()
             this.chart_reload()
         },
@@ -40,6 +41,7 @@ export default {
             this.s_right = !this.s_right
             this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible;
             add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, false, this.$store.state.user.UID)
+            this.$store.commit("setDislike", this.$store.state.user.data_to_be_displayed.UID )
             this.get_new_profile()
             this.chart_reload()
         },

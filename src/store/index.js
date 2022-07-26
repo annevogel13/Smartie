@@ -74,8 +74,15 @@ export default createStore({
         augmentIndex(state) {
             state.user.swipe.index = state.user.swipe.index + 1
         },
+        setLike(state, UID){
+            state.user.swipeChoice.likes.push(UID)
+        },
+        
+        setDislike(state, UID){
+            state.user.swipeChoice.dislikes.push(UID)
+        },
         nullifyIndex(state) {
-            state.user.swipe.index = 0 
+            state.user.swipe.index = 0
         },
         setProfile(state, _profile) {
             state.user.profile = _profile
@@ -85,6 +92,9 @@ export default createStore({
         },
         giveFeedback(state, feedback) {
             state.user.data_to_be_displayed.feedback.push(feedback)
+        },
+        setPrediction(state, number) {
+            state.user.prediction = number
         }
         ,
         fillStateVuex(state, data) {

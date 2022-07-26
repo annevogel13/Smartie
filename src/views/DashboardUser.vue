@@ -49,13 +49,13 @@
             <PopUpNoMatches ref="noMatches"></PopUpNoMatches>
         </div>
     </div>
-    <div v-if="!this.$store.state.user.loggedIn">
+   <!-- <div v-if="!this.$store.state.user.loggedIn">
         <img src="/error_robot.png" style="width : 400px">
         <h2> Je bent niet ingelogd </h2>
         <button>
             <router-link to="./RegisterUser">Ga naar de inlog pagina</router-link>
         </button>
-    </div>
+    </div> -->
 
 </template>
 <script>

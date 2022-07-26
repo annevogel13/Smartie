@@ -180,6 +180,7 @@ export default {
             add_prediction(prediction, 'bedrijf', this.$store.state.user.UID)
             add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
             this.$store.commit("setQuestionnaire", true)
+            this.$store.commit("setPrediction", prediction)
             this.$router.push("./DashboardUser");
 
         }
