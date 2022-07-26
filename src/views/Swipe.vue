@@ -16,11 +16,10 @@ export default {
             noMoreMatches: false,
             chart_reload1: 0,
             chart_reload2: 0,
-
-
         }
     },
     methods: {
+        // hack die ervoor zorgt dat de charts elke keer dat er een nieuwe user komt, refreshed worden 
         chart_reload() {
             this.chart_reload1++;
             this.chart_reload2++;
@@ -31,32 +30,52 @@ export default {
         },
         swipe_left() {
             this.s_left = !this.s_left
+            // voegt de swipe toe aan de database 
             add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, true, this.$store.state.user.UID)
-            this.$store.commit("setLike", this.$store.state.user.data_to_be_displayed.UID )
+
+            // past de vuex state aan 
+            this.$store.commit("setLike", this.$store.state.user.data_to_be_displayed.UID)
+
+            // laad het nieuwe profiel 
             this.get_new_profile()
+
+            // dwingt een chart reload 
             this.chart_reload()
         },
 
         swipe_right() {
             this.s_right = !this.s_right
+            // laat feedbaak popup zien 
             this.$refs.feedback_visible.visible = !this.$refs.feedback_visible.visible;
+
+            // voegt de swipe toe aan de database 
             add_swipe(this.$store.state.user.UID, this.$store.state.user.data_to_be_displayed.UID, false, this.$store.state.user.UID)
-            this.$store.commit("setDislike", this.$store.state.user.data_to_be_displayed.UID )
+
+            // past de vuex state aan 
+            this.$store.commit("setDislike", this.$store.state.user.data_to_be_displayed.UID)
+
+            // laad het nieuwe profiel 
             this.get_new_profile()
+
+            // dwingt een chart reload 
             this.chart_reload()
         },
         get_new_profile() {
 
+            // berekenen van de minimale en maximale index voor de array met approved users 
             const max = this.$store.state.user.swipe.approved_matches.length;
             const index = this.$store.state.user.swipe.index
             console.log("max : ", max, " index : ", index)
-            if (index < max) {
 
+            // check elke keer of er nog profielen over zijn 
+            if (index < max) {
+                // zo ja dan --> 
                 const tmp = this.$store.state.user.swipe.approved_matches[index]
                 console.log(tmp)
                 get_profile_in_store(tmp, true)
                 this.$store.commit('augmentIndex')
             } else {
+                // zo niet --> pagina met plaatjes dat er niet meer matches zijn 
                 console.log("Geen matches meer over")
                 this.noMoreMatches = true;
             }
@@ -74,8 +93,6 @@ export default {
 
     }
 }
-
-
 </script>
 
 <template>
@@ -143,14 +160,14 @@ export default {
 
     grid-column: 1;
     grid-row: 2;
-    
+
 }
 
 .div3 {
 
     grid-column: 2 / 4;
     grid-row: 2;
-    max-width : 100%; 
+    max-width: 100%;
 
 }
 
@@ -158,7 +175,7 @@ export default {
 
     grid-column: 1/3;
     grid-row: 4;
- 
+
 }
 
 .swipeCartBusiness {

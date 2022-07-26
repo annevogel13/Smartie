@@ -1,25 +1,3 @@
-<template>
-    <div class="signup">
-
-        <h2>Maak je profiel compleet</h2>
-        <label> Username </label>
-        <input type="text" required v-model="this.data.username">
-        <label> Telefoonnummer </label>
-        <input type="tel" required v-model="this.data.telefoonnr">
-        <label>Korte beschrijving</label>
-        <textarea type="textfield" class="textfield"></textarea>
-        <label>Link naar de bedrijfswebsite of github pagina</label>
-        <input type="text" required v-model="this.data.link">
-        <label>Profiel foto</label>
-        <br>
-        <button @click="click1">Kies foto</button>
-        <input type="file" ref="input1" style="display : none " @change="previewImage" accept="image/*">
-
-        <br>
-        <button @click="uploadInformation">Bevestigen</button>
-
-    </div>
-</template>
 <script>
 
 import { update_profile, uploadImage } from '../db'
@@ -64,6 +42,29 @@ export default {
 }
 
 </script>
+<template>
+    <div class="signup">
+
+        <h2>Maak je profiel compleet</h2>
+        <label> Username </label>
+        <input type="text" required v-model="this.data.username">
+        <label> Telefoonnummer </label>
+        <input type="tel" required v-model="this.data.telefoonnr">
+        <label>Korte beschrijving</label>
+        <textarea type="textfield" class="textfield"></textarea>
+        <label>Link naar de bedrijfswebsite of github pagina</label>
+        <input type="text" required v-model="this.data.link">
+        <label>Profiel foto</label>
+        <br>
+        <button @click="click1">Kies foto</button>
+        <input type="file" ref="input1" style="display : none " @change="previewImage" accept="image/*">
+
+        <br>
+        <button @click="uploadInformation">Bevestigen</button>
+
+    </div>
+</template>
+
 <style scoped >
 .textfield {
     max-width: 85%;

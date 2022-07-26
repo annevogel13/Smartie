@@ -1,7 +1,5 @@
 <script>
 
-
-
 import login from '../components/User/LoginUser.vue'
 import register from '../components/User/RegisterUser.vue'
 
@@ -18,7 +16,6 @@ export default {
 <template>
     
         <div class="register">
-
             <register v-if = "!wissel"></register>
             <login v-if = "wissel"></login> 
             <button @click = "this.wissel = !wissel">Wissel</button>
@@ -50,5 +47,4 @@ button {
     padding: 5px;
 
 }
-
 </style>

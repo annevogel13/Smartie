@@ -1,17 +1,9 @@
-<template>
-    <div class="about">
-
-        <VuePdfEmbed :source= source1 />
-
-    </div>
-
-</template>
 <script>
 import VuePdfEmbed from 'vue-pdf-embed'
 
 export default {
     components: {
-        VuePdfEmbed
+        VuePdfEmbed // component which transforms automatically an pdf to an html page 
     },
     data(){
         return {
@@ -21,7 +13,14 @@ export default {
 }
 
 </script>
+<template>
+    <div class="about">
 
+        <VuePdfEmbed :source= source1 />
+
+    </div>
+
+</template>
 <style scoped>
 .presentatie {
     position: relative;

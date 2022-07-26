@@ -1,3 +1,40 @@
+<script>
+import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
+import PopUpNoMatches from "../components/Popups/PopUpNoMatches.vue"
+import { get_group_approved_users, get_data_user_swipe } from "../db"
+
+export default {
+    methods: {
+        prepare_matches() {
+            get_group_approved_users(this.$store.state.user.role).then(data => {
+
+                console.log("get group approved users", data)
+                this.$store.commit("nullifyIndex")
+                // extra test om ervoor te zorgen dat er geen lege array doorgegeven kan worden 
+                if (typeof (data.length) != "undefined" && data.length != 0) {
+                    this.$store.commit("setApprovedMatchs", data)
+                    this.prepare_data_for_swipe_show(data[0])
+                    this.$router.push("./Swipe")
+                } else {
+                    console.log("Geen matches")
+                    this.$refs.noMatches.visibel = !this.$refs.noMatches.visibel
+                    this.$router.push("./DashboardUser")
+                }
+
+            })
+
+        },
+        prepare_data_for_swipe_show(_UID) {
+
+            get_data_user_swipe(_UID, this.$store.state.user.role).then(data => {
+                this.$store.commit("set_data_to_be_displayed", data)
+            })
+        }
+    },
+    components: { SwipeDataChart, PopUpNoMatches },
+}
+</script>
+
 <template>
 
     <div class="dashboard" v-if="this.$store.state.user.loggedIn">
@@ -49,49 +86,16 @@
             <PopUpNoMatches ref="noMatches"></PopUpNoMatches>
         </div>
     </div>
-   <!-- <div v-if="!this.$store.state.user.loggedIn">
+    <div v-if="!this.$store.state.user.loggedIn">
         <img src="/error_robot.png" style="width : 400px">
         <h2> Je bent niet ingelogd </h2>
         <button>
             <router-link to="./RegisterUser">Ga naar de inlog pagina</router-link>
         </button>
-    </div> -->
+    </div>
 
 </template>
-<script>
-import SwipeDataChart from "../components/Swipe/SwipeDataChart.vue"
-import PopUpNoMatches from "../components/Popups/PopUpNoMatches.vue"
-import { get_group_approved_users, get_data_user_swipe } from "../db"
 
-export default {
-    methods: {
-        prepare_matches() {
-            get_group_approved_users(this.$store.state.user.role).then(data => {
-                console.log("get group approved users", data)
-                this.$store.commit("nullifyIndex")
-                if (typeof (data.length) != "undefined" && data.length != 0) {
-                    this.$store.commit("setApprovedMatchs", data)
-                    this.prepare_data_for_swipe_show(data[0])
-                    this.$router.push("./Swipe")
-                } else {
-                    console.log("Geen matches")
-                    this.$refs.noMatches.visibel = !this.$refs.noMatches.visibel
-                    this.$router.push("./DashboardUser")
-                }
-
-            })
-
-        },
-        prepare_data_for_swipe_show(_UID) {
-
-            get_data_user_swipe(_UID, this.$store.state.user.role).then(data => {
-                this.$store.commit("set_data_to_be_displayed", data)
-            })
-        }
-    },
-    components: { SwipeDataChart, PopUpNoMatches },
-}
-</script>
 <style scoped>
 .toprecommendations {
     grid-column: 1;
