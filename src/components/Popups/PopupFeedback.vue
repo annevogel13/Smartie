@@ -4,7 +4,7 @@ import { add_feedback } from '../../db'
 export default {
   data() {
     return {
-      visible: false,
+      visible: false, // bool die de zichtbaarheid van de popup regelt 
       feedback: '',
     }
 
@@ -12,8 +12,11 @@ export default {
   methods: {
     submit() {
       // feedback toevoegen aan data_to_be_displayed is een array
+      // add_feedback voegt de feedback to aan de database 
       add_feedback(this.feedback, this.$store.state.user.data_to_be_displayed.role, this.$store.state.user.data_to_be_displayed.UID)
-      this.visible = false 
+
+      // variabelen weer terugzetten naar de default waarden 
+      this.visible = false
       this.feedback = ''
     }
   }
@@ -31,9 +34,8 @@ export default {
         <button type="submit" @click="submit">Submit</button>
         <button type="reset" @click="visible = !visible">Annuleren</button>
       </div>
-
+    
     </div>
-
   </div>
 
 </template>
@@ -70,7 +72,6 @@ export default {
   width: 50%;
   /* Could be more or less, depending on screen size */
   align-self: center;
-
 }
 
 /* The Close Button */

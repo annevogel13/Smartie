@@ -4,10 +4,7 @@
             return{
                 visible : false,
             }
-
         },
-        methods : {
-        }
     }
 
 </script>

@@ -1,20 +1,9 @@
 <script>
-import { add_feedback } from '../../db'
 
 export default {
     data() {
         return {
             visibel: false,
-
-        }
-
-    },
-    methods: {
-        submit() {
-            // feedback toevoegen aan data_to_be_displayed is een array
-            add_feedback(this.feedback, this.$store.state.user.data_to_be_displayed.role, this.$store.state.user.data_to_be_displayed.UID)
-            this.visible = false
-            this.feedback = ''
         }
     }
 }
