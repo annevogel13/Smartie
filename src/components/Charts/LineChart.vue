@@ -7,7 +7,7 @@ export default {
         return {
             series: [{
                 data: [
-
+                    // haalt de data vanuit de vuex state 
                     this.$store.state.user.data_to_be_displayed.questionnaire.k1 + 1, // hierarchisch 
                     this.$store.state.user.data_to_be_displayed.questionnaire.k2 + 1, // thuiswerken 
                     this.$store.state.user.data_to_be_displayed.questionnaire.k4 + 1, // vrijmibo 
@@ -18,7 +18,7 @@ export default {
             chartOptions: {
                 chart: {
                     height: 350,
-                    type: 'radar',
+                    type: 'radar', // geeft het type apex chart aan 
                 },
                 labels: ['Flexibele werktijden', 'Meedenken', 'Geek', 'Intercollegiaal', "Thuiswerken"],
                 title: {
@@ -28,13 +28,11 @@ export default {
                     categories: ['Flexibele werktijden', 'Meedenken', 'Geek', 'Intercollegiaal', "Thuiswerken"]
                 },
                 yaxis : {
-                    show : false , 
-                    max : 101, 
+                    show : false ,  // dit disables the labels on the yaxis 
+                    max : 101,  // max is op 101 omdat de maximale score 100 is. En door hem op 101 is de visualisatie het beste . 
                 } 
             },
             components: { VueApexCharts },
-
-
         }
     }
 }

@@ -6,6 +6,7 @@ export default {
     data() {
         return {
             series: [
+                // het ophalen van de corresponderende vragen vanuit de vuex state 
                 this.$store.state.user.data_to_be_displayed.questionnaire.d60,
                 this.$store.state.user.data_to_be_displayed.questionnaire.d61,
                 this.$store.state.user.data_to_be_displayed.questionnaire.d62,
@@ -14,13 +15,13 @@ export default {
             chartOptions: {
                 labels: ["Junioren", "Medioren", "Senioren"],
                 chart: {
-                    type: 'polarArea', // polarArea
+                    type: 'polarArea', 
                 }, 
                 stroke: {
                     colors: ['#fff']
                 },
                 fill: {
-                    opacity: 0.8
+                    opacity: 0.8 // de doorzichtheid van de kleuren 
                 },
                 title: {
                     text: 'Grafiek op kernwoorden'
@@ -36,6 +37,7 @@ export default {
                         }
                     }
                 }],
+                // disabled de namen van de axen
                 yaxis : {
                     show : false 
                 },
