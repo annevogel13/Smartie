@@ -5,6 +5,8 @@ import { Timestamp } from "firebase/firestore"
 
 import store from "./store"
 
+
+// beveiliging om in de database te komen 
 const firebaseConfig = {
     apiKey: "AIzaSyBz-GuAE6HSTl47j9VM0utLN_HWaYGP83Q",
     authDomain: "smartie-v1.firebaseapp.com",
@@ -20,6 +22,7 @@ const app_firebase = initializeApp(firebaseConfig);
 
 /***********************FIRESTORE*************************************/
 
+// creeren van een referentie naar de firestore 
 export const db = getFirestore(app_firebase);
 
 import { doc, getDoc, addDoc, setDoc, getDocs, updateDoc, query, where } from "firebase/firestore";
@@ -50,9 +53,9 @@ export async function get_profile_in_store(_UID, state = false) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        if(!state){
+        if (!state) {
             store.commit('fillStateVuex', docSnap.data())
-        }else{
+        } else {
             store.commit('set_data_to_be_displayed', docSnap.data())
         }
 
@@ -62,6 +65,7 @@ export async function get_profile_in_store(_UID, state = false) {
     }
 }
 
+/* Find the profile in the database and fill the vuex state  */
 export async function get_profile_in_store_cursist(_UID, state = false) {
 
     console.log("get profile in firebase (cursist)")
@@ -70,9 +74,9 @@ export async function get_profile_in_store_cursist(_UID, state = false) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        if(!state){
+        if (!state) {
             store.commit('fillStateVuex', docSnap.data())
-        }else{
+        } else {
             store.commit('set_data_to_be_displayed', docSnap.data())
         }
 
@@ -89,11 +93,10 @@ export async function update_profile(_UID, _data, role) {
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             UID: _UID,
             username: _data.username,
-            //tel: _data.tel,
             profile: true,
-            questionnaireCompleted : false,
+            questionnaireCompleted: false,
             time: Timestamp.now(),
-            feedback : []
+            feedback: []
         })
         console.log("Profile ", _UID, " updated ")
     } else {
@@ -101,24 +104,23 @@ export async function update_profile(_UID, _data, role) {
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             UID: _UID,
             username: _data.username,
-            //tel: _data.telefoonnr,
             profile: true,
-            questionnaireCompleted : false,
+            questionnaireCompleted: false,
             time: Timestamp.now(),
-            feedback : []
+            feedback: []
         })
         console.log("Profile ", _UID, " updated ")
     }
 }
 
-
+/* Adds the questionnaire, filled in by a user, to the database */
 export async function add_questionnaire(Object, role, _UID) {
-   
+
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
-            questionnaire: Object, 
-            questionnaireCompleted : true
+            questionnaire: Object,
+            questionnaireCompleted: true
         })
         store.commit("setQuestionnaire", true)
         console.log("Questionnaire of business", _UID, " filled in")
@@ -126,32 +128,34 @@ export async function add_questionnaire(Object, role, _UID) {
 
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             questionnaire: Object,
-            questionnaireCompleted : true
+            questionnaireCompleted: true
         })
         store.commit("setQuestionnaire", true)
         console.log("Questionnaire of user", _UID, " filled in")
     }
 }
 
+/* Add the feedback to the database and links it to the right user */
 export async function add_feedback(Object, role, _UID) {
-    
+
     if (role == "bedrijf") {
 
         await updateDoc(doc(db, "profiel_bedrijf", _UID), {
             feedback: arrayUnion(Object)
         })
-        
+
         console.log("Feedback of business", _UID, " filled in")
     } else {
 
         await updateDoc(doc(db, "profiel_cursist", _UID), {
             feedback: arrayUnion(Object)
         })
-        
+
         console.log("Feedback of cursist", _UID, " filled in")
     }
 }
 
+/* Add the predidction to the database and links it to the right user */
 export async function add_prediction(Object, role, _UID) {
 
     if (role == "bedrijf") {
@@ -169,16 +173,18 @@ export async function add_prediction(Object, role, _UID) {
     }
 }
 
+/* before the swiping, get the group of user which are approved
+    returns an array with the uid of the approved users 
+*/ 
 export async function get_group_approved_users(role) {
 
-    
     const array_uid = []
     if (role == "bedrijf") {
         console.log("bedrijf --> cursist")
-        // TODO let op net aangepast 
+        // let op net aangepast 
         //const docRef = query(collection(db, "profiel_cursist"), where("prediction", "==", store.state.user.prediction));
         const docRef = query(collection(db, "profiel_cursist"), where("questionnaireCompleted", "==", true));
-        
+
         const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {
@@ -189,10 +195,10 @@ export async function get_group_approved_users(role) {
         return array_uid
     } else {
         console.log("cursist --> bedrijf")
-       // const docRef = query(collection(db, "profiel_bedrijf"), where("prediction", "==", store.state.user.prediction));
+        // const docRef = query(collection(db, "profiel_bedrijf"), where("prediction", "==", store.state.user.prediction));
         const docRef = query(collection(db, "profiel_bedrijf"), where("questionnaireCompleted", "==", true));
-        
-       const docSnap = await getDocs(docRef);
+
+        const docSnap = await getDocs(docRef);
 
         docSnap.forEach((doc) => {
             console.log(doc.id)
@@ -204,6 +210,9 @@ export async function get_group_approved_users(role) {
 
 }
 
+/* 
+    from the UID get the data associeted to that user, and display it in the swipe element
+*/ 
 export async function get_data_user_swipe(_UID, role) {
     console.log("get_data_user_swipe( .. )", _UID, " + role = ", role)
 
@@ -221,12 +230,13 @@ export async function get_data_user_swipe(_UID, role) {
     }
 }
 
+/* Add the result from the swipe to the trainer */  
 export async function add_swipe(_UID, _UID_match, match, role) {
     console.log("add_swipe ", match)
     if (role == "bedrijf") {
         if (match) {
             await updateDoc(doc(db, "profiel_bedrijf", _UID), { likes: arrayUnion(_UID_match) })
-        } else await updateDoc(doc(db, "profiel_bedrijf", _UID), { dislikes: arrayUnion(_UID_match)})
+        } else await updateDoc(doc(db, "profiel_bedrijf", _UID), { dislikes: arrayUnion(_UID_match) })
 
     } else {
         if (match) {
@@ -238,51 +248,5 @@ export async function add_swipe(_UID, _UID_match, match, role) {
 /******************* STORAGE **************************/
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+// create the reference to the storage 
 export const storage = getStorage(app_firebase);
-
-
-export async function uploadImage(file) {
-    const fileRef = 'images/avatars/' + file.name
-    const storageRef = ref(storage, fileRef);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on('state_changed',
-        (snapshot) => {
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state) {
-                case 'paused':
-                    console.log('Upload is paused');
-                    break;
-                case 'running':
-                    console.log('Upload is running');
-                    break;
-            }
-        },
-        (error) => {
-            // A full list of error codes is available at
-            // https://firebase.google.com/docs/storage/web/handle-errors
-            switch (error.code) {
-                case 'storage/unauthorized':
-                    // User doesn't have permission to access the object
-                    break;
-                case 'storage/canceled':
-                    // User canceled the upload
-                    break;
-                case 'storage/unknown':
-                    // Unknown error occurred, inspect error.serverResponse
-                    break;
-            }
-        },
-        () => {
-            // Upload completed successfully, now we can get the download URL
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log('File available at', downloadURL);
-                return downloadURL
-
-            });
-        }
-    );
-}

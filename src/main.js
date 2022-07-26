@@ -11,7 +11,6 @@ import Profile from '@/views/ProfileUser.vue'
 import Swipe from '@/views/Swipe.vue'
 import Dashboard from '@/views/DashboardUser.vue'
 import Register from '@/views/RegisterUser.vue'
-
 import Presentatie from '@/views/Presentatie.vue'
 import StageRapport from '@/views/StageRapport.vue'
 import QuestionnaireB from '@/components/Questionnaire/FormCompany.vue'
