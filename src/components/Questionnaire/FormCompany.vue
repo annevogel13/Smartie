@@ -1,3 +1,78 @@
+<script>
+
+import { add_questionnaire, add_prediction } from "../../db"
+import { prediction_model } from "../../main"
+
+export default {
+    data() {
+        return {
+            // de nummers van elke vraag zijn terug te vinden in de pdf genaamd questionnaire 
+            questionnaire: {
+                k1: 0,
+                k2: 25,
+                k3: 50,
+                k4: 75,
+                k5: 0,
+
+                k50: 100,
+                k51: false,
+                k52: true,
+                k53: 100,
+
+                s1: 0,
+                s2: false,
+
+                d4: 0,
+                d5: 0,
+
+                d60: 0,
+                d61: 0,
+                d62: 0,
+                d63: 0,
+
+                ambiance: 0
+            }
+        }
+    },
+    methods: {
+        calculate_ambiance() {
+            
+            /*
+                op deze manier wordt de ambiance berekent
+                s21: false, // x 20
+                s22: false, // x 20 
+                s23: false, // x 20
+                s24: false, // x 20
+                s25: 0,     // x 5 
+                ----------------------- + 
+                        range 0-100
+            */
+
+            const ambiance = this.questionnaire.k50 * 0.25 + this.questionnaire.k51 * 25 + this.questionnaire.k52 * 25 + this.questionnaire.k53 * 0.25
+            console.log(this.questionnaire.k50, this.questionnaire.k51, this.questionnaire.k52, this.questionnaire.k53, " = ", ambiance)
+            this.questionnaire.ambiance = ambiance
+            return ambiance;
+        },
+        submitQuestionnaire() {
+            // berekenen van de ambiance 
+            this.calculate_ambiance() 
+
+            // prediction vanuit het model halen met de input van de vragen 
+            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, parseInt(this.questionnaire.d4))
+            
+            // toevoegen van de voorspelling aan de database 
+            add_prediction(prediction, 'bedrijf', this.$store.state.user.UID)
+            add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
+
+            // aanpassen van de vuex state 
+            this.$store.commit("setQuestionnaire", true)
+            this.$store.commit("setPrediction", prediction)
+            this.$router.push("./DashboardUser");
+        }
+    }
+}
+</script>
+
 <template>
     <div class="formCompany">
 
@@ -118,75 +193,6 @@
     </div>
 
 </template>
-
-<script>
-
-import { add_questionnaire, add_prediction } from "../../db"
-import { prediction_model } from "../../main"
-
-export default {
-    data() {
-        return {
-            questionnaire: {
-                k1: 0,
-                k2: 25,
-                k3: 50,
-                k4: 75,
-                k5: 0,
-
-                k50: 100,
-                k51: false,
-                k52: true,
-                k53: 100,
-
-                s1: 0,
-                s2: false,
-
-                d4: 0,
-                d5: 0,
-
-                d60: 0,
-                d61: 0,
-                d62: 0,
-                d63: 0,
-
-                ambiance: 0
-            }
-        }
-    },
-    methods: {
-        calculate_ambiance() {
-            
-            /*
-                s21: false, // x 20
-                s22: false, // x 20 
-                s23: false, // x 20
-                s24: false, // x 20
-                s25: 0,     // x 5 
-                ----------------------- + 
-                        range 0-100
-
-            */
-
-            const ambiance = this.questionnaire.k50 * 0.25 + this.questionnaire.k51 * 25 + this.questionnaire.k52 * 25 + this.questionnaire.k53 * 0.25
-            console.log(this.questionnaire.k50, this.questionnaire.k51, this.questionnaire.k52, this.questionnaire.k53, " = ", ambiance)
-            this.questionnaire.ambiance = ambiance
-            return ambiance;
-        },
-        submitQuestionnaire() {
-
-            this.calculate_ambiance() 
-            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.ambiance, this.questionnaire.s1, this.questionnaire.s2, parseInt(this.questionnaire.d4))
-            add_prediction(prediction, 'bedrijf', this.$store.state.user.UID)
-            add_questionnaire(this.questionnaire, 'bedrijf', this.$store.state.user.UID)
-            this.$store.commit("setQuestionnaire", true)
-            this.$store.commit("setPrediction", prediction)
-            this.$router.push("./DashboardUser");
-
-        }
-    }
-}
-</script>
 
 <style>
 .formCompany {

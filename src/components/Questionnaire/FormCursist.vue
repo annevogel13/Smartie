@@ -1,3 +1,79 @@
+<script>
+
+import { add_questionnaire, add_prediction } from "../../db"
+import { prediction_model } from "../../main"
+
+export default {
+    data() {
+        return {
+            // de betekenis van de nummers zijn te vinden in het pdf questionnaire 
+            questionnaire: {
+                // kernwoorden 
+                k1: 0,
+                k2: 25,
+                k3: 50,
+                k4: 75,
+                k5: 100,
+                // stelingen 
+                s1: true,
+                s21: false,
+                s22: false,
+                s23: false,
+                s24: false,
+                s25: 0,
+                // diverse vragen 
+                d1: 50,
+                d2: 50,
+                d4: 0,
+                // conclusie vanuit meerdere vragen 
+                personality: 0
+            }
+        }
+    },
+    methods: {
+        calculate_personality() {
+            /*
+                berekening van de personaliteit score 
+                s21: false, // x 20
+                s22: false, // x 20 
+                s23: false, // x 20
+                s24: false, // x 20
+                s25: 0,     // x 5 
+                ----------------------- + 
+                        range 0-100
+
+            */
+            const personality = this.questionnaire.s21 * 20 + this.questionnaire.s22 * 20 + this.questionnaire.s23 * 20 + this.questionnaire.s24 * 20 + parseInt(this.questionnaire.s25) * 5
+            console.log(this.questionnaire.s21, this.questionnaire.s22, this.questionnaire.s23, this.questionnaire.s24, parseInt(this.questionnaire.s25), " = ", personality)
+            this.questionnaire.personality = personality
+            return personality;
+        },
+        questionnaire1() {
+            // berekenen van de personality score 
+            this.calculate_personality()
+
+            // voorspelling maken mbv de antwoorden 
+            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.k5, this.questionnaire.s1, this.questionnaire.personality, this.questionnaire.d4)
+
+            // voorspelling toevoegen aan de database 
+            add_prediction(prediction, 'cursist', this.$store.state.user.UID)
+            console.log("Prediction voor deze user/vragenlijst is : ")
+
+            // vragenlijst toevoegen aan de database 
+            add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
+
+            // vuex state bijwerken 
+            this.$store.commit("setQuestionnaire", true)
+            this.$store.commit("setPrediction", prediction)
+            this.$router.push("./DashboardUser");
+
+        },
+
+
+    }
+}
+</script>
+
 <template>
     <div class="formCompany">
 
@@ -67,7 +143,7 @@
                 <h2>Vragen </h2>
 
                 <label for="min_uren">Hoeveel uur per week zou je in de ideale wereld willen werken?</label>
-                <!-- TODO v-model vanuit een select pakken??? -->
+
                 <select id="min_uren" style="margin-left : 30px;" v-model="questionnaire.d4">
                     <option value="24">24</option>
                     <option value="32">32</option>
@@ -132,7 +208,6 @@
                     <input type="radio" class="selectboxes" name="casus_reaction" v-model="questionnaire.s25" value=4>
                 </div>
 
-
                 <hr>
             </div>
 
@@ -144,75 +219,6 @@
     </div>
 
 </template>
-
-<script>
-// TODO buttons samenvoegen van bevestigen + bevestig vragenlijst 
-import { add_questionnaire , add_prediction} from "../../db"
-import { prediction_model } from "../../main"
-
-export default {
-    data() {
-        return {
-            questionnaire: {
-                // kernwoorden 
-                k1: 0,
-                k2: 25,
-                k3: 50,
-                k4: 75,
-                k5: 100,
-                // stelingen 
-                s1: true,
-                s21: false,
-                s22: false,
-                s23: false,
-                s24: false,
-                s25: 0,
-                // diverse vragen 
-                d1: 50,
-                d2: 50,
-                d4: 0,
-                // conclusie vanuit meerdere vragen 
-                personality : 0  
-            }
-        }
-    },
-    methods: {
-            calculate_personality() {
-            /*
-
-                s21: false, // x 20
-                s22: false, // x 20 
-                s23: false, // x 20
-                s24: false, // x 20
-                s25: 0,     // x 5 
-                ----------------------- + 
-                        range 0-100
-
-            */
-            const personality = this.questionnaire.s21 * 20  + this.questionnaire.s22 * 20 + this.questionnaire.s23 * 20 + this.questionnaire.s24 * 20 +  parseInt(this.questionnaire.s25)* 5 
-            console.log(this.questionnaire.s21 ,this.questionnaire.s22 ,this.questionnaire.s23 , this.questionnaire.s24 ,  parseInt(this.questionnaire.s25) , " = ", personality  )  
-            this.questionnaire.personality = personality
-            return personality; 
-        }, 
-        questionnaire1() {
-
-            this.calculate_personality()
-            
-            const prediction = prediction_model(this.questionnaire.k1, this.questionnaire.k2, this.questionnaire.k3, this.questionnaire.k4, this.questionnaire.k5, this.questionnaire.s1, this.questionnaire.personality, this.questionnaire.d4)
-            add_prediction(prediction,  'cursist', this.$store.state.user.UID)
-            console.log("Prediction voor deze user/vragenlijst is : ")
-
-            add_questionnaire(this.questionnaire, 'cursist', this.$store.state.user.UID)
-            this.$store.commit("setQuestionnaire", true)
-            this.$store.commit("setPrediction", prediction)
-            this.$router.push("./DashboardUser");
-
-        },
-
-
-    }
-}
-</script>
 
 <style>
 .formCompany {
