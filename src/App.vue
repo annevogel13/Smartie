@@ -1,3 +1,24 @@
+<script>
+import { getAuth, signOut } from "firebase/auth";
+
+export default {
+
+  methods: {
+    log_out() {
+
+      const auth = getAuth();
+      signOut(auth).then(() => {
+        this.$store.commit('loggingOut')
+        console.log("Sign-out successful")
+        this.$router.push('/')
+      }).catch((error) => {
+        console.log("An error happened", error.message)
+      })
+    },
+  }
+}
+</script>
+
 <template>
   <header>
 
@@ -56,27 +77,7 @@
   </div>
 </template>
 
-<script>
-import { getAuth, signOut } from "firebase/auth";
 
-export default {
-
-  methods: {
-    log_out() {
-
-      const auth = getAuth();
-      signOut(auth).then(() => {
-        this.$store.commit('loggingOut')
-        console.log("Sign-out successful")
-        this.$router.push('/')
-      }).catch((error) => {
-        console.log("An error happened", error.message)
-      })
-    },
-  }
-}
-
-</script>
 <style  >
 .pointer {
   width: 90px;
