@@ -1,6 +1,8 @@
 <script>
 
-import { update_profile, uploadImage } from '../db'
+//import { update_profile, uploadImage } from '../db'
+import { update_profile } from '../db'
+
 import { get_profile_in_store } from '../db'
 export default {
     data() {
@@ -36,7 +38,7 @@ export default {
         },
         async onUpload() {
             console.log(this.imageData)
-            this.img1 = uploadImage(this.imageData)
+           // this.img1 = uploadImage(this.imageData)
         },
     }
 }
